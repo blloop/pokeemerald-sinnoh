@@ -38,3 +38,6 @@ prefabs.json
 *.diff
 *.sym
 *.js
+
+# poryscript
+tools/poryscript/poryscript
