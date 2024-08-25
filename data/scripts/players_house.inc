@@ -3,48 +3,6 @@
 .set LOCALID_DAD, 5
 .set LOCALID_MOM_2F, 14
 
-PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
-	setvar VAR_LITTLEROOT_INTRO_STATE, 5
-	return
-
-PlayersHouse_1F_EventScript_EnterHouseMovingIn::
-	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
-	applymovement VAR_0x8004, Common_Movement_FacePlayer
-	waitmovement 0
-	call_if_eq VAR_0x8005, MALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale
-	call_if_eq VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale
-	msgbox PlayersHouse_1F_Text_MoversPokemonGoSetClock, MSGBOX_DEFAULT
-	closemessage
-	setvar VAR_LITTLEROOT_INTRO_STATE, 4
-	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerWalkIn
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	releaseall
-	end
-
-PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	return
-
-PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	return
-
-PlayersHouse_1F_Movement_PlayerWalkIn:
-	walk_up
-	step_end
-
-PlayersHouse_1F_EventScript_MomGoSeeRoom::
-	msgbox PlayersHouse_1F_Text_ArentYouInterestedInRoom, MSGBOX_DEFAULT
-	closemessage
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterUp
-	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_MovePlayerAwayFromDoor
-	waitmovement 0
-	releaseall
-	end
-
 LittlerootTown_BrendansHouse_2F_EventScript_WallClock::
 	lockall
 	setvar VAR_0x8004, MALE
@@ -64,8 +22,6 @@ PlayersHouse_2F_EventScript_WallClock::
 	delay 30
 	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	setflag FLAG_SET_WALL_CLOCK
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, PlayersHouse_2F_EventScript_MomComesUpstairsMale
 	call_if_eq VAR_RESULT, FEMALE, PlayersHouse_2F_EventScript_MomComesUpstairsFemale
@@ -372,26 +328,6 @@ PlayersHouse_1F_EventScript_DidYouMeetProfBirch::
 	release
 	end
 
-PlayersHouse_1F_EventScript_Vigoroth1::
-	lock
-	faceplayer
-	waitse
-	playmoncry SPECIES_VIGOROTH, CRY_MODE_NORMAL
-	msgbox PlayersHouse_1F_Text_Vigoroth1, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-PlayersHouse_1F_EventScript_Vigoroth2::
-	lock
-	faceplayer
-	waitse
-	playmoncry SPECIES_VIGOROTH, CRY_MODE_NORMAL
-	msgbox PlayersHouse_1F_Text_Vigoroth2, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
 PlayersHouse_1F_Movement_PlayerApproachTVForGymMale:
 	walk_down
 	walk_down
@@ -414,10 +350,6 @@ PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale:
 
 PlayersHouse_1F_Movement_PlayerMoveToTVFemale:
 	walk_right
-	step_end
-
-PlayersHouse_1F_Movement_MovePlayerAwayFromDoor:
-	walk_up
 	step_end
 
 PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
