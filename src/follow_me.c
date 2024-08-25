@@ -233,7 +233,8 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
         return;
     else if (!gSaveBlock2Ptr->follower.inProgress)
         return;
-    else if (ScriptContext2_IsEnabled() && !ignoreScriptActive)
+    else if (!ignoreScriptActive)
+    // else if (ScriptContext2_IsEnabled() && !ignoreScriptActive)
         return; //Don't follow during a script
                 
     
@@ -1232,10 +1233,11 @@ static void TurnNPCIntoFollower(u8 localId, u16 followerFlags)
             follower->movementType = MOVEMENT_TYPE_NONE; //Doesn't get to move on its own anymore
             gSprites[follower->spriteId].callback = MovementType_None; //MovementType_None
             SetObjEventTemplateMovementType(localId, 0);
-            if (followerFlags & FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT)
-                script = (const u8 *)ReadWord(0);
-            else
-                script = GetObjectEventScriptPointerByObjectEventId(eventObjId);
+            // if (followerFlags & FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT)
+            //     script = (const u8 *)ReadWord(0);
+            // else
+                // script = GetObjectEventScriptPointerByObjectEventId(eventObjId);
+            script = GetObjectEventScriptPointerByObjectEventId(eventObjId);
             
             flag = GetObjectEventTemplateByLocalIdAndMap(follower->localId, follower->mapNum, follower->mapGroup)->flagId;
             gSaveBlock2Ptr->follower.inProgress = TRUE;
