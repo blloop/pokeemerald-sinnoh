@@ -26,7 +26,15 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_BrendansHouse_2F_EventScript_SetIntroFlags"
+    }
   ],
   "bg_events": [
     {
@@ -35,7 +43,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC"
+      "script": "LittlerootTown_BrendansHouse_2F_EventScript_PC"
     },
     {
       "type": "sign",
