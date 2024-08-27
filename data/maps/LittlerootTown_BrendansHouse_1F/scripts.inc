@@ -44,11 +44,16 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	lockall
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
 	applymovement LOCALID_MOM, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 10
 	applymovement LOCALID_MOM, MomTalk_A
 	waitmovement 0
+	delay 10
 	msgbox LittlerootTown_BrendansHouse_1F_EventScript_Mom_Text
+	closemessage
 	applymovement LOCALID_MOM, MomTalk_B
 	waitmovement 0
+	delay 10
 	releaseall
 	return
 

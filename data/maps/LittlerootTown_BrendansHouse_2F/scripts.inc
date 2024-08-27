@@ -31,7 +31,6 @@ LittlerootTown_BrendansHouse_2F_EventScript_SetIntroFlags::
 	lockall
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	setvar VAR_LITTLEROOT_INTRO_STATE, 1
-	msgbox LittlerootTown_BrendansHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	releaseall
 	end
 
