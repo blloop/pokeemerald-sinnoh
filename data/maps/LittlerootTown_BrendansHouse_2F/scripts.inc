@@ -254,29 +254,15 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC::
 	releaseall
 	end
 
-PlayersHouse_2F_EventScript_Notebook::
-	msgbox PlayersHouse_2F_Text_Notebook, MSGBOX_SIGN
+LittlerootTown_BrendansHouse_2F_EventScript_Notebook::
+	msgbox LittlerootTown_BrendansHouse_2F_Text_Notebook, MSGBOX_SIGN
 	end
 
-PlayersHouse_2F_EventScript_GameCube::
-	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
+LittlerootTown_BrendansHouse_2F_EventScript_GameCube::
+	msgbox LittlerootTown_BrendansHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end
 
-PlayersHouse_2F_Text_ClockIsStopped:
-	.string "The clock is stopped…\p"
-	.string "Better set it and start it!$"
-
-PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "MOM: {PLAYER}, how do you like your\n"
-	.string "new room?\p"
-	.string "Good! Everything's put away neatly!\p"
-	.string "They finished moving everything in\n"
-	.string "downstairs, too.\p"
-	.string "POKéMON movers are so convenient!\p"
-	.string "Oh, you should make sure that\n"
-	.string "everything's all there on your desk.$"
-
-PlayersHouse_2F_Text_Notebook:
+LittlerootTown_BrendansHouse_2F_Text_Notebook:
 	.string "{PLAYER} flipped open the notebook.\p"
 	.string "ADVENTURE RULE NO. 1\n"
 	.string "Open the MENU with START.\p"
@@ -288,7 +274,16 @@ Common_Text_LookCloserAtMap:
 	.string "{PLAYER} took a closer look at the\n"
 	.string "HOENN region map.$"
 
-PlayersHouse_2F_Text_ItsAGameCube:
+LittlerootTown_BrendansHouse_2F_Text_ItsAGameCube:
 	.string "It's a Nintendo GameCube.\p"
 	.string "A Game Boy Advance is connected to\n"
 	.string "serve as the Controller.$"
+
+LittlerootTown_BrendansHouse_2F_EventScript_Controls::
+	lockall
+	msgbox LittlerootTown_BrendansHouse_2F_EventScript_Controls_Text_0
+	releaseall
+	return
+
+LittlerootTown_BrendansHouse_2F_EventScript_Controls_Text_0:
+	.string "The X button opens the menu!$"

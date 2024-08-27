@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PlayersHouse_1F_EventScript_Mom",
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_Mom",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_MOM"
     }
   ],
@@ -54,21 +54,12 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 9,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_PLAYER_HOUSE_STATE",
-      "var_value": "0",
-      "script": "PlayersHouse_1F_Trigger_MomA"
-    },
-    {
-      "type": "trigger",
       "x": 5,
       "y": 8,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "PlayersHouse_1F_Trigger_MomB"
+      "script": "LittlerootTown_BrendansHouse_1F_Trigger_Exit"
     },
     {
       "type": "trigger",
@@ -77,7 +68,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "PlayersHouse_1F_Trigger_MomB"
+      "script": "LittlerootTown_BrendansHouse_1F_Trigger_Exit"
     }
   ],
   "bg_events": [
