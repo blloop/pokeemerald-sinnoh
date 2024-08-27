@@ -389,7 +389,6 @@ LilycoveCity_EventScript_RivalFlyAway::
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	savebgm MUS_DUMMY
 	fadedefaultbgm
-	setflag FLAG_MET_RIVAL_LILYCOVE
 	release
 	end
 
