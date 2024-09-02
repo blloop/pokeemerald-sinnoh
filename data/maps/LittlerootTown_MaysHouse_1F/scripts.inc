@@ -13,6 +13,15 @@ LittlerootTown_MaysHouse_1F_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV
 	end
 
+@ Many of the below scripts have no gender check because they assume youre in the correct house
+LittlerootTown_MaysHouse_1F_OnFrame:
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
+	.2byte 0
+
+LittlerootTown_MaysHouse_1F_EventScript_Mom::
+	msgbox LittlerootTown_MaysHouse_1F_MomMessage
+	end
+
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs::
 	setobjectxyperm LOCALID_MOM, 2, 4
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
@@ -27,11 +36,6 @@ LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor::
 	setobjectxyperm LOCALID_MOM, 1, 8
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
 	return
-
-@ Many of the below scripts have no gender check because they assume youre in the correct house
-LittlerootTown_MaysHouse_1F_OnFrame:
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
-	.2byte 0
 
 LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock::
 	lockall
@@ -246,6 +250,16 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	walk_up
 	walk_up
 	step_end
+
+LittlerootTown_MaysHouse_1F_MomMessage:
+	.string "{RIVAL}'s mom: Oh, hi,\n"
+	.string "{PLAYER}.\p"
+	.string "Are you looking for {RIVAL}?\p"
+	.string "He was gone for a second, but then\n"
+	.string "he came running right back home.\p"
+	.string "He just can't sit still, that boy.\n"
+	.string "I wonder who he takes after?$"
+
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "Like child, like father.\p"

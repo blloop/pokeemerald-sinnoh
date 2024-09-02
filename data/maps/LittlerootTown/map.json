@@ -62,7 +62,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MAY_NORMAL",
       "x": 3,
-      "y": 12,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -112,6 +112,51 @@
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "2",
       "script": "LittlerootTown_EventScript_RivalMeet"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "2",
+      "script": "LittlerootTown_EventScript_LeaveBlock1"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "2",
+      "script": "LittlerootTown_EventScript_LeaveBlock2"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "2",
+      "script": "LittlerootTown_EventScript_LeaveBlock3"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "2",
+      "script": "LittlerootTown_EventScript_LeaveBlock4"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "2",
+      "script": "LittlerootTown_EventScript_LeaveBlock5"
     }
   ],
   "bg_events": [

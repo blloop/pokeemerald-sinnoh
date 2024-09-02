@@ -1,4 +1,5 @@
 .set LOCALID_RIVAL, 4
+.set LOCALID_BLOCK, 3
 
 LittlerootTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
@@ -32,12 +33,11 @@ LittlerootTown_MapScripts::
 
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	hideobjectat LOCALID_RIVAL, MAP_LITTLEROOT_TOWN
 	call Common_EventScript_SetupRivalGfxId
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 9, LittlerootTown_EventScript_MoveMomToMaysDoor
 	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
 	call_if_eq VAR_OLDALE_RIVAL_STATE, 1, LittlerootTown_EventScript_MoveRivalFromOldale
-	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
+	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 8, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
 	end
@@ -53,7 +53,8 @@ LittlerootTown_EventScript_RivalMeet::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	opendoor 3, 12
 	waitdooranim
-	showobjectat LOCALID_RIVAL, MAP_LITTLEROOT_TOWN
+	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RevealRival
+	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_BumpPlayer
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_BumpRival
 	waitmovement 0
@@ -73,8 +74,9 @@ LittlerootTown_EventScript_RivalMeet::
 	delay 60
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RunLeft
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_FaceDown
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
+	delay 30
 	msgbox LittlerootTown_Text_RivalForget, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, Common_Movement_FaceUp
@@ -83,7 +85,6 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_LeaveRival
 	waitmovement 0
-	hideobjectat LOCALID_RIVAL, MAP_LITTLEROOT_TOWN
 	closedoor 3, 12
 	waitdooranim
 	release
@@ -95,6 +96,11 @@ LittlerootTown_Movement_BumpPlayer:
 	step_end
 
 LittlerootTown_Movement_BumpRival:
+	walk_fast_down
+	step_end
+
+LittlerootTown_Movement_RevealRival:
+	walk_fast_down
 	walk_fast_down
 	step_end
 
@@ -115,6 +121,165 @@ LittlerootTown_Movement_RunLeft:
 
 LittlerootTown_Movement_LeaveRival:
 	walk_fast_up
+	step_end
+
+LittlerootTown_EventScript_BlockBump::
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_BumpPlayer
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_BumpRival
+	waitmovement 0
+	delay 60
+	msgbox LittlerootTown_Text_Guitarist, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	return
+
+LittlerootTown_EventScript_BlockExclaim::
+	applymovement LOCALID_BLOCK, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	delay 10
+	applymovement LOCALID_BLOCK, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 60
+	return
+
+LittlerootTown_EventScript_LeaveBlock1::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight1
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft1
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_EventScript_LeaveBlock2::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight2
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft2
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_EventScript_LeaveBlock3::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight3
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft3
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_EventScript_LeaveBlock4::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight4
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft4
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_EventScript_LeaveBlock5::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight5
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft5
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_Movement_RunRight1:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight2:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight3:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight4:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight5:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_WalkLeft1:
+	walk_left
+	walk_down
+	step_end
+
+LittlerootTown_Movement_WalkLeft2:
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+LittlerootTown_Movement_WalkLeft3:
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+LittlerootTown_Movement_WalkLeft4:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+LittlerootTown_Movement_WalkLeft5:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 LittlerootTown_Text_Thud:
@@ -281,24 +446,15 @@ LittlerootTown_EventScript_PlayersHouseSignFemale::
 	return
 
 LittlerootTown_EventScript_FatMan::
-	@ lock
-	@ faceplayer
 	msgbox LittlerootTown_Text_FatMan, MSGBOX_NPC
-	@ release
 	end
 
 LittlerootTown_EventScript_Aroma::
-	lock
-	faceplayer
 	msgbox LittlerootTown_Text_Aroma, MSGBOX_NPC
-	release
 	end
 
 LittlerootTown_EventScript_Guitarist::
-	lock
-	faceplayer
 	msgbox LittlerootTown_Text_Guitarist, MSGBOX_NPC
-	release
 	end
 
 LittlerootTown_Text_FatMan:
@@ -338,7 +494,7 @@ LittlerootTown_Text_PlayersHouse:
 	.string "{PLAYER}'s House$"
 
 LittlerootTown_Text_ProfBirchsHouse:
-	.string "{RIVAL}'s House'}"
+	.string "{RIVAL}'s House$"
 
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
