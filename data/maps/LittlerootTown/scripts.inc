@@ -53,8 +53,7 @@ LittlerootTown_EventScript_RivalMeet::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	opendoor 3, 12
 	waitdooranim
-	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RevealRival
-	waitmovement 0
+	addobject LOCALID_RIVAL
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_BumpPlayer
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_BumpRival
 	waitmovement 0
@@ -63,7 +62,8 @@ LittlerootTown_EventScript_RivalMeet::
 	msgbox LittlerootTown_Text_Thud, MSGBOX_DEFAULT
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	delay 60
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
 	closemessage
 	msgbox LittlerootTown_Text_RivalBump, MSGBOX_DEFAULT
 	closemessage
@@ -71,7 +71,8 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	delay 60
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RunLeft
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
@@ -87,6 +88,7 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	closedoor 3, 12
 	waitdooranim
+	removeobject LOCALID_RIVAL
 	release
 	end
 
@@ -96,11 +98,6 @@ LittlerootTown_Movement_BumpPlayer:
 	step_end
 
 LittlerootTown_Movement_BumpRival:
-	walk_fast_down
-	step_end
-
-LittlerootTown_Movement_RevealRival:
-	walk_fast_down
 	walk_fast_down
 	step_end
 
@@ -139,7 +136,8 @@ LittlerootTown_EventScript_BlockExclaim::
 	delay 10
 	applymovement LOCALID_BLOCK, Common_Movement_ExclamationMark
 	waitmovement 0
-	delay 60
+	applymovement LOCALID_BLOCK, Common_Movement_Delay48
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_LeaveBlock1::

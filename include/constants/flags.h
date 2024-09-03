@@ -149,7 +149,7 @@
 #define FLAG_MET_PRETTY_PETAL_SHOP_OWNER     0x7F
 #define FLAG_ENABLE_ROXANNE_FIRST_CALL       0x80 // Set after defeating Brawly. This will activate a call with Roxanne in order to register her.
 #define FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN  0x81
-#define FLAG_DEFEATED_RIVAL_ROUTE103         0x82
+#define FLAG_UNUSED_0x82                     0x82
 #define FLAG_RECEIVED_DOLL_LANETTE           0x83
 #define FLAG_RECEIVED_POTION_OLDALE          0x84
 #define FLAG_UNUSED_0x85                     0x85
@@ -768,7 +768,7 @@
 #define FLAG_HIDE_ROUTE_104_RIVAL                                   0x2CF
 #define FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE                  0x2D0
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH                  0x2D1
-#define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM          0x2D2
+#define FLAG_HIDE_LITTLEROOT_TOWN_RIVAL          0x2D2
 #define FLAG_HIDE_ROUTE_103_RIVAL                                   0x2D3
 #define FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE                    0x2D4
 #define FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT                        0x2D5
