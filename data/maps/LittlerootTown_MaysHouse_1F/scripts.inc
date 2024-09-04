@@ -41,7 +41,6 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	delay 30
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm

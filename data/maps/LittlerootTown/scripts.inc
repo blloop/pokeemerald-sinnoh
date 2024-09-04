@@ -17,35 +17,11 @@ LittlerootTown_MapScripts::
 	@ 2: Talked to Mom twice
 	@ 3: Bumped into Rival
 
-	@ State descriptions for VAR_LITTLEROOT_HOUSES_STATE_RIVAL
-	@                    and VAR_LITTLEROOT_HOUSES_STATE_PLAYER
-	@ 1: On Truck (and is corresponding gender)
-	@ 2: Met Rival's Mom (and is corresponding gender)
-	@ 3: Entered Hall of Fame
-	@ 4: Completed Lati TV / SS Ticket event
-	@ 5: Exited house after above event
-
-	@ State descriptions for VAR_LITTLEROOT_RIVAL_STATE
-	@ 1: Never occurs
-	@ 2: Entered Rival's bedroom
-	@ 3: Met Rival
-	@ 4: Received Pokedex
-
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	call Common_EventScript_SetupRivalGfxId
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 9, LittlerootTown_EventScript_MoveMomToMaysDoor
-	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
-	call_if_eq VAR_OLDALE_RIVAL_STATE, 1, LittlerootTown_EventScript_MoveRivalFromOldale
-	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 8, LittlerootTown_EventScript_SetRivalLeftForRoute103
-	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
-	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
 	end
 
 LittlerootTown_OnFrame:
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 9, LittlerootTown_EventScript_StepOffTruckMale
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 9, LittlerootTown_EventScript_StepOffTruckFemale
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_BeginDexUpgradeScene
 	.2byte 0
 
 LittlerootTown_EventScript_RivalMeet::
@@ -54,8 +30,8 @@ LittlerootTown_EventScript_RivalMeet::
 	opendoor 3, 12
 	waitdooranim
 	addobject LOCALID_RIVAL
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_BumpPlayer
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_BumpRival
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_BumpPlayer
 	waitmovement 0
 	closedoor 3, 12
 	waitdooranim
@@ -73,6 +49,7 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	delay 10
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RunLeft
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
@@ -86,9 +63,9 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_LeaveRival
 	waitmovement 0
+	removeobject LOCALID_RIVAL
 	closedoor 3, 12
 	waitdooranim
-	removeobject LOCALID_RIVAL
 	release
 	end
 
@@ -290,122 +267,11 @@ LittlerootTown_Text_RivalBump:
 	.string "You come too! And be quick about it!\p"
 	.string "OK, B?\n"
 	@ TODO: Fix dollar sign exiting early
-	.string "I'm fining you 1 million if you're late!$"
+	.string "I'm fining you ₽1 million if you're late!$"
 
 LittlerootTown_Text_RivalForget:
 	.string "Barry: Oh, jeez!\n"
 	.string "Forgot something!$"
-
-LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
-	return
-
-LittlerootTown_EventScript_HideMapNamePopup::
-	setflag FLAG_HIDE_MAP_NAME_POPUP
-	return
-
-LittlerootTown_EventScript_SetRivalLeftForRoute103::
-	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
-	return
-
-LittlerootTown_EventScript_MoveRivalFromOldale::
-	setvar VAR_OLDALE_RIVAL_STATE, 2
-	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
-	return
-
-LittlerootTown_EventScript_MoveMomToMaysDoor::
-	return
-
-LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos::
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetMomInFrontOfDoorMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetMomInFrontOfDoorFemale
-	return
-
-LittlerootTown_EventScript_SetMomInFrontOfDoorMale::
-	return
-
-LittlerootTown_EventScript_SetMomInFrontOfDoorFemale::
-	return
-
-LittlerootTown_EventScript_StepOffTruckMale::
-	lockall
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_GoInsideWithMom
-	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 8, 8
-	waitstate
-	releaseall
-	end
-
-LittlerootTown_EventScript_StepOffTruckFemale::
-	lockall
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_GoInsideWithMom
-	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 2, 8
-	waitstate
-	releaseall
-	end
-
-LittlerootTown_EventScript_GoInsideWithMom::
-	delay 15
-	playse SE_LEDGE
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerStepOffTruck
-	waitmovement 0
-	opendoor VAR_0x8004, VAR_0x8005
-	waitdooranim
-	waitmovement 0
-	closedoor VAR_0x8004, VAR_0x8005
-	waitdooranim
-	delay 10
-	waitmovement 0
-	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
-	waitmovement 0
-	opendoor VAR_0x8004, VAR_0x8005
-	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerEnterHouse
-	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	closedoor VAR_0x8004, VAR_0x8005
-	waitdooranim
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	return
-
-LittlerootTown_Movement_PlayerApproachDoor:
-	delay_16
-	delay_8
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-LittlerootTown_Movement_PlayerEnterHouse:
-	walk_up
-	walk_up
-	step_end
-
-LittlerootTown_Movement_PlayerStepOffTruck:
-	jump_right
-	delay_16
-	delay_16
-	delay_16
-	step_end
-
-LittlerootTown_EventScript_BeginDexUpgradeScene::
-	lockall
-	playse SE_PIN
-	waitmovement 0
-	delay 80
-	msgbox LittlerootTown_Text_BirchSomethingToShowYouAtLab, MSGBOX_DEFAULT
-	closemessage
-	delay 20
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 5
-	waitstate
-	releaseall
-	end
 
 LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
@@ -472,18 +338,6 @@ LittlerootTown_Text_Guitarist:
 	.string "I think he's home now.\n"
 	.string "Why don't you go check it out?$"
 
-LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
-	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
-
 LittlerootTown_Text_TownSign:
 	.string "Twinleaf Town\n"
 	.string "Fresh and free!$"
@@ -493,14 +347,3 @@ LittlerootTown_Text_PlayersHouse:
 
 LittlerootTown_Text_ProfBirchsHouse:
 	.string "{RIVAL}'s House$"
-
-LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
-	.string "That was good work out there!\p"
-	.string "I knew there was something special\n"
-	.string "about you when I first saw you,\l"
-	.string "but I never expected this.\p"
-	.string "Oh, yes. Do you still have the POKéDEX\n"
-	.string "I gave you?\p"
-	.string "I have something to show you.\n"
-	.string "Let's go to my LAB.$"
