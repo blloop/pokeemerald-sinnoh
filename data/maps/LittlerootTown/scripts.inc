@@ -49,7 +49,8 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	delay 10
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RunLeft
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
@@ -63,8 +64,8 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_LeaveRival
 	waitmovement 0
-	removeobject LOCALID_RIVAL
 	closedoor 3, 12
+	removeobject LOCALID_RIVAL
 	waitdooranim
 	release
 	end
@@ -266,8 +267,8 @@ LittlerootTown_Text_RivalBump:
 	.string "Hey! I'm going to the lake!\n"
 	.string "You come too! And be quick about it!\p"
 	.string "OK, B?\n"
-	@ TODO: Fix dollar sign exiting early
-	.string "I'm fining you ₽1 million if you're late!$"
+	@ TODO: Fix dollar sign ₽
+	.string "I'm fining you 1 million if you're late!$"
 
 LittlerootTown_Text_RivalForget:
 	.string "Barry: Oh, jeez!\n"

@@ -23,6 +23,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	waitmovement 0
 	applymovement LOCALID_MOM, Common_Movement_Delay48
 	waitmovement 0
+	applymovement LOCALID_MOM, Common_Movement_Delay48
+	waitmovement 0
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_A
 	waitmovement 0
 	delay 10
