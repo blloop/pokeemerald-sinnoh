@@ -14,7 +14,7 @@ LittlerootTown_BrendansHouse_1F_OnFrame:
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
-	lockall
+	lock
 	setvar VAR_LITTLEROOT_INTRO_STATE, 1
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
 	waitmovement 0
@@ -25,19 +25,19 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	waitmovement 0
 	applymovement LOCALID_MOM, Common_Movement_Delay48
 	waitmovement 0
-	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_A
+	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_1
 	waitmovement 0
 	delay 10
-	msgbox LittlerootTown_BrendansHouse_1F_EventScript_Mom_Text
+	msgbox LittlerootTown_BrendansHouse_1F_EventScript_Mom_Text, MSGBOX_DEFAULT
 	closemessage
 	delay 60
-	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_B
+	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2
 	waitmovement 0
 	delay 10
-	releaseall
+	release
 	return
 
-LittlerootTown_BrendansHouse_1F_Movement_MomTalk_A:
+LittlerootTown_BrendansHouse_1F_Movement_MomTalk_1:
 	walk_up
 	walk_right
 	walk_right
@@ -45,7 +45,7 @@ LittlerootTown_BrendansHouse_1F_Movement_MomTalk_A:
 	walk_up
 	step_end
 
-LittlerootTown_BrendansHouse_1F_Movement_MomTalk_B:
+LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2:
 	walk_down
 	walk_left
 	walk_left
@@ -56,7 +56,7 @@ LittlerootTown_BrendansHouse_1F_Movement_MomTalk_B:
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Trigger_Exit::
-	lockall
+	lock
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
 	waitmovement 0
@@ -64,8 +64,8 @@ LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	delay 30
-	msgbox LittlerootTown_BrendansHouse_1F_Trigger_Mom_Text
-	releaseall
+	msgbox LittlerootTown_BrendansHouse_1F_Trigger_Mom_Text, MSGBOX_DEFAULT
+	release
 	return
 
 @ TODO: Change to kitchen scene

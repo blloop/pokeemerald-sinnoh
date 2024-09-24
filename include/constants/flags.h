@@ -767,7 +767,7 @@
 #define FLAG_HIDE_MEW                                               0x2CE
 #define FLAG_HIDE_ROUTE_104_RIVAL                                   0x2CF
 #define FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE                  0x2D0
-#define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH                  0x2D1
+#define FLAG_UNUSED_0x2D1                                           0x2D1
 #define FLAG_HIDE_LITTLEROOT_TOWN_RIVAL                             0x2D2
 #define FLAG_HIDE_ROUTE_103_RIVAL                                   0x2D3
 #define FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE                    0x2D4

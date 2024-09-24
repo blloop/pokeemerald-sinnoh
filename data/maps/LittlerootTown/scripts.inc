@@ -119,6 +119,7 @@ LittlerootTown_EventScript_BlockExclaim::
 	return
 
 LittlerootTown_EventScript_LeaveBlock1::
+	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight1
@@ -132,6 +133,7 @@ LittlerootTown_EventScript_LeaveBlock1::
 	end
 
 LittlerootTown_EventScript_LeaveBlock2::
+	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight2
@@ -145,6 +147,7 @@ LittlerootTown_EventScript_LeaveBlock2::
 	end
 
 LittlerootTown_EventScript_LeaveBlock3::
+	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight3
@@ -158,6 +161,7 @@ LittlerootTown_EventScript_LeaveBlock3::
 	end
 
 LittlerootTown_EventScript_LeaveBlock4::
+	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight4
@@ -171,6 +175,7 @@ LittlerootTown_EventScript_LeaveBlock4::
 	end
 
 LittlerootTown_EventScript_LeaveBlock5::
+	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight5
