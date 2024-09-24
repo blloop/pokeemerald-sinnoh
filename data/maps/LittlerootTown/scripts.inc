@@ -16,6 +16,7 @@ LittlerootTown_MapScripts::
 	@ 1: Talked to Mom once
 	@ 2: Talked to Mom twice
 	@ 3: Bumped into Rival
+	@ 4: Spoken to Rival in room
 
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
@@ -103,7 +104,7 @@ LittlerootTown_EventScript_BlockBump::
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_BumpRival
 	waitmovement 0
 	delay 60
-	msgbox LittlerootTown_Text_Guitarist, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_Guitarist1, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return
@@ -119,7 +120,7 @@ LittlerootTown_EventScript_BlockExclaim::
 	return
 
 LittlerootTown_EventScript_LeaveBlock1::
-	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
+	@ goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight1
@@ -133,7 +134,7 @@ LittlerootTown_EventScript_LeaveBlock1::
 	end
 
 LittlerootTown_EventScript_LeaveBlock2::
-	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
+	@ goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight2
@@ -147,7 +148,7 @@ LittlerootTown_EventScript_LeaveBlock2::
 	end
 
 LittlerootTown_EventScript_LeaveBlock3::
-	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
+	@ goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight3
@@ -161,7 +162,7 @@ LittlerootTown_EventScript_LeaveBlock3::
 	end
 
 LittlerootTown_EventScript_LeaveBlock4::
-	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
+	@ goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight4
@@ -175,7 +176,7 @@ LittlerootTown_EventScript_LeaveBlock4::
 	end
 
 LittlerootTown_EventScript_LeaveBlock5::
-	goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
+	@ goto_if_gt VAR_LITTLEROOT_INTRO_STATE, 3, Common_EventScript_NopReturn
 	lockall
 	call LittlerootTown_EventScript_BlockExclaim
 	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight5
@@ -324,7 +325,16 @@ LittlerootTown_EventScript_Aroma::
 	end
 
 LittlerootTown_EventScript_Guitarist::
-	msgbox LittlerootTown_Text_Guitarist, MSGBOX_NPC
+	call_if_lt VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_EventScript_Guitarist_Talk1
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_EventScript_Guitarist_Talk2
+	end
+
+LittlerootTown_EventScript_Guitarist_Talk1::
+	msgbox LittlerootTown_Text_Guitarist1, MSGBOX_NPC
+	end
+
+LittlerootTown_EventScript_Guitarist_Talk2::
+	msgbox LittlerootTown_Text_Guitarist2, MSGBOX_NPC
 	end
 
 LittlerootTown_Text_FatMan:
@@ -338,11 +348,19 @@ LittlerootTown_Text_Aroma:
 	.string "However, Pokemon also let you become\n"
 	.string "friends with them.$"
 	
-LittlerootTown_Text_Guitarist:
+LittlerootTown_Text_Guitarist1:
 	.string "Hiya, {PLAYER}.\n"
 	.string "{RIVAL} was looking for you.\p"
 	.string "I think he's home now.\n"
 	.string "Why don't you go check it out?$"
+	
+LittlerootTown_Text_Guitarist2:
+	.string "Hiya, {PLAYER}.\n"
+	.string "You're looking for {RIVAL}?\p"
+	.string "He just went tearing off a little\n"
+	.string "while ago.\p"
+	.string "He's probably not gone too far.\n"
+	.string "Why not go chase after him?$"
 
 LittlerootTown_Text_TownSign:
 	.string "Twinleaf Town\n"
