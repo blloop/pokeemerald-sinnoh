@@ -80,8 +80,8 @@ LittlerootTown_MaysHouse_2F_RivalMessage1:
 	.string "too...$"
 
 LittlerootTown_MaysHouse_2F_RivalMessage2:
-	.string "Oh hey! {PLAYER}!"
+	.string "Oh hey! {PLAYER}!\p"
 	.string "We're going to the lake!\n"
-	.string "I'll be waiting on the road!\p"
+	.string "I'll be waiting on the road!\n"
 	@ TODO: Fix dollar sign ₽
 	.string "It's a 10 million fine if you're late!$"
