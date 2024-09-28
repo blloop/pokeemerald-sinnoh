@@ -21,10 +21,6 @@ Route101_Movement_Unused2:
 	walk_up
 	step_end
 
-Route101_EventScript_Boy::
-	msgbox Route101_Text_WildPokemonInTallGrass, MSGBOX_NPC
-	end
-
 Route101_EventScript_RouteSign::
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
@@ -38,6 +34,6 @@ Route101_EventScript_BirchsBag::
 	release
 	end
 
-Route101_Text_RouteSign1:
+Route101_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
 	.string "  Twinleaf Town$"
