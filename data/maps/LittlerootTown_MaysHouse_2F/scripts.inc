@@ -31,6 +31,7 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 LittlerootTown_MaysHouse_2F_EventScript_MeetRival::
 	lock
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
+	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkRight
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_RivalMessage1, MSGBOX_DEFAULT

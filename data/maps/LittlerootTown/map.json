@@ -118,8 +118,8 @@
       "x": 7,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "2",
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_LeaveBlock1"
     },
     {
@@ -127,8 +127,8 @@
       "x": 8,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "2",
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_LeaveBlock2"
     },
     {
@@ -136,8 +136,8 @@
       "x": 9,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "2",
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_LeaveBlock3"
     },
     {
@@ -145,8 +145,8 @@
       "x": 10,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "2",
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_LeaveBlock4"
     },
     {
@@ -154,8 +154,8 @@
       "x": 11,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "2",
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_LeaveBlock5"
     }
   ],
