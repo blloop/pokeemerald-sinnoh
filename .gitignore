@@ -40,4 +40,4 @@ prefabs.json
 *.js
 
 # poryscript
-tools/poryscript/poryscript
+tools/poryscript/poryscript*
