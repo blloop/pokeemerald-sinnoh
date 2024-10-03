@@ -183,6 +183,32 @@ LittlerootTown_EventScript_LeaveBlock5::
 	releaseall
 	end
 
+LittlerootTown_EventScript_LeaveBlock6::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight6
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft6
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
+LittlerootTown_EventScript_LeaveBlock7::
+	lockall
+	call LittlerootTown_EventScript_BlockExclaim
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_RunRight7
+	applymovement LOCALID_BLOCK, Common_Movement_FaceDown
+	waitmovement 0
+	call LittlerootTown_EventScript_BlockBump
+	applymovement LOCALID_BLOCK, LittlerootTown_Movement_WalkLeft7
+	waitmovement 0
+	delay 30
+	releaseall
+	end
+
 LittlerootTown_Movement_RunRight1:
 	walk_fast_up
 	walk_fast_up
@@ -216,6 +242,29 @@ LittlerootTown_Movement_RunRight4:
 LittlerootTown_Movement_RunRight5:
 	walk_fast_up
 	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight6:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+LittlerootTown_Movement_RunRight7:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -258,6 +307,27 @@ LittlerootTown_Movement_WalkLeft5:
 	walk_down
 	step_end
 
+LittlerootTown_Movement_WalkLeft6:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+LittlerootTown_Movement_WalkLeft7:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
 LittlerootTown_Text_Thud:
 	.string "Thud!!$"
 
@@ -271,7 +341,7 @@ LittlerootTown_Text_RivalBump:
 	.string "I'm fining you 1 million if you're late!$"
 
 LittlerootTown_Text_RivalForget:
-	.string "Barry: Oh, jeez!\n"
+	.string "{RIVAL}: Oh, jeez!\n"
 	.string "Forgot something!$"
 
 LittlerootTown_EventScript_TownSign::
