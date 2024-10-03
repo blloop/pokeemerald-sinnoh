@@ -47,6 +47,8 @@ Route101_EventScript_RivalSee::
 	waitmovement 0
 	msgbox Route101_Text_RivalMeet, MSGBOX_DEFAULT
 	closemessage
+	loadword 0 Route101_EventScript_Rival
+	setfollower LOCALID_RIVAL 0x100
 	release
 	end
 
@@ -71,9 +73,13 @@ Route101_EventScript_RouteSign::
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
 
+Route101_EventScript_Rival::
+	msgbox Route101_Text_RivalTalk, MSGBOX_SIGN
+	end
+
 Route101_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
-	.string "  Twinleaf Town$"
+	.string "     Twinleaf Town$"
 
 Route101_Text_RivalMeet:
 	.string "{RIVAL}: Hey you saw that news\n"
@@ -86,3 +92,6 @@ Route101_Text_RivalMeet:
 	.string "like that in it, too!\p"
 	.string "So that's what we're gonna do.\n"
 	.string "We'll go find a Pokemon like that!$"
+
+Route101_Text_RivalTalk:
+	.string "Hey! I'm following you$"
