@@ -137,8 +137,6 @@ Route101_EventScript_FollowGrass::
 	applymovement LOCALID_RIVAL, Common_Movement_WalkLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_FaceRight
-	waitmovement 0
 	delay 30
 	release
 	end
