@@ -4422,14 +4422,14 @@
       "blockdata_filepath": "data/layouts/LittlerootTown_OtherHouseB/map.bin"
     },
     {
-      "id": "LAYOUT_VERITY_LAKEFRONT",
-      "name": "VerityLakefront_Layout",
+      "id": "LAYOUT_LAKEFRONT_VERITY",
+      "name": "LakefrontVerity_Layout",
       "width": 20,
       "height": 20,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
-      "border_filepath": "data/layouts/VerityLakefront/border.bin",
-      "blockdata_filepath": "data/layouts/VerityLakefront/map.bin"
+      "border_filepath": "data/layouts/LakefrontVerity/border.bin",
+      "blockdata_filepath": "data/layouts/LakefrontVerity/map.bin"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
-  "id": "MAP_VERITY_LAKEFRONT",
-  "name": "VerityLakefront",
-  "layout": "LAYOUT_VERITY_LAKEFRONT",
-  "music": "MUS_DUMMY",
+  "id": "MAP_LAKEFRONT_VERITY",
+  "name": "LakefrontVerity",
+  "layout": "LAYOUT_LAKEFRONT_VERITY",
+  "music": "MUS_LITTLEROOT",
   "region_map_section": "MAPSEC_ROUTE_101",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
