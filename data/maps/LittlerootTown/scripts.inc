@@ -50,7 +50,7 @@ LittlerootTown_EventScript_RivalMeet::
 	msgbox LittlerootTown_Text_RivalBump, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalRight
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerFaceRight
 	waitmovement 0
 	@ TODO: Fix exclamation not showing
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -62,7 +62,7 @@ LittlerootTown_EventScript_RivalMeet::
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalLeft
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerFaceUp
 	waitmovement 0
 	delay 30
 	msgbox LittlerootTown_Text_RivalForget, MSGBOX_SIGN
@@ -80,6 +80,16 @@ LittlerootTown_EventScript_RivalMeet::
 
 LittlerootTown_Movement_PlayerBump:
 	walk_fast_down
+	face_up
+	step_end
+
+LittlerootTown_Movement_PlayerFaceRight:
+	delay_16
+	face_right
+	step_end
+
+LittlerootTown_Movement_PlayerFaceUp:
+	delay_16
 	face_up
 	step_end
 
