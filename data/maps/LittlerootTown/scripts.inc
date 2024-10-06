@@ -8,8 +8,8 @@ LittlerootTown_MapScripts::
 
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
 	@ 1: Left with Rival to see lake
-	@ 2: Returned from lake
-	@ 3: Returned from lab
+	@ 2: Entered lake event
+	@ 3: Returned from lab @ TODO
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
@@ -36,13 +36,18 @@ LittlerootTown_EventScript_RivalMeet::
 	closedoor 3, 12
 	waitdooranim
 	msgbox LittlerootTown_Text_Thud, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
 	closemessage
-	msgbox LittlerootTown_Text_RivalBump, MSGBOX_DEFAULT
-	closemessage
+	msgbox LittlerootTown_Text_RivalBump, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalRight
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
@@ -55,13 +60,12 @@ LittlerootTown_EventScript_RivalMeet::
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	delay 30
-	msgbox LittlerootTown_Text_RivalForget, MSGBOX_DEFAULT
-	closemessage
+	msgbox LittlerootTown_Text_RivalForget, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, Common_Movement_FaceUp
 	opendoor 3, 12
 	waitdooranim
