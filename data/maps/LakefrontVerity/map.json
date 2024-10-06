@@ -39,7 +39,24 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "1",
+      "script": "LakefrontVerity_EventScript_EnterLake"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "1",
+      "script": "LakefrontVerity_EventScript_EnterLake"
+    }
   ],
   "bg_events": [
     {
@@ -48,7 +65,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "NULL"
+      "script": "LakefrontVerity_EventScript_RouteSign"
     }
   ]
 }
