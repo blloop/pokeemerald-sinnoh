@@ -10,8 +10,8 @@ LakefrontVerity_EventScript_EnterLake::
 	applymovement OBJ_EVENT_ID_PLAYER, LakefrontVerity_Movement_WalkUp
 	applymovement OBJ_EVENT_ID_FOLLOWER, LakefrontVerity_Movement_WalkUp
 	waitmovement 0
-	destroyfollower OBJ_EVENT_ID_FOLLOWER
-	warp MAP_LAKE_VERITY, 1
+	warp MAP_LAKE_VERITY, 0
+	destroyfollower
 	release
 	end
 

@@ -943,7 +943,7 @@
 #define FLAG_HIDE_ROUTE_116_WANDAS_BOYFRIEND                        0x37E
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2         0x37F
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380          0x380
-#define FLAG_UNUSED_0x381                                           0x381
+#define FLAG_HIDE_VERITY_INTRO_SCENE                                0x381
 #define FLAG_HIDE_ROUTE_103_BIRCH                                   0x382
 #define FLAG_HIDE_TRICK_HOUSE_END_MAN                               0x383
 #define FLAG_HIDE_ROUTE_110_TEAM_AQUA                               0x384
