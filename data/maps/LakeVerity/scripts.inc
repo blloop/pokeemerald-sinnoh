@@ -2,6 +2,8 @@
 .set LOCALID_PROF, 2
 .set LOCALID_DAWN, 3
 .set LOCALID_LUCAS, 4
+.set LOCALID_WILDA, 5
+.set LOCALID_WILDB, 6
 
 LakeVerity_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LakeVerity_OnFrame
@@ -25,6 +27,7 @@ LakeVerity_EventScript_IntroScene::
 	msgbox LakeVerity_Text_Professor1, MSGBOX_SIGN
 	applymovement LOCALID_PROF, Common_Movement_FaceRight
 	waitmovement 0
+	delay 10
 	@ TODO: Add prof helper gender logic
 	msgbox LakeVerity_Text_HelperDawn1, MSGBOX_SIGN
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
@@ -35,8 +38,8 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LakeVerity_Text_HelperDawn2, MSGBOX_SIGN
-	delay 48
-	delay 48
+	delay 30
+	delay 30
 	@ TODO: Spawn briefcase
 	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_CameraPan2
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave1
@@ -66,12 +69,36 @@ LakeVerity_EventScript_IntroScene::
 	msgbox LakeVerity_Text_Rival2, MSGBOX_SIGN
 	delay 30
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceUp
+	waitmovement 0
 	delay 30
 	msgbox LakeVerity_Text_Rival3, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 30
+	msgbox LakeVerity_Text_Rival4, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival
+	waitmovement 0
+	msgbox LakeVerity_Text_Rival5, MSGBOX_SIGN
+	addobject LOCALID_WILDA
+	addobject LOCALID_WILDB
+	applymovement LOCALID_WILDA, LakeVerity_Movement_WildLeft
+	applymovement LOCALID_WILDB, LakeVerity_Movement_WildUp
+	waitmovement 0
+	delay 10
+	applymovement LOCALID_RIVAL, Common_Movement_FaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	msgbox LakeVerity_Text_Rival6, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_FaceDown
+	msgbox LakeVerity_Text_Rival7, MSGBOX_DEFAULT
+	@ Open briefcase
 
-
+	@ Battle wild
 
 	special RemoveCameraObject
+	@ Add post battle content
+
 	release
 	end
 
@@ -85,11 +112,9 @@ LakeVerity_Movement_CameraPan1:
 	walk_up
 	walk_up
 	walk_up
-	walk_up
 	step_end
 
 LakeVerity_Movement_CameraPan2:
-	walk_down
 	walk_down
 	walk_down
 	walk_down
@@ -112,7 +137,6 @@ LakeVerity_Movement_ProfessorLeave1:
 	walk_down
 	walk_down
 	walk_down
-	walk_down
 	step_end
 
 LakeVerity_Movement_ProfessorLeave2:
@@ -131,7 +155,6 @@ LakeVerity_Movement_HelperLeave1:
 	walk_down
 	walk_down
 	walk_down
-	walk_down
 	step_end
 
 LakeVerity_Movement_HelperLeave2:
@@ -146,6 +169,54 @@ LakeVerity_Movement_HelperLeave2:
 	delay_16
 	step_end
 
+LakeVerity_Movement_Rival:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	face_left
+	step_end
+
+LakeVerity_Movement_Player:
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+LakeVerity_Movement_WildLeft:
+	walk_faster_left
+	walk_faster_left
+	walk_faster_left
+	walk_faster_left
+	walk_faster_left
+	walk_faster_left
+	step_end
+
+LakeVerity_Movement_WildUp:
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	walk_faster_up
+	step_end
+
 LakeVerity_Text_Rival1:
 	.string "{RIVAL}: What's going on...?$"
 
@@ -156,6 +227,30 @@ LakeVerity_Text_Rival2:
 LakeVerity_Text_Rival3:
 	.string "Huh? {PLAYER}!\n"
 	.string "Let's go check this out!$"
+
+LakeVerity_Text_Rival4:
+	.string "...\n"
+	.string "...\p"
+	.string "What's that?\n"
+	.string "Don't go into the tall grass?\p"
+	.string "No problem, no problem!\p"
+	.string "We won't be in there long enough\n"
+	.string "for a wild Pokemon to come out.$"
+	
+LakeVerity_Text_Rival5:
+	.string "It's...\n"
+	.string "A briefcase?\p"
+	.string "Those people forgot it here.\n"
+	.string "What are we supposed to do with it?\p"
+	.string "We can try to deliver it, but who are\n"
+	.string "they? I heard them say professor...$"
+
+LakeVerity_Text_Rival6:
+	.string "Waaah!\n"
+	.string "Po-Pokemon?!$"
+	
+LakeVerity_Text_Rival7:
+	.string "What's going on?!"
 
 LakeVerity_Text_Professor1:
 	.string "Professor, there isn't anything out\n"
@@ -190,3 +285,9 @@ LakeVerity_Text_HelperDawn2:
 LakeVerity_Text_HelperDawn3:
 	.string "Dawn: I beg your pardon...\n"
 	.string "We'll be on our way.$"
+
+LakeVerity_Text_Briefcase:
+	.string "Look! These are Poke Balls!\n"
+	.string "Let's battle using these!\p"
+	.string "Eh...?\n"
+	.string "Which one do you want, then?$"
