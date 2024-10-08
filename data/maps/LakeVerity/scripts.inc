@@ -4,6 +4,7 @@
 .set LOCALID_LUCAS, 4
 .set LOCALID_WILDA, 5
 .set LOCALID_WILDB, 6
+.set LOCALID_BRIEFCASE, 7
 
 LakeVerity_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LakeVerity_OnFrame
@@ -28,7 +29,7 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_PROF, Common_Movement_FaceRight
 	waitmovement 0
 	delay 10
-	@ TODO: Add prof helper gender logic
+	@ TODO: Add prof helper gender logic to whole function
 	msgbox LakeVerity_Text_HelperDawn1, MSGBOX_SIGN
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	waitmovement 0
@@ -41,6 +42,7 @@ LakeVerity_EventScript_IntroScene::
 	delay 30
 	delay 30
 	@ TODO: Spawn briefcase
+	addobject LOCALID_BRIEFCASE
 	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_CameraPan2
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave1
 	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperLeave1
@@ -76,9 +78,14 @@ LakeVerity_EventScript_IntroScene::
 	waitmovement 0
 	delay 30
 	msgbox LakeVerity_Text_Rival4, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player
-	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player
-	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival
+	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player1
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player1
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival1
+	waitmovement 0
+	addobject LOCALID_BRIEFCASE
+	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player2
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player2
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival2
 	waitmovement 0
 	msgbox LakeVerity_Text_Rival5, MSGBOX_SIGN
 	addobject LOCALID_WILDA
@@ -99,6 +106,9 @@ LakeVerity_EventScript_IntroScene::
 	special RemoveCameraObject
 	@ Add post battle content
 
+	setflag FLAG_HIDE_VERITY_INTRO_OTHER
+	setflag FLAG_HIDE_VERITY_INTRO_MAY
+	@ setflag FLAG_HIDE_VERITY_INTRO_BRENDAN
 	release
 	end
 
@@ -169,13 +179,16 @@ LakeVerity_Movement_HelperLeave2:
 	delay_16
 	step_end
 
-LakeVerity_Movement_Rival:
+LakeVerity_Movement_Rival1:
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	walk_right
+	step_end
+	
+LakeVerity_Movement_Rival2:
 	walk_up
 	walk_up
 	walk_up
@@ -185,13 +198,16 @@ LakeVerity_Movement_Rival:
 	face_left
 	step_end
 
-LakeVerity_Movement_Player:
+LakeVerity_Movement_Player1:
 	walk_right
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	walk_up
+	step_end
+
+LakeVerity_Movement_Player2:
 	walk_right
 	walk_up
 	walk_up
@@ -250,7 +266,7 @@ LakeVerity_Text_Rival6:
 	.string "Po-Pokemon?!$"
 	
 LakeVerity_Text_Rival7:
-	.string "What's going on?!"
+	.string "What's going on?!$"
 
 LakeVerity_Text_Professor1:
 	.string "Professor, there isn't anything out\n"

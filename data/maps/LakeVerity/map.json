@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_VERITY_INTRO_SCENE"
+      "flag": "FLAG_HIDE_VERITY_INTRO_OTHER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
@@ -38,10 +38,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_VERITY_INTRO_SCENE"
+      "flag": "FLAG_HIDE_VERITY_INTRO_OTHER"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MAY_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 13,
       "y": 9,
       "elevation": 0,
@@ -51,20 +51,20 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_VERITY_INTRO_SCENE"
+      "flag": "FLAG_HIDE_VERITY_INTRO_MAY"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BIRCHS_BAG",
-      "x": 12,
-      "y": 9,
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
+      "x": 14,
+      "y": 6,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_VERITY_INTRO_BRENDAN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
@@ -85,6 +85,19 @@
       "y": 17,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_EVENTOBJ"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BIRCHS_BAG",
+      "x": 12,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
