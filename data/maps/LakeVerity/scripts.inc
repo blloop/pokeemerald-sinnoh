@@ -11,7 +11,8 @@ LakeVerity_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_VERITY_STATE
-	@ 1: Entered First Lake Scene
+	@ 0: Prior to First Lake Scene
+	@ 1: After First Lake Scene
 
 LakeVerity_OnFrame:
 	map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
@@ -41,7 +42,6 @@ LakeVerity_EventScript_IntroScene::
 	msgbox LakeVerity_Text_HelperDawn2, MSGBOX_SIGN
 	delay 30
 	delay 30
-	@ TODO: Spawn briefcase
 	addobject LOCALID_BRIEFCASE
 	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_CameraPan2
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave1
@@ -96,19 +96,25 @@ LakeVerity_EventScript_IntroScene::
 	delay 10
 	applymovement LOCALID_RIVAL, Common_Movement_FaceRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
-	msgbox LakeVerity_Text_Rival6, MSGBOX_DEFAULT
+	waitmovement 0
+	msgbox LakeVerity_Text_Rival6, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, Common_Movement_FaceDown
-	msgbox LakeVerity_Text_Rival7, MSGBOX_DEFAULT
-	@ Open briefcase
-
-	@ Battle wild
-
-	special RemoveCameraObject
+	waitmovement 0
+	msgbox LakeVerity_Text_Rival7, MSGBOX_SIGN
+	special ChooseStarter
+	removeobject LOCALID_WILDA
+	removeobject LOCALID_WILDB
 	@ Add post battle content
-
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox LakeVerity_Text_Rival8, MSGBOX_SIGN
+	
+	special RemoveCameraObject
 	setflag FLAG_HIDE_VERITY_INTRO_OTHER
 	setflag FLAG_HIDE_VERITY_INTRO_MAY
-	@ setflag FLAG_HIDE_VERITY_INTRO_BRENDAN
+	setflag FLAG_HIDE_VERITY_INTRO_BRENDAN
 	release
 	end
 
@@ -170,11 +176,11 @@ LakeVerity_Movement_HelperLeave1:
 LakeVerity_Movement_HelperLeave2:
 	walk_down
 	walk_in_place_left
-	delay_16
-	walk_in_place_right
 	delay_8
+	walk_in_place_right
+	delay_4
 	walk_in_place_left
-	delay_16
+	delay_8
 	walk_in_place_down
 	delay_16
 	step_end
@@ -268,6 +274,17 @@ LakeVerity_Text_Rival6:
 LakeVerity_Text_Rival7:
 	.string "What's going on?!$"
 
+@ TODO: Add custom string based on starter selected
+LakeVerity_Text_Rival8:
+	.string "{RIVAL}: Fwaaah!\n"
+	.string "Your CHIMCHAR totally rocked!\p"
+	.string "But my PIPLUP was way toughter\n"
+	.string "than yours!\p"
+	.string "...They were other people's\n"
+	.string "Pokemon, though...\p"
+	.string "But we had to use them...\n"
+	.string "They won't mind, will they?$"
+
 LakeVerity_Text_Professor1:
 	.string "Professor, there isn't anything out\n"
 	.string "of the ordinary on the other side,\l"
@@ -301,9 +318,3 @@ LakeVerity_Text_HelperDawn2:
 LakeVerity_Text_HelperDawn3:
 	.string "Dawn: I beg your pardon...\n"
 	.string "We'll be on our way.$"
-
-LakeVerity_Text_Briefcase:
-	.string "Look! These are Poke Balls!\n"
-	.string "Let's battle using these!\p"
-	.string "Eh...?\n"
-	.string "Which one do you want, then?$"

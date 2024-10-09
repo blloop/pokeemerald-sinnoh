@@ -6,10 +6,12 @@ Route101_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_ROUTE101_STATE
-	@ 1: Paired up with Rival
-	@ 2: Entered First Lake Scene
+	@ 1: Prior to First Lake Scene
+	@ 2: Post First Lake Scene
+	@ 3: Post Professor Scene
 
 Route101_OnTransition:
+	map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
 	end
 
 Route101_OnFrame:
