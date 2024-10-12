@@ -7,8 +7,9 @@ Route101_MapScripts::
 
 	@ State descriptions for VAR_ROUTE101_STATE
 	@ 1: Prior to First Lake Scene
-	@ 2: Post First Lake Scene
-	@ 3: Post Professor Scene
+	@ 2: Entered First Lake Scene
+	@ 3: Post First Lake Scene
+	@ 4: Post Professor Scene
 
 Route101_OnTransition:
 	@ call_if_eq VAR_ROUTE101_STATE, 4, ...
@@ -16,6 +17,8 @@ Route101_OnTransition:
 
 Route101_OnFrame:
 	@ TODO: Add script to prepare professor scene
+	@ Set VAR_ROUTE101_STATE to 3 onstart
+	@ destroyfollower after event
 	@ map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
 	.2byte 0
 
@@ -99,6 +102,7 @@ Route101_EventScript_RouteSign::
 	end
 
 Route101_EventScript_Rival::
+	@ TODO: Faceplayer not working
 	faceplayer
 	goto_if_eq VAR_FOLLOWER_TEXT, 0, Route101_EventScript_RivalTalk1
 	goto_if_eq VAR_FOLLOWER_TEXT, 1, Route101_EventScript_RivalTalk2

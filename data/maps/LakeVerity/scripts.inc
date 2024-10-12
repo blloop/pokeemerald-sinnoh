@@ -240,6 +240,7 @@ LakeVerity_Movement_HelperArrive1:
 	walk_up
 	walk_up
 	walk_up
+	face_left
 	step_end
 
 LakeVerity_Movement_HelperShift1:
@@ -419,7 +420,7 @@ LakeVerity_Text_Rival7:
 LakeVerity_Text_Rival8:
 	.string "{RIVAL}: Fwaaah!\n"
 	.string "Your CHIMCHAR totally rocked!\p"
-	.string "But my PIPLUP was way toughter\n"
+	.string "But my PIPLUP was way tougher\n"
 	.string "than yours!\p"
 	.string "...They were other people's\n"
 	.string "Pokemon, though...\p"
@@ -435,7 +436,7 @@ LakeVerity_Text_Rival0:
 	.string "My Pokemon got hurt from that\n"
 	.string "battle.\p"
 	.string "If we get attacked by another\n"
-	.string "Pokemon, we might be in trouble$"
+	.string "Pokemon, we might be in trouble.$"
 
 LakeVerity_Text_Professor1:
 	.string "Professor, there isn't anything out\n"
