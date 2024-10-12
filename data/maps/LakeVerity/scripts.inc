@@ -104,14 +104,47 @@ LakeVerity_EventScript_IntroScene::
 	special ChooseStarter
 	removeobject LOCALID_WILDA
 	removeobject LOCALID_WILDB
-	@ Add post battle content
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox LakeVerity_Text_Rival8, MSGBOX_SIGN
-	
+	addobject LOCALID_DAWN
+	setobjectxy LOCALID_DAWN, 11, 15
+	applymovement LOCALID_DAWN, Common_Movement_FaceUp
+	waitmovement 0
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival3
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player3
+	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperArrive1
+	waitmovement 0
+	msgbox LakeVerity_Text_HelperDawn4, MSGBOX_SIGN
+	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperShift1
+	waitmovement 0
+	msgbox LakeVerity_Text_HelperDawn5, MSGBOX_SIGN
+	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 16
+	removeobject LOCALID_BRIEFCASE
+	delay 16
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival4
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Rival4
+	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperLeave3
+	waitmovement 0
+	removeobject LOCALID_DAWN
+	delay 16
+	msgbox LakeVerity_Text_Rival9, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player4
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival5
+	waitmovement 0
+	msgbox LakeVerity_Text_Rival0, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player5
+	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player5
+	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival6
+	waitmovement 0
+	removeobject LOCALID_RIVAL
+	delay_16
 	special RemoveCameraObject
+	warp MAP_LAKEFRONT_VERITY, 1
 	setflag FLAG_HIDE_VERITY_INTRO_OTHER
 	setflag FLAG_HIDE_VERITY_INTRO_MAY
 	setflag FLAG_HIDE_VERITY_INTRO_BRENDAN
@@ -185,6 +218,39 @@ LakeVerity_Movement_HelperLeave2:
 	delay_16
 	step_end
 
+LakeVerity_Movement_HelperLeave3:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+LakeVerity_Movement_HelperArrive1:
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+LakeVerity_Movement_HelperShift1:
+	walk_in_place_down
+	delay_16
+	walk_in_place_right
+	delay_16
+	walk_in_place_down
+	delay_16
+	step_end
+
 LakeVerity_Movement_Rival1:
 	walk_up
 	walk_up
@@ -204,6 +270,45 @@ LakeVerity_Movement_Rival2:
 	face_left
 	step_end
 
+LakeVerity_Movement_Rival3:
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_right
+	walk_in_place_left
+	step_end
+
+LakeVerity_Movement_Rival4:
+	delay_16
+	walk_in_place_down
+	step_end
+
+LakeVerity_Movement_Rival5:
+	walk_left
+	walk_down
+	walk_in_place_left
+	step_end
+
+LakeVerity_Movement_Rival6:
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
 LakeVerity_Movement_Player1:
 	walk_right
 	walk_up
@@ -219,6 +324,42 @@ LakeVerity_Movement_Player2:
 	walk_up
 	walk_up
 	walk_up
+	step_end
+
+LakeVerity_Movement_Player3:
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	face_down
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_right
+	walk_in_place_up
+	step_end
+
+LakeVerity_Movement_Player4:
+	delay_16
+	walk_in_place_right
+	step_end
+
+LakeVerity_Movement_Player5:
+	delay_16
+	face_down
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 LakeVerity_Movement_WildLeft:
@@ -285,6 +426,17 @@ LakeVerity_Text_Rival8:
 	.string "But we had to use them...\n"
 	.string "They won't mind, will they?$"
 
+LakeVerity_Text_Rival9:
+	.string "{RIVAL}: What was that about?$"
+
+LakeVerity_Text_Rival0:
+	.string "I don't know what's going on.\n"
+	.string "{PLAYER}, let's get out of here.\p"
+	.string "My Pokemon got hurt from that\n"
+	.string "battle.\p"
+	.string "If we get attacked by another\n"
+	.string "Pokemon, we might be in trouble$"
+
 LakeVerity_Text_Professor1:
 	.string "Professor, there isn't anything out\n"
 	.string "of the ordinary on the other side,\l"
@@ -318,3 +470,18 @@ LakeVerity_Text_HelperDawn2:
 LakeVerity_Text_HelperDawn3:
 	.string "Dawn: I beg your pardon...\n"
 	.string "We'll be on our way.$"
+
+LakeVerity_Text_HelperDawn4:
+	.string "Dawn: Oh! There's the briefcase!\p"
+	.string "The professor would have been furious\n"
+	.string "if I'd lost it...$"
+
+LakeVerity_Text_HelperDawn5:
+	.string "Dawn: Huh?\n"
+	.string "On, no!\p"
+	.string "Did you...\n"
+	.string "Did you use the Pokemon in here?\p"
+	.string "You did?! Oh, my gosh!\n"
+	.string "What's the professor going to say...?\p"
+	.string "...This is so not good...\n"
+	.string "I'll take this briefcase for now.$"

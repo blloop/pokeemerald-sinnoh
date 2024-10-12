@@ -11,10 +11,12 @@ Route101_MapScripts::
 	@ 3: Post Professor Scene
 
 Route101_OnTransition:
-	map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
+	@ call_if_eq VAR_ROUTE101_STATE, 4, ...
 	end
 
 Route101_OnFrame:
+	@ TODO: Add script to prepare professor scene
+	@ map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
 	.2byte 0
 
 Route101_EventScript_RivalSee1::
