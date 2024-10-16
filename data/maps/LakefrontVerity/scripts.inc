@@ -19,6 +19,7 @@ LakefrontVerity_EventScript_EnterLake::
 	waitmovement 0
 	warp MAP_LAKE_VERITY, 0
 	destroyfollower
+	clearflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
 	release
 	end
 
@@ -35,9 +36,20 @@ LakefrontVerity_EventScript_ExitLake::
 	applymovement LOCALID_RIVAL, LakefrontVerity_Movement_WalkUpRight
 	waitmovement 0
 	setvar VAR_FOLLOWER_TEXT, 0
-	setvar VAR_ROUTE101_STATE, 3
+	setflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
 	loadword 0 LakefrontVerity_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
+	release
+	end
+
+LakefrontVerity_EventScript_ReturnLake::
+	lock
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	msgbox LakefrontVerity_Text_RivalLeave, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
 	release
 	end
 
@@ -94,6 +106,12 @@ LakefrontVerity_Text_ExitLake:
 	.string "Pokemon. They're not ours.\p"
 	.string "But I want to spend just a little\n"
 	.string "more time with this little guy...$"
+
+LakefrontVerity_Text_RivalLeave:
+	.string "{RIVAL}: Hey, hey!\n"
+	.string "Where do you think you're going?\p"
+	.string "We have to go return these\n"
+	.string "Pokemon...$"
 
 LakefrontVerity_Text_RivalTalk1:
 	.string "{RIVAL}: We didn't have any\n"

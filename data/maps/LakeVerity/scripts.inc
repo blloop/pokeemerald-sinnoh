@@ -11,7 +11,6 @@ LakeVerity_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_VERITY_STATE
-	@ 0: Prior to First Lake Scene
 	@ 1: After First Lake Scene
 
 LakeVerity_OnFrame:
@@ -279,7 +278,6 @@ LakeVerity_Movement_Rival3:
 	delay_16
 	delay_16
 	delay_16
-	delay_8
 	walk_right
 	walk_in_place_left
 	step_end

@@ -7,12 +7,10 @@ Route101_MapScripts::
 
 	@ State descriptions for VAR_ROUTE101_STATE
 	@ 1: Prior to First Lake Scene
-	@ 2: Entered First Lake Scene
-	@ 3: Post First Lake Scene
-	@ 4: Post Professor Scene
+	@ 2: Post First Lake Scene
+	@ 3: Post Professor Scene
 
 Route101_OnTransition:
-	@ call_if_eq VAR_ROUTE101_STATE, 4, ...
 	end
 
 Route101_OnFrame:
@@ -56,6 +54,7 @@ Route101_EventScript_RivalSee::
 	call_if_eq VAR_0x8004, 3, Route101_EventScript_RivalShift3
 	call_if_eq VAR_0x8004, 4, Route101_EventScript_RivalShift4
 	msgbox Route101_Text_RivalMeet, MSGBOX_SIGN
+	setflag FLAG_HIDE_ROUTE101_RIVAL
 	loadword 0 Route101_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
 	release

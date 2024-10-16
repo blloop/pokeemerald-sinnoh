@@ -31,7 +31,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_VERITY_LAKEFRONT_RIVAL"
     }
   ],
   "warp_events": [
@@ -68,6 +68,24 @@
       "var": "VAR_ROUTE101_STATE",
       "var_value": "1",
       "script": "LakefrontVerity_EventScript_EnterLake"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "2",
+      "script": "LakefrontVerity_EventScript_ReturnLake"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ROUTE101_STATE",
+      "var_value": "2",
+      "script": "LakefrontVerity_EventScript_ReturnLake"
     }
   ],
   "bg_events": [
