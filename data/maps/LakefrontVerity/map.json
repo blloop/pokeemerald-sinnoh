@@ -75,7 +75,7 @@
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "LakefrontVerity_EventScript_ReturnLake"
     },
     {
@@ -84,7 +84,7 @@
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var_value": "3",
       "script": "LakefrontVerity_EventScript_ReturnLake"
     }
   ],

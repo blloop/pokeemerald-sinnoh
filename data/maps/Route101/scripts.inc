@@ -1,4 +1,7 @@
 .set LOCALID_RIVAL, 1
+.set LOCALID_PROF, 2
+.set LOCALID_DAWN, 3
+.set LOCALID_LUCAS, 4
 
 Route101_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
@@ -6,18 +9,15 @@ Route101_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_ROUTE101_STATE
-	@ 1: Prior to First Lake Scene
-	@ 2: Post First Lake Scene
-	@ 3: Post Professor Scene
+	@ 1: Prior to first lake event
+	@ 2: Post first lake event
+	@ 3: Returned from first lake event
+	@ 4: Post professor event
 
 Route101_OnTransition:
 	end
 
 Route101_OnFrame:
-	@ TODO: Add script to prepare professor scene
-	@ Set VAR_ROUTE101_STATE to 3 onstart
-	@ destroyfollower after event
-	@ map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
 	.2byte 0
 
 Route101_EventScript_RivalSee1::
@@ -54,7 +54,7 @@ Route101_EventScript_RivalSee::
 	call_if_eq VAR_0x8004, 3, Route101_EventScript_RivalShift3
 	call_if_eq VAR_0x8004, 4, Route101_EventScript_RivalShift4
 	msgbox Route101_Text_RivalMeet, MSGBOX_SIGN
-	setflag FLAG_HIDE_ROUTE101_RIVAL
+	setflag FLAG_HIDE_ROUTE_101_RIVAL
 	loadword 0 Route101_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
 	release
@@ -175,6 +175,94 @@ Route101_EventScript_FollowGrassSpecial::
 	release
 	end
 
+Route101_EventScript_Professor1::
+	lock
+	setvar VAR_ROUTE101_STATE, 4
+	setflag FLAG_HIDE_ROUTE_101_PROF
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 48
+	delay 48
+	msgbox Route101_Text_RivalProf, MSGBOX_SIGN
+	delay 48
+	@ TODO: Add prof helper gender logic to whole function
+	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 48
+	applymovement LOCALID_PROF, Route101_Movement_Prof1
+	waitmovement 0
+	msgbox Route101_Text_Prof1, MSGBOX_SIGN
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route101_Text_Prof2, MSGBOX_SIGN
+	applymovement LOCALID_DAWN, Route101_Movement_Helper1
+	applymovement LOCALID_PROF, Route101_Movement_ProfLeave
+	waitmovement 0
+	removeobject LOCALID_PROF
+	msgbox Route101_Text_Helper1, MSGBOX_SIGN
+	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route101_Text_Helper2, MSGBOX_SIGN
+	applymovement LOCALID_DAWN, Route101_Movement_HelperLeave
+	waitmovement 0
+	removeobject LOCALID_DAWN
+	msgbox Route101_Text_RivalLeave, MSGBOX_SIGN
+	delay 48
+	setvar VAR_LITTLEROOT_INTRO_STATE, 5
+	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
+	fadescreen FADE_TO_BLACK
+	destroyfollower
+	release
+	end
+
+Route101_EventScript_Professor2::
+	lock
+	setvar VAR_ROUTE101_STATE, 4
+	setflag FLAG_HIDE_ROUTE_101_PROF
+	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
+	@ warp
+	@ destroyfollower
+	release
+	end
+
+Route101_Movement_Prof1:
+	walk_left
+	walk_left
+	step_end
+
+Route101_Movement_Prof2:
+	walk_left
+	walk_left
+	step_end
+
+Route101_Movement_ProfLeave:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+Route101_Movement_Helper1:
+	delay_16
+	delay_16
+	walk_in_place_right
+	step_end
+
+Route101_Movement_HelperLeave:
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
 Route101_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
 	.string "     Twinleaf Town$"
@@ -248,3 +336,42 @@ Route101_Text_FollowGrass:
 	.string "you if you're walking in the tall grass.\p"
 	.string "'It would be OK if you had your\n"
 	.string "own Pokemon, but...'$"
+
+Route101_Text_RivalProf:
+	.string "{RIVAL}: Hey, it's those people!\n"
+	.string "Is that old guy staring at us?$"
+
+Route101_Text_Prof1:
+	.string "Professor: Hmm...\p"
+	.string "I heard from Dawn that\n"
+	.string "you used our Pokemon?\l"
+	.string "Let me see them, please.\p"
+	.string "Hmm...\n"
+	.string "CHIMCHAR and PIPLUP...\p"
+	.string "...\p"
+	.string "Hmm...\p"
+	.string "I see...\n"
+	.string "That's how it is...$"
+
+Route101_Text_Prof2:
+	.string "Dawn!\n"
+	.string "I'm going back to my lab!$"
+
+Route101_Text_Helper1:
+	.string "Dawn: Um...Yes!\n"
+	.string "Professor, please wait for me!$"
+
+Route101_Text_Helper2:
+	.string "I think you should visit our lab\n"
+	.string "later.\p"
+	.string "OK, see you!$"
+
+Route101_Text_RivalLeave:
+	.string "{RIVAL}: What was all that\n"
+	.string "craziness about?\p"
+	.string "I mean, if he was angry, he could've\n"
+	.string "just yelled at us, or whatever...\p"
+	.string "And didn't he want their Pokemon\n"
+	.string "back...?\p"
+	.string "{PLAYER}...\n"
+	.string "We should go home, too...$"

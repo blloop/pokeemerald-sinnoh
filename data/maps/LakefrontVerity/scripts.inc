@@ -36,7 +36,9 @@ LakefrontVerity_EventScript_ExitLake::
 	applymovement LOCALID_RIVAL, LakefrontVerity_Movement_WalkUpRight
 	waitmovement 0
 	setvar VAR_FOLLOWER_TEXT, 0
+	setvar VAR_ROUTE101_STATE, 3
 	setflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
+	clearflag FLAG_HIDE_ROUTE_101_PROF
 	loadword 0 LakefrontVerity_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
 	release

@@ -9,13 +9,13 @@ LittlerootTown_MapScripts::
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
 	@ 1: Left with Rival to see lake
 	@ 2: Entered lake event
-	@ 3: Returned from lab @ TODO
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
 	@ 2: Talked to Mom twice
 	@ 3: Bumped into Rival
 	@ 4: Spoken to Rival in room
+	@ 5: Returned from lake event
 
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
@@ -36,16 +36,11 @@ LittlerootTown_EventScript_RivalMeet::
 	closedoor 3, 12
 	waitdooranim
 	msgbox LittlerootTown_Text_Thud, MSGBOX_DEFAULT
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	closemessage
 	msgbox LittlerootTown_Text_RivalBump, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalRight
@@ -54,11 +49,8 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	@ TODO: Fix exclamation not showing
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalLeft
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
@@ -132,10 +124,8 @@ LittlerootTown_EventScript_BlockExclaim::
 	delay 10
 	applymovement LOCALID_BLOCK, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_BLOCK, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_BLOCK, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	return
 
 LittlerootTown_EventScript_LeaveBlock1::
