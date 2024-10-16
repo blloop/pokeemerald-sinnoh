@@ -1,17 +1,21 @@
 .set LOCALID_RIVAL, 1
 .set LOCALID_PROF, 2
-.set LOCALID_DAWN, 3
-.set LOCALID_LUCAS, 4
-.set LOCALID_WILDA, 5
-.set LOCALID_WILDB, 6
-.set LOCALID_BRIEFCASE, 7
+.set LOCALID_HELPER, 3
+.set LOCALID_WILDA, 4
+.set LOCALID_WILDB, 5
+.set LOCALID_BRIEFCASE, 6
 
 LakeVerity_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, LakeVerity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LakeVerity_OnFrame
 	.byte 0
 
 	@ State descriptions for VAR_VERITY_STATE
 	@ 1: After First Lake Scene
+
+LakeVerity_OnTransition:
+	call Common_EventScript_SetupRivalGfxId
+	end
 
 LakeVerity_OnFrame:
 	map_script_2 VAR_VERITY_STATE, 0, LakeVerity_EventScript_IntroScene
@@ -29,22 +33,21 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_PROF, Common_Movement_FaceRight
 	waitmovement 0
 	delay 10
-	@ TODO: Add prof helper gender logic to whole function
-	msgbox LakeVerity_Text_HelperDawn1, MSGBOX_SIGN
+	msgbox LakeVerity_Text_Helper1, MSGBOX_SIGN
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 30
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LakeVerity_Text_HelperDawn2, MSGBOX_SIGN
+	msgbox LakeVerity_Text_Helper2, MSGBOX_SIGN
 	delay 30
 	delay 30
 	addobject LOCALID_BRIEFCASE
 	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_CameraPan2
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave1
-	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperLeave1
+	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperLeave1
 	waitmovement 0
 	delay 10
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
@@ -56,12 +59,12 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave2
 	waitmovement 0
 	removeobject LOCALID_PROF
-	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperLeave2
+	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperLeave2
 	waitmovement 0
-	msgbox LakeVerity_Text_HelperDawn3, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, LakeVerity_Movement_ProfessorLeave2
+	msgbox LakeVerity_Text_Helper3, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, LakeVerity_Movement_ProfessorLeave2
 	waitmovement 0
-	removeobject LOCALID_DAWN
+	removeobject LOCALID_HELPER
 	delay 48
 	applymovement LOCALID_RIVAL, Common_Movement_WalkLeft
 	waitmovement 0
@@ -108,28 +111,28 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox LakeVerity_Text_Rival8, MSGBOX_SIGN
-	addobject LOCALID_DAWN
-	setobjectxy LOCALID_DAWN, 11, 15
-	applymovement LOCALID_DAWN, Common_Movement_FaceUp
+	addobject LOCALID_HELPER
+	setobjectxy LOCALID_HELPER, 11, 15
+	applymovement LOCALID_HELPER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival3
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player3
-	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperArrive1
+	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperArrive1
 	waitmovement 0
-	msgbox LakeVerity_Text_HelperDawn4, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperShift1
+	msgbox LakeVerity_Text_Helper4, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperShift1
 	waitmovement 0
-	msgbox LakeVerity_Text_HelperDawn5, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	msgbox LakeVerity_Text_Helper5, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 16
 	removeobject LOCALID_BRIEFCASE
 	delay 16
 	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival4
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Rival4
-	applymovement LOCALID_DAWN, LakeVerity_Movement_HelperLeave3
+	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperLeave3
 	waitmovement 0
-	removeobject LOCALID_DAWN
+	removeobject LOCALID_HELPER
 	delay 16
 	msgbox LakeVerity_Text_Rival9, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player4
@@ -144,9 +147,9 @@ LakeVerity_EventScript_IntroScene::
 	delay_16
 	special RemoveCameraObject
 	warp MAP_LAKEFRONT_VERITY, 1
+	clearflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
 	setflag FLAG_HIDE_VERITY_INTRO_OTHER
-	setflag FLAG_HIDE_VERITY_INTRO_MAY
-	setflag FLAG_HIDE_VERITY_INTRO_BRENDAN
+	setflag FLAG_HIDE_VERITY_INTRO_HELPER
 	release
 	end
 
@@ -451,10 +454,10 @@ LakeVerity_Text_Professor2:
 	.string "Professor: Excuse me.\n"
 	.string "Let us pass, please.$"
 
-LakeVerity_Text_HelperDawn1:
+LakeVerity_Text_Helper1:
 	.string "Dawn, we're leaving.$"
 
-LakeVerity_Text_HelperDawn2:
+LakeVerity_Text_Helper2:
 	.string "Dawn: Professor, how are you enjoying\n"
 	.string "being back in Sinnoh?\p"
 	.string "After being away for four years,\n"
@@ -466,16 +469,16 @@ LakeVerity_Text_HelperDawn2:
 	.string "The region should serve us very well\n"
 	.string "in regard to our studies.$"
 
-LakeVerity_Text_HelperDawn3:
+LakeVerity_Text_Helper3:
 	.string "Dawn: I beg your pardon...\n"
 	.string "We'll be on our way.$"
 
-LakeVerity_Text_HelperDawn4:
+LakeVerity_Text_Helper4:
 	.string "Dawn: Oh! There's the briefcase!\p"
 	.string "The professor would have been furious\n"
 	.string "if I'd lost it...$"
 
-LakeVerity_Text_HelperDawn5:
+LakeVerity_Text_Helper5:
 	.string "Dawn: Huh?\n"
 	.string "On, no!\p"
 	.string "Did you...\n"

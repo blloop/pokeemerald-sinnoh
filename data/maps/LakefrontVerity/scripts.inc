@@ -19,7 +19,6 @@ LakefrontVerity_EventScript_EnterLake::
 	waitmovement 0
 	warp MAP_LAKE_VERITY, 0
 	destroyfollower
-	clearflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
 	release
 	end
 
@@ -39,6 +38,7 @@ LakefrontVerity_EventScript_ExitLake::
 	setvar VAR_ROUTE101_STATE, 3
 	setflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
 	clearflag FLAG_HIDE_ROUTE_101_PROF
+	clearflag FLAG_HIDE_ROUTE_101_HELPER
 	loadword 0 LakefrontVerity_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
 	release
@@ -100,7 +100,7 @@ LakefrontVerity_Text_EnterLake:
 
 LakefrontVerity_Text_RouteSign:
 	.string "{UP_ARROW} Lake Verity Ahead\n"
-	.string "     The Lake of Emotions$"
+	.string "   The Lake of Emotions$"
 
 LakefrontVerity_Text_ExitLake:
 	.string "{RIVAL}: You go ahead...\p"

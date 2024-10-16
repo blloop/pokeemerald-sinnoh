@@ -39,6 +39,7 @@ LittlerootTown_EventScript_RivalMeet::
 	delay 48
 	delay 48
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	waitmovement 0
 	delay 48
 	delay 48
 	closemessage
@@ -49,6 +50,7 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	@ TODO: Fix exclamation not showing
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	waitmovement 0
 	delay 48
 	delay 48
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalLeft

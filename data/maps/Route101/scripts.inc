@@ -15,6 +15,7 @@ Route101_MapScripts::
 	@ 4: Post professor event
 
 Route101_OnTransition:
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 Route101_OnFrame:
@@ -179,6 +180,7 @@ Route101_EventScript_Professor1::
 	lock
 	setvar VAR_ROUTE101_STATE, 4
 	setflag FLAG_HIDE_ROUTE_101_PROF
+	setflag FLAG_HIDE_ROUTE_101_HELPER
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -188,8 +190,7 @@ Route101_EventScript_Professor1::
 	delay 48
 	msgbox Route101_Text_RivalProf, MSGBOX_SIGN
 	delay 48
-	@ TODO: Add prof helper gender logic to whole function
-	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 48
 	applymovement LOCALID_PROF, Route101_Movement_Prof1
@@ -198,17 +199,17 @@ Route101_EventScript_Professor1::
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox Route101_Text_Prof2, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, Route101_Movement_Helper1
+	applymovement LOCALID_HELPER, Route101_Movement_Helper1
 	applymovement LOCALID_PROF, Route101_Movement_ProfLeave
 	waitmovement 0
 	removeobject LOCALID_PROF
 	msgbox Route101_Text_Helper1, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox Route101_Text_Helper2, MSGBOX_SIGN
-	applymovement LOCALID_DAWN, Route101_Movement_HelperLeave
+	applymovement LOCALID_HELPER, Route101_Movement_HelperLeave
 	waitmovement 0
-	removeobject LOCALID_DAWN
+	removeobject LOCALID_HELPER
 	msgbox Route101_Text_RivalLeave, MSGBOX_SIGN
 	delay 48
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
@@ -222,9 +223,42 @@ Route101_EventScript_Professor2::
 	lock
 	setvar VAR_ROUTE101_STATE, 4
 	setflag FLAG_HIDE_ROUTE_101_PROF
-	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
-	@ warp
-	@ destroyfollower
+	setflag FLAG_HIDE_ROUTE_101_HELPER
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 48
+	delay 48
+	msgbox Route101_Text_RivalProf, MSGBOX_SIGN
+	delay 48
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 48
+	applymovement LOCALID_PROF, Route101_Movement_Prof2
+	waitmovement 0
+	msgbox Route101_Text_Prof1, MSGBOX_SIGN
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route101_Text_Prof2, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Route101_Movement_Helper2
+	applymovement LOCALID_PROF, Route101_Movement_ProfLeave
+	waitmovement 0
+	removeobject LOCALID_PROF
+	msgbox Route101_Text_Helper1, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route101_Text_Helper2, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Route101_Movement_HelperLeave
+	waitmovement 0
+	removeobject LOCALID_HELPER
+	msgbox Route101_Text_RivalLeave, MSGBOX_SIGN
+	delay 48
+	setvar VAR_LITTLEROOT_INTRO_STATE, 5
+	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
+	fadescreen FADE_TO_BLACK
+	destroyfollower
 	release
 	end
 
@@ -235,6 +269,7 @@ Route101_Movement_Prof1:
 
 Route101_Movement_Prof2:
 	walk_left
+	walk_down
 	walk_left
 	step_end
 
@@ -254,6 +289,13 @@ Route101_Movement_Helper1:
 	walk_in_place_right
 	step_end
 
+Route101_Movement_Helper2:
+	delay_16
+	walk_up
+	walk_in_place_down
+	walk_in_place_right
+	step_end
+
 Route101_Movement_HelperLeave:
 	walk_fast_right
 	walk_fast_right
@@ -265,7 +307,7 @@ Route101_Movement_HelperLeave:
 
 Route101_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
-	.string "     Twinleaf Town$"
+	.string "   Twinleaf Town$"
 
 @ TODO: Figure out how to add delimited quotes to string
 Route101_Text_RivalMeet:

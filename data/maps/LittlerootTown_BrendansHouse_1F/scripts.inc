@@ -6,11 +6,12 @@ LittlerootTown_BrendansHouse_1F_MapScripts::
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_OnTransition:
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToDoor
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MoveMom
 	end
 
 LittlerootTown_BrendansHouse_1F_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomMessage
+	@ map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MomSurprised
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
@@ -55,6 +56,11 @@ LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2:
 	walk_in_place_up
 	step_end
 
+LittlerootTown_BrendansHouse_1F_EventScript_MomSurprised::
+	lock
+	release
+	end
+
 LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	lock
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
@@ -69,7 +75,7 @@ LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	return
 
 @ TODO: Change to kitchen scene
-LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToDoor::
+LittlerootTown_BrendansHouse_1F_EventScript_MoveMom::
 	setobjectxyperm LOCALID_MOM, 1, 3
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_DOWN
 	return

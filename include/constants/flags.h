@@ -863,7 +863,7 @@
 #define FLAG_HIDE_RUSTBORO_CITY_RIVAL                               0x32E
 #define FLAG_UNUSED_0x32F                                           0x32F
 #define FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE                           0x330
-#define FLAG_UNUSED_0x331                                           0x331
+#define FLAG_HIDE_ROUTE_101_HELPER                                  0x331
 #define FLAG_UNUSED_0x332                                           0x332
 #define FLAG_HIDE_ROUTE_112_TEAM_MAGMA                              0x333
 #define FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE                        0x334
@@ -943,8 +943,8 @@
 #define FLAG_HIDE_ROUTE_116_WANDAS_BOYFRIEND                        0x37E
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2         0x37F
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380          0x380
-#define FLAG_HIDE_VERITY_INTRO_MAY                                  0x381
-#define FLAG_HIDE_VERITY_INTRO_BRENDAN                              0x382
+#define FLAG_HIDE_VERITY_INTRO_HELPER                               0x381
+#define FLAG_UNUSED_382                                             0x382
 #define FLAG_HIDE_TRICK_HOUSE_END_MAN                               0x383
 #define FLAG_HIDE_ROUTE_110_TEAM_AQUA                               0x384
 #define FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2                          0x385
