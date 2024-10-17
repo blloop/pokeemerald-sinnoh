@@ -180,7 +180,7 @@
       "elevation": 0,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "3",
-      "script": "Route101_EventScript_Professor1"
+      "script": "Route101_EventScript_ProfessorA"
     },
     {
       "type": "trigger",
@@ -189,7 +189,7 @@
       "elevation": 0,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "3",
-      "script": "Route101_EventScript_Professor2"
+      "script": "Route101_EventScript_ProfessorB"
     }
   ],
   "bg_events": [

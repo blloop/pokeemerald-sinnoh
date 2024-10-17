@@ -74,10 +74,9 @@ LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	release
 	return
 
-@ TODO: Change to kitchen scene
 LittlerootTown_BrendansHouse_1F_EventScript_MoveMom::
 	setobjectxyperm LOCALID_MOM, 1, 3
-	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::

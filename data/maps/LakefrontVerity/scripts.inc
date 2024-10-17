@@ -17,8 +17,9 @@ LakefrontVerity_EventScript_EnterLake::
 	applymovement OBJ_EVENT_ID_PLAYER, LakefrontVerity_Movement_WalkUp
 	applymovement OBJ_EVENT_ID_FOLLOWER, LakefrontVerity_Movement_WalkUp
 	waitmovement 0
-	warp MAP_LAKE_VERITY, 0
 	destroyfollower
+	warp MAP_LAKE_VERITY, 0
+	waitstate
 	release
 	end
 
@@ -46,10 +47,10 @@ LakefrontVerity_EventScript_ExitLake::
 
 LakefrontVerity_EventScript_ReturnLake::
 	lock
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceUp
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LakefrontVerity_Text_RivalLeave, MSGBOX_SIGN
-	applymovement LOCALID_RIVAL, Common_Movement_WalkDown
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkDown
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
 	waitmovement 0
 	release

@@ -176,15 +176,24 @@ Route101_EventScript_FollowGrassSpecial::
 	release
 	end
 
-Route101_EventScript_Professor1::
+Route101_EventScript_ProfessorA::
 	lock
+	setvar VAR_0x8004, 0
+	goto Route101_EventScript_Professor1
+	
+Route101_EventScript_ProfessorB::
+	lock
+	setvar VAR_0x8004, 1
+	goto Route101_EventScript_Professor1
+
+Route101_EventScript_Professor1::
 	setvar VAR_ROUTE101_STATE, 4
 	setflag FLAG_HIDE_ROUTE_101_PROF
 	setflag FLAG_HIDE_ROUTE_101_HELPER
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 48
 	delay 48
@@ -193,57 +202,21 @@ Route101_EventScript_Professor1::
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 48
-	applymovement LOCALID_PROF, Route101_Movement_Prof1
-	waitmovement 0
-	msgbox Route101_Text_Prof1, MSGBOX_SIGN
-	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
-	waitmovement 0
-	msgbox Route101_Text_Prof2, MSGBOX_SIGN
-	applymovement LOCALID_HELPER, Route101_Movement_Helper1
-	applymovement LOCALID_PROF, Route101_Movement_ProfLeave
-	waitmovement 0
-	removeobject LOCALID_PROF
-	msgbox Route101_Text_Helper1, MSGBOX_SIGN
-	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
-	msgbox Route101_Text_Helper2, MSGBOX_SIGN
-	applymovement LOCALID_HELPER, Route101_Movement_HelperLeave
-	waitmovement 0
-	removeobject LOCALID_HELPER
-	msgbox Route101_Text_RivalLeave, MSGBOX_SIGN
-	delay 48
-	setvar VAR_LITTLEROOT_INTRO_STATE, 5
-	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
-	fadescreen FADE_TO_BLACK
-	destroyfollower
-	release
+	call_if_eq VAR_0x8004, 0, Route101_EventScript_ProfessorMove1
+	call_if_eq VAR_0x8004, 1, Route101_EventScript_ProfessorMove2
+	switch VAR_STARTER_MON
+	case 0, Route101_EventScript_ProfessorSay1
+	case 1, Route101_EventScript_ProfessorSay2
+	case 2, Route101_EventScript_ProfessorSay3
 	end
 
 Route101_EventScript_Professor2::
-	lock
-	setvar VAR_ROUTE101_STATE, 4
-	setflag FLAG_HIDE_ROUTE_101_PROF
-	setflag FLAG_HIDE_ROUTE_101_HELPER
-	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	delay 48
-	delay 48
-	msgbox Route101_Text_RivalProf, MSGBOX_SIGN
-	delay 48
-	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
-	delay 48
-	applymovement LOCALID_PROF, Route101_Movement_Prof2
-	waitmovement 0
-	msgbox Route101_Text_Prof1, MSGBOX_SIGN
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox Route101_Text_Prof2, MSGBOX_SIGN
-	applymovement LOCALID_HELPER, Route101_Movement_Helper2
-	applymovement LOCALID_PROF, Route101_Movement_ProfLeave
+	msgbox Route101_Text_Professor4, MSGBOX_SIGN
+	call_if_eq VAR_0x8004, 0, Route101_EventScript_HelperMove1
+	call_if_eq VAR_0x8004, 1, Route101_EventScript_HelperMove2
+	applymovement LOCALID_PROF, Route101_Movement_ProfessorLeave
 	waitmovement 0
 	removeobject LOCALID_PROF
 	msgbox Route101_Text_Helper1, MSGBOX_SIGN
@@ -262,18 +235,50 @@ Route101_EventScript_Professor2::
 	release
 	end
 
-Route101_Movement_Prof1:
+Route101_EventScript_ProfessorSay1::
+	msgbox Route101_Text_Professor1, MSGBOX_SIGN
+	goto Route101_EventScript_Professor2
+	end
+
+Route101_EventScript_ProfessorSay2::
+	msgbox Route101_Text_Professor2, MSGBOX_SIGN
+	goto Route101_EventScript_Professor2
+	end
+Route101_EventScript_ProfessorSay3::
+	msgbox Route101_Text_Professor3, MSGBOX_SIGN
+	goto Route101_EventScript_Professor2
+	end
+
+Route101_EventScript_ProfessorMove1::
+	applymovement LOCALID_PROF, Route101_Movement_Professor1
+	waitmovement 0
+	return
+	
+Route101_EventScript_ProfessorMove2::
+	applymovement LOCALID_PROF, Route101_Movement_Professor2
+	waitmovement 0
+	return
+
+Route101_EventScript_HelperMove1::
+	applymovement LOCALID_HELPER, Route101_Movement_Helper1
+	return
+
+Route101_EventScript_HelperMove2::
+	applymovement LOCALID_HELPER, Route101_Movement_Helper2
+	return
+
+Route101_Movement_Professor1:
 	walk_left
 	walk_left
 	step_end
 
-Route101_Movement_Prof2:
+Route101_Movement_Professor2:
 	walk_left
 	walk_down
 	walk_left
 	step_end
 
-Route101_Movement_ProfLeave:
+Route101_Movement_ProfessorLeave:
 	walk_right
 	walk_right
 	walk_right
@@ -383,7 +388,19 @@ Route101_Text_RivalProf:
 	.string "{RIVAL}: Hey, it's those people!\n"
 	.string "Is that old guy staring at us?$"
 
-Route101_Text_Prof1:
+Route101_Text_Professor1:
+	.string "Professor: Hmm...\p"
+	.string "I heard from Dawn that\n"
+	.string "you used our Pokemon?\l"
+	.string "Let me see them, please.\p"
+	.string "Hmm...\n"
+	.string "TURTWIG and CHIMCHAR...\p"
+	.string "...\p"
+	.string "Hmm...\p"
+	.string "I see...\n"
+	.string "That's how it is...$"
+	
+Route101_Text_Professor2:
 	.string "Professor: Hmm...\p"
 	.string "I heard from Dawn that\n"
 	.string "you used our Pokemon?\l"
@@ -394,8 +411,20 @@ Route101_Text_Prof1:
 	.string "Hmm...\p"
 	.string "I see...\n"
 	.string "That's how it is...$"
+	
+Route101_Text_Professor3:
+	.string "Professor: Hmm...\p"
+	.string "I heard from Dawn that\n"
+	.string "you used our Pokemon?\l"
+	.string "Let me see them, please.\p"
+	.string "Hmm...\n"
+	.string "PIPLUP and TURTWIG...\p"
+	.string "...\p"
+	.string "Hmm...\p"
+	.string "I see...\n"
+	.string "That's how it is...$"
 
-Route101_Text_Prof2:
+Route101_Text_Professor4:
 	.string "Dawn!\n"
 	.string "I'm going back to my lab!$"
 

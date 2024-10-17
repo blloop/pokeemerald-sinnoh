@@ -110,7 +110,13 @@ LakeVerity_EventScript_IntroScene::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	msgbox LakeVerity_Text_Rival8, MSGBOX_SIGN
+	switch VAR_STARTER_MON
+	case 0, LakeVerity_EventScript_RivalSayA
+	case 1, LakeVerity_EventScript_RivalSayB
+	case 2, LakeVerity_EventScript_RivalSayC
+	end
+
+LakeVerity_EventScript_IntroScenePost::
 	addobject LOCALID_HELPER
 	setobjectxy LOCALID_HELPER, 11, 15
 	applymovement LOCALID_HELPER, Common_Movement_FaceUp
@@ -134,11 +140,11 @@ LakeVerity_EventScript_IntroScene::
 	waitmovement 0
 	removeobject LOCALID_HELPER
 	delay 16
-	msgbox LakeVerity_Text_Rival9, MSGBOX_SIGN
+	msgbox LakeVerity_Text_Rival8, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player4
 	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival5
 	waitmovement 0
-	msgbox LakeVerity_Text_Rival0, MSGBOX_SIGN
+	msgbox LakeVerity_Text_Rival9, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_CAMERA, LakeVerity_Movement_Player5
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player5
 	applymovement LOCALID_RIVAL, LakeVerity_Movement_Rival6
@@ -151,6 +157,21 @@ LakeVerity_EventScript_IntroScene::
 	setflag FLAG_HIDE_VERITY_INTRO_OTHER
 	setflag FLAG_HIDE_VERITY_INTRO_HELPER
 	release
+	end
+
+LakeVerity_EventScript_RivalSayA::
+	msgbox LakeVerity_Text_RivalA, MSGBOX_SIGN
+	goto LakeVerity_EventScript_IntroScenePost
+	end
+
+LakeVerity_EventScript_RivalSayB::
+	msgbox LakeVerity_Text_RivalB, MSGBOX_SIGN
+	goto LakeVerity_EventScript_IntroScenePost
+	end
+
+LakeVerity_EventScript_RivalSayC::
+	msgbox LakeVerity_Text_RivalC, MSGBOX_SIGN
+	goto LakeVerity_EventScript_IntroScenePost
 	end
 
 LakeVerity_Movement_CameraPan1:
@@ -417,8 +438,17 @@ LakeVerity_Text_Rival6:
 LakeVerity_Text_Rival7:
 	.string "What's going on?!$"
 
-@ TODO: Add custom string based on starter selected
-LakeVerity_Text_Rival8:
+LakeVerity_Text_RivalA:
+	.string "{RIVAL}: Fwaaah!\n"
+	.string "Your TURTWIG totally rocked!\p"
+	.string "But my CHIMCHAR was way tougher\n"
+	.string "than yours!\p"
+	.string "...They were other people's\n"
+	.string "Pokemon, though...\p"
+	.string "But we had to use them...\n"
+	.string "They won't mind, will they?$"
+
+LakeVerity_Text_RivalB:
 	.string "{RIVAL}: Fwaaah!\n"
 	.string "Your CHIMCHAR totally rocked!\p"
 	.string "But my PIPLUP was way tougher\n"
@@ -428,10 +458,20 @@ LakeVerity_Text_Rival8:
 	.string "But we had to use them...\n"
 	.string "They won't mind, will they?$"
 
-LakeVerity_Text_Rival9:
+LakeVerity_Text_RivalC:
+	.string "{RIVAL}: Fwaaah!\n"
+	.string "Your PIPLUP totally rocked!\p"
+	.string "But my TURTWIG was way tougher\n"
+	.string "than yours!\p"
+	.string "...They were other people's\n"
+	.string "Pokemon, though...\p"
+	.string "But we had to use them...\n"
+	.string "They won't mind, will they?$"
+
+LakeVerity_Text_Rival8:
 	.string "{RIVAL}: What was that about?$"
 
-LakeVerity_Text_Rival0:
+LakeVerity_Text_Rival9:
 	.string "I don't know what's going on.\n"
 	.string "{PLAYER}, let's get out of here.\p"
 	.string "My Pokemon got hurt from that\n"
