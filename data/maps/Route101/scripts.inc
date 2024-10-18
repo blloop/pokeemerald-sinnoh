@@ -204,6 +204,9 @@ Route101_EventScript_Professor1::
 	delay 48
 	call_if_eq VAR_0x8004, 0, Route101_EventScript_ProfessorMove1
 	call_if_eq VAR_0x8004, 1, Route101_EventScript_ProfessorMove2
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route101_EventScript_ProfessorSay4
+	call_if_eq VAR_RESULT, FEMALE, Route101_EventScript_ProfessorSay5
 	switch VAR_STARTER_MON
 	case 0, Route101_EventScript_ProfessorSay1
 	case 1, Route101_EventScript_ProfessorSay2
@@ -213,16 +216,20 @@ Route101_EventScript_Professor1::
 Route101_EventScript_Professor2::
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox Route101_Text_Professor4, MSGBOX_SIGN
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route101_EventScript_ProfessorSay6
+	call_if_eq VAR_RESULT, FEMALE, Route101_EventScript_ProfessorSay7
 	call_if_eq VAR_0x8004, 0, Route101_EventScript_HelperMove1
 	call_if_eq VAR_0x8004, 1, Route101_EventScript_HelperMove2
 	applymovement LOCALID_PROF, Route101_Movement_ProfessorLeave
 	waitmovement 0
 	removeobject LOCALID_PROF
-	msgbox Route101_Text_Helper1, MSGBOX_SIGN
+	call_if_eq VAR_RESULT, MALE, Route_EventScript_HelperSay1
+	call_if_eq VAR_RESULT, FEMALE, Route_EventScript_HelperSay2
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	msgbox Route101_Text_Helper2, MSGBOX_SIGN
+	call_if_eq VAR_RESULT, MALE, Route_EventScript_HelperSay3
+	call_if_eq VAR_RESULT, FEMALE, Route_EventScript_HelperSay4
 	applymovement LOCALID_HELPER, Route101_Movement_HelperLeave
 	waitmovement 0
 	removeobject LOCALID_HELPER
@@ -249,6 +256,22 @@ Route101_EventScript_ProfessorSay3::
 	goto Route101_EventScript_Professor2
 	end
 
+Route101_EventScript_ProfessorSay4::
+	msgbox Route101_Text_Professor4, MSGBOX_SIGN
+	return
+
+Route101_EventScript_ProfessorSay5::
+	msgbox Route101_Text_Professor5, MSGBOX_SIGN
+	return
+
+Route101_EventScript_ProfessorSay6::
+	msgbox Route101_Text_Professor6, MSGBOX_SIGN
+	return
+
+Route101_EventScript_ProfessorSay7::
+	msgbox Route101_Text_Professor7, MSGBOX_SIGN
+	return
+
 Route101_EventScript_ProfessorMove1::
 	applymovement LOCALID_PROF, Route101_Movement_Professor1
 	waitmovement 0
@@ -257,6 +280,22 @@ Route101_EventScript_ProfessorMove1::
 Route101_EventScript_ProfessorMove2::
 	applymovement LOCALID_PROF, Route101_Movement_Professor2
 	waitmovement 0
+	return
+
+Route_EventScript_HelperSay1::
+	msgbox Route101_Text_Helper1, MSGBOX_SIGN
+	return
+
+Route_EventScript_HelperSay2::
+	msgbox Route101_Text_Helper2, MSGBOX_SIGN
+	return
+
+Route_EventScript_HelperSay3::
+	msgbox Route101_Text_Helper3, MSGBOX_SIGN
+	return
+
+Route_EventScript_HelperSay4::
+	msgbox Route101_Text_Helper4, MSGBOX_SIGN
 	return
 
 Route101_EventScript_HelperMove1::
@@ -389,10 +428,6 @@ Route101_Text_RivalProf:
 	.string "Is that old guy staring at us?$"
 
 Route101_Text_Professor1:
-	.string "Professor: Hmm...\p"
-	.string "I heard from Dawn that\n"
-	.string "you used our Pokemon?\l"
-	.string "Let me see them, please.\p"
 	.string "Hmm...\n"
 	.string "TURTWIG and CHIMCHAR...\p"
 	.string "...\p"
@@ -401,10 +436,6 @@ Route101_Text_Professor1:
 	.string "That's how it is...$"
 	
 Route101_Text_Professor2:
-	.string "Professor: Hmm...\p"
-	.string "I heard from Dawn that\n"
-	.string "you used our Pokemon?\l"
-	.string "Let me see them, please.\p"
 	.string "Hmm...\n"
 	.string "CHIMCHAR and PIPLUP...\p"
 	.string "...\p"
@@ -413,10 +444,6 @@ Route101_Text_Professor2:
 	.string "That's how it is...$"
 	
 Route101_Text_Professor3:
-	.string "Professor: Hmm...\p"
-	.string "I heard from Dawn that\n"
-	.string "you used our Pokemon?\l"
-	.string "Let me see them, please.\p"
 	.string "Hmm...\n"
 	.string "PIPLUP and TURTWIG...\p"
 	.string "...\p"
@@ -425,7 +452,23 @@ Route101_Text_Professor3:
 	.string "That's how it is...$"
 
 Route101_Text_Professor4:
+	.string "Professor: Hmm...\p"
+	.string "I heard from Dawn that\n"
+	.string "you used our Pokemon?\l"
+	.string "Let me see them, please.$"
+
+Route101_Text_Professor5:
+	.string "Professor: Hmm...\p"
+	.string "I heard from Lucas that\n"
+	.string "you used our Pokemon?\l"
+	.string "Let me see them, please.$"
+
+Route101_Text_Professor6:
 	.string "Dawn!\n"
+	.string "I'm going back to my lab!$"
+
+Route101_Text_Professor7:
+	.string "Lucas!\n"
 	.string "I'm going back to my lab!$"
 
 Route101_Text_Helper1:
@@ -433,9 +476,18 @@ Route101_Text_Helper1:
 	.string "Professor, please wait for me!$"
 
 Route101_Text_Helper2:
+	.string "Lucas: Uh... Yeah, Of course!\n"
+	.string "Professor, wait for me!$"
+
+Route101_Text_Helper3:
 	.string "I think you should visit our lab\n"
 	.string "later.\p"
 	.string "OK, see you!$"
+	
+Route101_Text_Helper4:
+	.string "You should visit us at our lab later,\n"
+	.string "I think.\p"
+	.string "We'll be seeing you!$"
 
 Route101_Text_RivalLeave:
 	.string "{RIVAL}: What was all that\n"

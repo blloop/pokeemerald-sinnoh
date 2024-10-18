@@ -33,7 +33,9 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_PROF, Common_Movement_FaceRight
 	waitmovement 0
 	delay 10
-	msgbox LakeVerity_Text_Helper1, MSGBOX_SIGN
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LakeVerity_EventScript_ProfessorSay1
+	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_ProfessorSay2
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
@@ -41,7 +43,8 @@ LakeVerity_EventScript_IntroScene::
 	delay 30
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LakeVerity_Text_Helper2, MSGBOX_SIGN
+	call_if_eq VAR_RESULT, MALE, LakeVerity_EventScript_HelperSay1
+	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_HelperSay2
 	delay 30
 	delay 30
 	addobject LOCALID_BRIEFCASE
@@ -61,7 +64,8 @@ LakeVerity_EventScript_IntroScene::
 	removeobject LOCALID_PROF
 	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperLeave2
 	waitmovement 0
-	msgbox LakeVerity_Text_Helper3, MSGBOX_SIGN
+	call_if_eq VAR_RESULT, MALE, LakeVerity_EventScript_HelperSay3
+	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_HelperSay4
 	applymovement LOCALID_HELPER, LakeVerity_Movement_ProfessorLeave2
 	waitmovement 0
 	removeobject LOCALID_HELPER
@@ -125,10 +129,13 @@ LakeVerity_EventScript_IntroScenePost::
 	applymovement OBJ_EVENT_ID_PLAYER, LakeVerity_Movement_Player3
 	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperArrive1
 	waitmovement 0
-	msgbox LakeVerity_Text_Helper4, MSGBOX_SIGN
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LakeVerity_EventScript_HelperSay5
+	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_HelperSay6
 	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperShift1
 	waitmovement 0
-	msgbox LakeVerity_Text_Helper5, MSGBOX_SIGN
+	call_if_eq VAR_RESULT, MALE, LakeVerity_EventScript_HelperSay7
+	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_HelperSay8
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 16
@@ -158,6 +165,46 @@ LakeVerity_EventScript_IntroScenePost::
 	setflag FLAG_HIDE_VERITY_INTRO_HELPER
 	release
 	end
+
+LakeVerity_EventScript_ProfessorSay1::
+	msgbox LakeVerity_Text_Professor3, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_ProfessorSay2::
+	msgbox LakeVerity_Text_Professor4, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay1::
+	msgbox LakeVerity_Text_Helper1, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay2::
+	msgbox LakeVerity_Text_Helper2, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay3::
+	msgbox LakeVerity_Text_Helper3, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay4::
+	msgbox LakeVerity_Text_Helper4, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay5::
+	msgbox LakeVerity_Text_Helper5, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay6::
+	msgbox LakeVerity_Text_Helper6, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay7::
+	msgbox LakeVerity_Text_Helper7, MSGBOX_SIGN
+	return
+
+LakeVerity_EventScript_HelperSay8::
+	msgbox LakeVerity_Text_Helper8, MSGBOX_SIGN
+	return
 
 LakeVerity_EventScript_RivalSayA::
 	msgbox LakeVerity_Text_RivalA, MSGBOX_SIGN
@@ -494,14 +541,29 @@ LakeVerity_Text_Professor2:
 	.string "Professor: Excuse me.\n"
 	.string "Let us pass, please.$"
 
-LakeVerity_Text_Helper1:
+LakeVerity_Text_Professor3:
 	.string "Dawn, we're leaving.$"
 
-LakeVerity_Text_Helper2:
+LakeVerity_Text_Professor4:
+	.string "Lucas, we're leaving.$"
+
+LakeVerity_Text_Helper1:
 	.string "Dawn: Professor, how are you enjoying\n"
 	.string "being back in Sinnoh?\p"
 	.string "After being away for four years,\n"
 	.string "it must be exciting again?\p"
+	.string "Professor: ...Hm.\n"
+	.string "There is one thing I can say.\p"
+	.string "There are many rare kinds of Pokemon\n"
+	.string "in Sinnoh.\p"
+	.string "The region should serve us very well\n"
+	.string "in regard to our studies.$"
+
+LakeVerity_Text_Helper2:
+	.string "Lucas: Professor, you've been gone\n"
+	.string "for four years now.\p"
+	.string "How are you enjoying being back in\n"
+	.string "Sinnoh?\p"
 	.string "Professor: ...Hm.\n"
 	.string "There is one thing I can say.\p"
 	.string "There are many rare kinds of Pokemon\n"
@@ -514,11 +576,19 @@ LakeVerity_Text_Helper3:
 	.string "We'll be on our way.$"
 
 LakeVerity_Text_Helper4:
+	.string "Lucas: Sorry folks.$"
+
+LakeVerity_Text_Helper5:
 	.string "Dawn: Oh! There's the briefcase!\p"
 	.string "The professor would have been furious\n"
 	.string "if I'd lost it...$"
 
-LakeVerity_Text_Helper5:
+LakeVerity_Text_Helper6:
+	.string "Lucas: Whew! You found the briefcase?\p"
+	.string "The professor would've gone through'\n"
+	.string "the roof if he knew I forgot it here.$"
+
+LakeVerity_Text_Helper7:
 	.string "Dawn: Huh?\n"
 	.string "On, no!\p"
 	.string "Did you...\n"
@@ -527,3 +597,13 @@ LakeVerity_Text_Helper5:
 	.string "What's the professor going to say...?\p"
 	.string "...This is so not good...\n"
 	.string "I'll take this briefcase for now.$"
+
+LakeVerity_Text_Helper8:
+	.string "Lucas: Hunh?\n"
+	.string "Whaaaat?!\p"
+	.string "Did you guys...\n"
+	.string "Did you use these Pokemon?!\p"
+	.string "Oh, man... How am I gonna explain\n"
+	.string "this to the professor?\p"
+	.string "...This briefcase is the professor's,\n"
+	.string "so I'll take it, OK?$"
