@@ -7,11 +7,12 @@ LittlerootTown_BrendansHouse_1F_MapScripts::
 
 LittlerootTown_BrendansHouse_1F_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MoveMom
+	setvar VAR_0x8004, 0
 	end
 
 LittlerootTown_BrendansHouse_1F_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomMessage
-	@ map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MomSurprised
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
@@ -20,6 +21,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
+	playse SE_PIN
 	applymovement LOCALID_MOM, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_MOM, Common_Movement_Delay48
@@ -29,7 +31,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_1
 	waitmovement 0
 	delay 10
-	msgbox LittlerootTown_BrendansHouse_1F_EventScript_Mom_Text, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_Emergency, MSGBOX_DEFAULT
 	closemessage
 	delay 60
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2
@@ -56,11 +58,6 @@ LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2:
 	walk_in_place_up
 	step_end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomSurprised::
-	lock
-	release
-	end
-
 LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	lock
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
@@ -70,7 +67,7 @@ LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	delay 30
-	msgbox LittlerootTown_BrendansHouse_1F_Trigger_Mom_Text, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_LeaveHouse, MSGBOX_DEFAULT
 	release
 	return
 
@@ -79,11 +76,66 @@ LittlerootTown_BrendansHouse_1F_EventScript_MoveMom::
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
+LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn::
+	lock
+	setobjectmovementtype OBJ_EVENT_ID_PLAYER, MOVEMENT_TYPE_FACE_UP
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
+	delay 48
+	delay 48
+	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomKitchen
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen
+	waitmovement 0
+	delay 48
+	delay 48
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen1, MSGBOX_SIGN
+	delay 48
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen2, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_BrendansHouse_1F_Text_RunningShoesGet
+	waitfanfare
+	setflag FLAG_RECEIVED_RUNNING_SHOES
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen3, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_Movement_MomKitchen:
+	walk_left
+	face_up
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_left
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen:
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_right
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	step_end
+
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
-	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
+	goto_if_eq VAR_0x8004, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
+	goto_if_eq VAR_0x8004, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
 	release
 	end
 
@@ -97,11 +149,20 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	release
 	end
 
-@ LittlerootTown_BrendansHouse_1F_EventScript_SeeYouHoney::
-@ msgbox LittlerootTown_BrendansHouse_1F_Text_SeeYouHoney, MSGBOX_DEFAULT
-
 LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomRead, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomBye1::
+	setvar VAR_0x8004, 1
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye1, MSGBOX_SIGN
+	release
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomBye2::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye2, MSGBOX_SIGN
 	release
 	end
 
@@ -117,8 +178,99 @@ LittlerootTown_BrendansHouse_1F_EventScript_Fridge::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Fridge, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_1F_Text_SeeYouHoney:
-	.string "MOM: See you, honey!$"
+@ LittlerootTown_EventScript_SetReceivedRunningShoes::
+@ 	setflag FLAG_SYS_B_DASH
+@ 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
+@ 	release
+@ 	end
+
+LittlerootTown_BrendansHouse_1F_Text_Kitchen:
+	.string "Mom's kitchen is spotless!\n"
+	.string "You can see your face on the floor!$"
+
+LittlerootTown_BrendansHouse_1F_Text_Counter:
+	.string "This is where Mom does all her\n"
+	.string "delicious cooking.$"
+
+LittlerootTown_BrendansHouse_1F_Text_Fridge:
+	.string "Mom's favorite dessert is in\n"
+	.string "the refrigerator.$"
+
+LittlerootTown_BrendansHouse_1F_Text_TheresAMovieOnTV:
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"
+
+LittlerootTown_BrendansHouse_1F_Text_Emergency:
+	.string "Mom: {PLAYER}!\p"
+	.string "{RIVAL} came calling for you a little\n"
+	.string "while ago.\p"
+	.string "I don't know what it was about, but he\n"
+	.string "said it was an emergency.$"
+
+LittlerootTown_BrendansHouse_1F_Text_LeaveHouse:
+	.string "Mom: Oh yes! {PLAYER}!\p"
+	.string "Don't go into the tall grass. Wild\n"
+	.string "Pokemon might attack you.\p"
+	.string "It would be OK if you had your own\n"
+	.string "Pokemon, but you don't so...$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomBye1:
+	.string "Mom: Bye-bye, {PLAYER}!\n"
+	.string "You take care now!$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomBye2:
+	.string "Mom: What is it, dear?\n"
+	.string "Isn't {RIVAL} waiting for you?$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomKitchen1:
+	.string "Mom: What's up, dear?\p"
+	.string "...\p"
+	.string "Wow.\n"
+	.string "I can't believe that happened to you.\p"
+	.string "Am I ever glad that both you and\n"
+	.string "{RIVAL} are unharmed.\p"
+	.string "The professor you mentioned is\n"
+	.string "most likely Professor Rowan of\l"
+	.string "Sandgem Town.\p"
+	.string "I've heard that he is well known for\n"
+	.string "his studies on Pokemon.\p"
+	.string "I hear he's also quite intimidating...\p"
+	.string "{PLAYER}, I think you need to\n"
+	.string "visit him in Sandgem Town.\p"
+	.string "You need to properly explain why you\n"
+	.string "had no choice but to use his Pokemon.\p"
+	.string "Don't worry!\n"
+	.string "I'm sure he will understand.$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomKitchen2:
+	.string "Oh, I know!\n"
+	.string "{PLAYER}, put these on.$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomKitchen3:
+	.string "Going to Sandgem Town is like an\n"
+	.string "adventure in itself, right?\p"
+	.string "With those Running Shoes, you can\n"
+	.string "get to faraway places much faster.\p"
+	.string "OK...\n"
+	.string "Let me read the instructions...$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomRead:
+	.string "Mom: I'll read you the instructions\n"
+	.string "for the Running Shoes...$"
+
+LittlerootTown_BrendansHouse_1F_Text_RunningShoesGet:
+	.string "{PLAYER} received a pair of\n"
+	.string "Running Shoes!$"
+
+@ TODO: Figure out how to add delimited quotes to string
+LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual:
+	.string "'Press the B Button and dash\n"
+	.string "about faster than ever before!\p"
+	.string "'Put on the Running Shoes and\n"
+	.string "blaze new trails of adventure!'\p"
+	.string "Well, isn't that just nifty!$"
 
 LittlerootTown_BrendansHouse_1F_Text_YouShouldRestABit:
 	.string "MOM: How are you doing, {PLAYER}?\n"
@@ -132,57 +284,3 @@ LittlerootTown_BrendansHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Don't push yourself too hard, dear.\n"
 	.string "You can always come home.\p"
 	.string "Go for it, honey!$"
-
-LittlerootTown_BrendansHouse_1F_Text_TheresAMovieOnTV:
-	.string "There is a movie on TV.\p"
-	.string "Two men are dancing on a big piano\n"
-	.string "keyboard.\p"
-	.string "Better get going!$"
-
-LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual:
-	.string "It's the instruction booklet for the\n"
-	.string "RUNNING SHOES.\p"
-	.string "“Press the B Button to run while\n"
-	.string "wearing your RUNNING SHOES.\p"
-	.string "“Lace up your RUNNING SHOES and hit\n"
-	.string "the road running!”$"
-
-LittlerootTown_BrendansHouse_1F_EventScript_Mom_Text:
-	.string "Mom: {PLAYER}!\p"
-	.string "{RIVAL} came calling for you a little\n"
-	.string "while ago.\p"
-	.string "I don't know what it was about, but he\n"
-	.string "said it was an emergency.$"
-
-LittlerootTown_BrendansHouse_1F_Trigger_Mom_Text:
-	.string "Mom: Oh yes! {PLAYER}!\p"
-	.string "Don't go into the tall grass. Wild\n"
-	.string "Pokemon might attack you.\p"
-	.string "It would be OK if you had your own\n"
-	.string "Pokemon, but you don't so...$"
-
-LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
-	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "“Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!”$"
-
-@ LittlerootTown_EventScript_SetReceivedRunningShoes::
-@ 	setflag FLAG_SYS_B_DASH
-@ 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
-@ 	release
-@	end
-
-LittlerootTown_BrendansHouse_1F_Text_Kitchen:
-	.string "Mom's kitchen is spotless!\n"
-	.string "You can see your face on the floor!$"
-
-LittlerootTown_BrendansHouse_1F_Text_Counter:
-	.string "This is where Mom does all her\n"
-	.string "delicious cooking.$"
-
-LittlerootTown_BrendansHouse_1F_Text_Fridge:
-	.string "Mom's favorite dessert is in\n"
-	.string "the refrigerator.$"

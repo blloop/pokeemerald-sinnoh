@@ -61,6 +61,7 @@ LakeVerity_EventScript_IntroScene::
 	msgbox LakeVerity_Text_Professor2, MSGBOX_SIGN
 	applymovement LOCALID_PROF, LakeVerity_Movement_ProfessorLeave2
 	waitmovement 0
+	playse SE_EXIT
 	removeobject LOCALID_PROF
 	applymovement LOCALID_HELPER, LakeVerity_Movement_HelperLeave2
 	waitmovement 0
@@ -68,6 +69,7 @@ LakeVerity_EventScript_IntroScene::
 	call_if_eq VAR_RESULT, FEMALE, LakeVerity_EventScript_HelperSay4
 	applymovement LOCALID_HELPER, LakeVerity_Movement_ProfessorLeave2
 	waitmovement 0
+	playse SE_EXIT
 	removeobject LOCALID_HELPER
 	delay 48
 	applymovement LOCALID_RIVAL, Common_Movement_WalkLeft
@@ -161,6 +163,7 @@ LakeVerity_EventScript_IntroScenePost::
 	special RemoveCameraObject
 	warp MAP_LAKEFRONT_VERITY, 1
 	clearflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
+	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_HIDE_VERITY_INTRO_OTHER
 	setflag FLAG_HIDE_VERITY_INTRO_HELPER
 	release
@@ -400,12 +403,10 @@ LakeVerity_Movement_Player3:
 	delay_16
 	delay_16
 	delay_16
-	delay_16
 	delay_8
 	face_down
 	delay_16
-	delay_16
-	delay_16
+	delay_8
 	walk_in_place_right
 	walk_in_place_up
 	step_end

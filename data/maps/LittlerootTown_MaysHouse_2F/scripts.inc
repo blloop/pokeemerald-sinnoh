@@ -39,6 +39,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetRival::
 	msgbox LittlerootTown_MaysHouse_2F_RivalMessage1, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, Common_Movement_FaceLeft
 	waitmovement 0
+	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48

@@ -16,6 +16,7 @@ LittlerootTown_MapScripts::
 	@ 3: Bumped into Rival
 	@ 4: Spoken to Rival in room
 	@ 5: Returned from lake event
+	@ 6: Received Running Shoes
 
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
@@ -40,6 +41,7 @@ LittlerootTown_EventScript_RivalMeet::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
@@ -51,6 +53,7 @@ LittlerootTown_EventScript_RivalMeet::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerFaceRight
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalRight
 	waitmovement 0
+	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
@@ -128,6 +131,7 @@ LittlerootTown_EventScript_BlockExclaim::
 	applymovement LOCALID_BLOCK, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
+	playse SE_PIN
 	applymovement LOCALID_BLOCK, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 48

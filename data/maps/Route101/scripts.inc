@@ -44,6 +44,7 @@ Route101_EventScript_RivalSee::
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 10
+	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
@@ -193,6 +194,7 @@ Route101_EventScript_Professor1::
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
+	playse SE_PIN
 	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 48
@@ -237,6 +239,7 @@ Route101_EventScript_Professor2::
 	delay 48
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
+	fadedefaultbgm
 	fadescreen FADE_TO_BLACK
 	destroyfollower
 	release
