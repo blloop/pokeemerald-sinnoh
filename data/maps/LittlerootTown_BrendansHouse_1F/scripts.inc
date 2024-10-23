@@ -142,7 +142,9 @@ LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen:
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomDiff
-	goto LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
+	@ goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
+	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1::
@@ -168,6 +170,16 @@ LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
 	end
 
+LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
+	lock
+	faceplayer
+	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeQuickRest, MSGBOX_DEFAULT
+	closemessage
+	call Common_EventScript_OutOfCenterPartyHeal
+	incrementgamestat GAME_STAT_RESTED_AT_HOME
+	release
+	end
+
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Kitchen, MSGBOX_SIGN
 	end
@@ -179,16 +191,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_Counter::
 LittlerootTown_BrendansHouse_1F_EventScript_Fridge::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Fridge, MSGBOX_SIGN
 	end
-
-@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
-@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_NPC
-@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
-@ 	closemessage
-@ 	call Common_EventScript_OutOfCenterPartyHeal
-@ 	incrementgamestat GAME_STAT_RESTED_AT_HOME
-@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeCareHoney, MSGBOX_DEFAULT
-@ 	release
-@ 	end
 
 LittlerootTown_BrendansHouse_1F_Text_Kitchen:
 	.string "Mom's kitchen is spotless!\n"
@@ -284,15 +286,8 @@ LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual:
 	.string "blaze new trails of adventure!'\p"
 	.string "Well, isn't that just nifty!$"
 
-LittlerootTown_BrendansHouse_1F_Text_YouShouldRestABit:
-	.string "MOM: How are you doing, {PLAYER}?\n"
-	.string "You look a little tired.\p"
-	.string "I think you should rest a bit.$"
-
-LittlerootTown_BrendansHouse_1F_Text_TakeCareHoney:
-	.string "MOM: Take care, honey!$"
-
-LittlerootTown_BrendansHouse_1F_Text_DontPushYourselfTooHard:
-	.string "Don't push yourself too hard, dear.\n"
-	.string "You can always come home.\p"
-	.string "Go for it, honey!$"
+LittlerootTown_BrendansHouse_1F_Text_TakeQuickRest:
+	.string "Mom: Welcome home, {PLAYER}.\n"
+	.string "Are you and your Pokemon healthy?\p"
+	.string "I just made dinner.\n"
+	.string "Take a quick rest, dear.$"

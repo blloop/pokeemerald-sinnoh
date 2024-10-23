@@ -9,6 +9,7 @@ LittlerootTown_MapScripts::
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
 	@ 1: Left with Rival to see lake
 	@ 2: Entered lake event
+	@ 3: Left Twinleaf with Running Shoes
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
@@ -23,6 +24,7 @@ LittlerootTown_MapScripts::
 	@ 2: Talked to Rival's Mom after Rival leaves Twinleaf
 
 LittlerootTown_OnTransition:
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_LeaveRunning
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
 
@@ -351,6 +353,10 @@ LittlerootTown_Movement_WalkLeft7:
 	walk_left
 	walk_down
 	step_end
+
+LittlerootTown_EventScript_LeaveRunning::
+	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	end
 
 LittlerootTown_Text_Thud:
 	.string "Thud!!$"

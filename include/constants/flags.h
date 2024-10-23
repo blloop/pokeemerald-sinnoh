@@ -863,7 +863,7 @@
 #define FLAG_HIDE_RUSTBORO_CITY_RIVAL                               0x32E
 #define FLAG_UNUSED_0x32F                                           0x32F
 #define FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE                           0x330
-#define FLAG_HIDE_ROUTE_101_HELPER                                  0x331
+#define FLAG_UNUSED_0x331                                           0x331
 #define FLAG_UNUSED_0x332                                           0x332
 #define FLAG_HIDE_ROUTE_112_TEAM_MAGMA                              0x333
 #define FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE                        0x334

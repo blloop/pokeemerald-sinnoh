@@ -1,7 +1,6 @@
 .set LOCALID_RIVAL, 1
 .set LOCALID_PROF, 2
-.set LOCALID_DAWN, 3
-.set LOCALID_LUCAS, 4
+.set LOCALID_HELPER, 3
 
 Route101_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
@@ -13,6 +12,7 @@ Route101_MapScripts::
 	@ 2: Post first lake event
 	@ 3: Returned from first lake event
 	@ 4: Post professor event
+	@ 5: Received Potion sample
 
 Route101_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -190,7 +190,6 @@ Route101_EventScript_ProfessorB::
 Route101_EventScript_Professor1::
 	setvar VAR_ROUTE101_STATE, 4
 	setflag FLAG_HIDE_ROUTE_101_PROF
-	setflag FLAG_HIDE_ROUTE_101_HELPER
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -352,6 +351,44 @@ Route101_Movement_HelperLeave:
 	walk_fast_right
 	step_end
 
+Route101_EventScript_TipSign::
+	msgbox Route101_Text_TipSign, MSGBOX_SIGN
+	end
+
+Route101_EventScript_NextRouteSign::
+	msgbox Route101_Text_NextRouteSign, MSGBOX_SIGN
+	end
+
+Route101_EventScript_BoyTalk::
+	msgbox Route101_Text_BoyTalk, MSGBOX_NPC
+	end
+
+Route101_EventScript_LassTalk::
+	msgbox Route101_Text_LassTalk, MSGBOX_NPC
+	end
+
+Route101_EventScript_MartSample::
+	goto_if_eq VAR_ROUTE101_STATE, 4, Route101_EventScript_MartSample1
+	goto Route101_EventScript_MartSample2
+	end
+
+Route101_EventScript_MartSample1::
+	lockall
+	setvar VAR_ROUTE101_STATE, 5
+	msgbox Route101_Text_MartSample1, MSGBOX_SIGN
+	giveitem ITEM_POTION
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+	releaseall
+	end
+
+Route101_EventScript_MartSample2::
+	msgbox Route101_EventScript_MartSample2, MSGBOX_NPC
+	end
+
+Route101_EventScript_SchoolKidTalk::
+	msgbox Route101_Text_SchoolKidTalk, MSGBOX_NPC
+	end
+
 Route101_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
 	.string "   Twinleaf Town$"
@@ -501,3 +538,49 @@ Route101_Text_RivalLeave:
 	.string "back...?\p"
 	.string "{PLAYER}...\n"
 	.string "We should go home, too...$"
+
+Route101_Text_TipSign:
+	.string "Trainer Tips!\p"
+	.string "Don't be shy! Talk to anyone and\n"
+	.string "everyone you happen to see.\p"
+	.string "By talking to people, you will get\n"
+	.string "invaluable information and advice.$"
+
+Route101_Text_NextRouteSign:
+	.string "{RIGHT_ARROW} R.201\n"
+	.string "   Sandgem Town$"
+
+Route101_Text_BoyTalk:
+	.string "Wild Pokemon lurk in tall grass. They\n"
+	.string "can come bursting out at any time.\p"
+	.string "So, if you're wanting to battle wild\n"
+	.string "Pokemon, just walk in tall grass.\p"
+	.string "If you want to avoid wild Pokemon,\n"
+	.string "then stay out of the tall grass.$"
+	
+Route101_Text_LassTalk:
+	.string "If your Pokemon's health--that's its\n"
+	.string "HP--is getting low, you should go\l"
+	.string "home and get some rest.$"
+
+Route101_Text_MartSample1:
+	.string "Hi!\n"
+	.string "I work at a Pokemon Mart.\p"
+	.string "Did you know that a Pokemon's health\n"
+	.string "is measured by Hit Pointer (HP)?\p"
+	.string "If a Pokemon runs out of HP, it\n"
+	.string "faints and can't battle anymore.\p"
+	.string "If a Pokemon's HP gets low, you\n"
+	.string "should heal it with a Potion.\p"
+	.string "Here, let me give you a Potion as\n"
+	.string "a free sample. First one's free!\p"
+	.string "It will automatically go in the\n"
+	.string "Medicine Pocket of your Bag.$"
+
+Route101_Text_MartSample2:
+	.string "You can find a Pokemon Mart in\n"
+	.string "cities and most major towns.$"
+
+Route101_Text_SchoolKidTalk:
+	.string "That ledge is one way. Jump down\n"
+	.string "for a shortcut to Twinleaf Town!$"
