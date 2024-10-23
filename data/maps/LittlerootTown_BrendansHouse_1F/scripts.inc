@@ -2,17 +2,21 @@
 
 LittlerootTown_BrendansHouse_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_1F_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_1F_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_OnFrame
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MoveMom
-	setvar VAR_0x8004, 0
 	end
 
 LittlerootTown_BrendansHouse_1F_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomMessage
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn
+	.2byte 0
+
+LittlerootTown_BrendansHouse_1F_OnWarp:
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_TurnPlayerNorth
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
@@ -76,9 +80,12 @@ LittlerootTown_BrendansHouse_1F_EventScript_MoveMom::
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
+LittlerootTown_BrendansHouse_1F_TurnPlayerNorth::
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	end
+
 LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn::
 	lock
-	setobjectmovementtype OBJ_EVENT_ID_PLAYER, MOVEMENT_TYPE_FACE_UP
 	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	delay 48
 	delay 48
@@ -94,6 +101,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn::
 	message LittlerootTown_BrendansHouse_1F_Text_RunningShoesGet
 	waitfanfare
 	setflag FLAG_RECEIVED_RUNNING_SHOES
+	setflag FLAG_SYS_B_DASH
+	delay 48
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen3, MSGBOX_DEFAULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
 	release
@@ -131,39 +140,32 @@ LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen:
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::
-	lock
-	faceplayer
-	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
-	goto_if_eq VAR_0x8004, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
-	goto_if_eq VAR_0x8004, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
-	release
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomDiff
+	goto LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
-	msgbox LittlerootTown_BrendansHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
-	closemessage
-	call Common_EventScript_OutOfCenterPartyHeal
-	incrementgamestat GAME_STAT_RESTED_AT_HOME
-	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeCareHoney, MSGBOX_DEFAULT
-	release
+LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomTalk1, MSGBOX_NPC
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomDiff::
+	goto_if_eq VAR_ALTERNATE_TEXT, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
+	goto_if_eq VAR_ALTERNATE_TEXT, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomBye1::
+	setvar VAR_ALTERNATE_TEXT, 1
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye1, MSGBOX_NPC
+	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomBye2::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye2, MSGBOX_NPC
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomRead, MSGBOX_DEFAULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_MomBye1::
-	setvar VAR_0x8004, 1
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye1, MSGBOX_SIGN
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_MomBye2::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye2, MSGBOX_SIGN
-	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
@@ -178,9 +180,13 @@ LittlerootTown_BrendansHouse_1F_EventScript_Fridge::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Fridge, MSGBOX_SIGN
 	end
 
-@ LittlerootTown_EventScript_SetReceivedRunningShoes::
-@ 	setflag FLAG_SYS_B_DASH
-@ 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
+@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
+@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_NPC
+@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
+@ 	closemessage
+@ 	call Common_EventScript_OutOfCenterPartyHeal
+@ 	incrementgamestat GAME_STAT_RESTED_AT_HOME
+@ 	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeCareHoney, MSGBOX_DEFAULT
 @ 	release
 @ 	end
 
@@ -215,6 +221,12 @@ LittlerootTown_BrendansHouse_1F_Text_LeaveHouse:
 	.string "Pokemon might attack you.\p"
 	.string "It would be OK if you had your own\n"
 	.string "Pokemon, but you don't so...$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomTalk1:
+	.string "Mom: You know how impatient\n"
+	.string "{RIVAL} is.\p"
+	.string "He took off before I could even\n"
+	.string "ask what it was about.$"
 
 LittlerootTown_BrendansHouse_1F_Text_MomBye1:
 	.string "Mom: Bye-bye, {PLAYER}!\n"

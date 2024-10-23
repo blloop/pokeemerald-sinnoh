@@ -18,6 +18,10 @@ LittlerootTown_MapScripts::
 	@ 5: Returned from lake event
 	@ 6: Received Running Shoes
 
+	@ State descriptions for VAR_ALTERNATE_TEXT
+	@ 1: Talked to Mom saying bye in intro event
+	@ 2: Talked to Rival's Mom after Rival leaves Twinleaf
+
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
@@ -357,7 +361,7 @@ LittlerootTown_Text_RivalBump:
 	.string "Hey! I'm going to the lake!\n"
 	.string "You come too! And be quick about it!\p"
 	.string "OK, B?\n"
-	@ TODO: Fix dollar sign ₽
+	@ TODO: Add dollar sign ₽
 	.string "I'm fining you 1 million if you're late!$"
 
 LittlerootTown_Text_RivalForget:
@@ -405,12 +409,22 @@ LittlerootTown_EventScript_FatMan::
 	end
 
 LittlerootTown_EventScript_Aroma::
-	msgbox LittlerootTown_Text_Aroma, MSGBOX_NPC
+	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Aroma_Talk1
+	goto LittlerootTown_EventScript_Aroma_Talk2
+	end
+
+LittlerootTown_EventScript_Aroma_Talk1::
+	msgbox LittlerootTown_Text_Aroma1, MSGBOX_NPC
+	end
+
+LittlerootTown_EventScript_Aroma_Talk2::
+	msgbox LittlerootTown_Text_Aroma2, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_Guitarist::
-	call_if_lt VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_EventScript_Guitarist_Talk1
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_EventScript_Guitarist_Talk2
+	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Guitarist_Talk1
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Guitarist_Talk2
+	goto LittlerootTown_EventScript_Guitarist_Talk3
 	end
 
 LittlerootTown_EventScript_Guitarist_Talk1::
@@ -421,16 +435,25 @@ LittlerootTown_EventScript_Guitarist_Talk2::
 	msgbox LittlerootTown_Text_Guitarist2, MSGBOX_NPC
 	end
 
+LittlerootTown_EventScript_Guitarist_Talk3::
+	msgbox LittlerootTown_Text_Guitarist3, MSGBOX_NPC
+	end
+
 LittlerootTown_Text_FatMan:
 	.string "Technology just blows me away!\p"
 	.string "I mean, now you can play with people\n"
 	.string "around the world... wirelessly!$"
 
-LittlerootTown_Text_Aroma:
+LittlerootTown_Text_Aroma1:
 	.string "It's true that wild Pokemon do attack\n"
 	.string "people sometimes...\p"
 	.string "However, Pokemon also let you become\n"
 	.string "friends with them.$"
+
+@ TODO: Add poke sign P
+LittlerootTown_Text_Aroma2:
+	.string "Oh! A Pokemon!\n"
+	.string "You look good together!$"
 	
 LittlerootTown_Text_Guitarist1:
 	.string "Hiya, {PLAYER}.\n"
@@ -445,6 +468,10 @@ LittlerootTown_Text_Guitarist2:
 	.string "while ago.\p"
 	.string "He's probably not gone too far.\n"
 	.string "Why not go chase after him?$"
+	
+LittlerootTown_Text_Guitarist3:
+	.string "{RIVAL}? He went tearing off\n"
+	.string "in a huge rush a while ago.$"
 
 LittlerootTown_Text_TownSign:
 	.string "Twinleaf Town\n"
