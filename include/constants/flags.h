@@ -766,7 +766,7 @@
 #define FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS            0x2CD
 #define FLAG_HIDE_MEW                                               0x2CE
 #define FLAG_HIDE_ROUTE_104_RIVAL                                   0x2CF
-#define FLAG_UNUSED_0x2D0                                           0x2D0
+#define FLAG_HIDE_OLDALE_HELPER                                     0x2D0
 #define FLAG_UNUSED_0x2D1                                           0x2D1
 #define FLAG_UNUSED_0x2D2                                           0x2D2
 #define FLAG_HIDE_ROUTE_103_RIVAL                                   0x2D3

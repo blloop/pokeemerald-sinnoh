@@ -43,18 +43,11 @@ LittlerootTown_EventScript_RivalMeet::
 	closedoor 3, 12
 	waitdooranim
 	msgbox LittlerootTown_Text_Thud, MSGBOX_DEFAULT
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	closemessage
 	msgbox LittlerootTown_Text_RivalBump, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerFaceRight
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalRight
@@ -62,10 +55,8 @@ LittlerootTown_EventScript_RivalMeet::
 	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	delay 48
+	delay 48
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerFaceUp
 	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalLeft
 	waitmovement 0
@@ -359,7 +350,7 @@ LittlerootTown_EventScript_LeaveRunning::
 	end
 
 LittlerootTown_Text_Thud:
-	.string "Thud!!$"
+	.string "THUD!!$"
 
 LittlerootTown_Text_RivalBump:
 	.string "{RIVAL}: What was that about?!\p"
