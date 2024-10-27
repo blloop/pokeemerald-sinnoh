@@ -374,15 +374,20 @@ Route101_EventScript_MartSample::
 
 Route101_EventScript_MartSample1::
 	lockall
-	setvar VAR_ROUTE101_STATE, 5
-	msgbox Route101_Text_MartSample1, MSGBOX_SIGN
+	msgbox Route101_Text_MartSample1, MSGBOX_NPC
 	giveitem ITEM_POTION
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Route101_EventScript_BagIsFull
+	setvar VAR_ROUTE101_STATE, 5
 	releaseall
 	end
 
 Route101_EventScript_MartSample2::
 	msgbox Route101_EventScript_MartSample2, MSGBOX_NPC
+	end
+
+Route101_EventScript_BagIsFull::
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+	releaseall
 	end
 
 Route101_EventScript_SchoolKidTalk::
