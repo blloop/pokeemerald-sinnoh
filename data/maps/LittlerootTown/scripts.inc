@@ -442,14 +442,13 @@ LittlerootTown_Text_FatMan:
 	.string "around the world... wirelessly!$"
 
 LittlerootTown_Text_Aroma1:
-	.string "It's true that wild Pokemon do attack\n"
+	.string "It's true that wild Pokémon do attack\n"
 	.string "people sometimes...\p"
-	.string "However, Pokemon also let you become\n"
+	.string "However, Pokémon also let you become\n"
 	.string "friends with them.$"
 
-@ TODO: Add poke sign P
 LittlerootTown_Text_Aroma2:
-	.string "Oh! A Pokemon!\n"
+	.string "Oh! A Pokémon!\n"
 	.string "You look good together!$"
 	
 LittlerootTown_Text_Guitarist1:

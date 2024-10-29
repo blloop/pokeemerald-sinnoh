@@ -92,13 +92,11 @@ OldaleTown_Movement_Helper1:
 	walk_left
 	walk_left
 	walk_left
-	walk_left
 	walk_up
 	face_up
 	step_end
 
 OldaleTown_Movement_Helper2:
-	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -111,11 +109,9 @@ OldaleTown_Movement_Helper3:
 	walk_left
 	walk_left
 	walk_left
-	walk_left
 	step_end
 
 OldaleTown_Movement_Helper4:
-	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -125,7 +121,6 @@ OldaleTown_Movement_Helper4:
 	step_end
 
 OldaleTown_Movement_Helper5:
-	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -142,12 +137,10 @@ OldaleTown_Movement_Helper6:
 	walk_right
 	walk_right
 	walk_right
-	walk_right
 	walk_in_place_up
 	step_end
 
 OldaleTown_Movement_Helper7:
-	walk_right
 	walk_right
 	walk_right
 	walk_right
@@ -158,7 +151,6 @@ OldaleTown_Movement_Helper7:
 
 OldaleTown_Movement_Helper8:
 	walk_up
-	walk_right
 	walk_right
 	walk_right
 	walk_right
@@ -175,14 +167,12 @@ OldaleTown_Movement_Helper9:
 	walk_right
 	walk_right
 	walk_right
-	walk_right
 	walk_in_place_up
 	step_end
 
 OldaleTown_Movement_Helper10:
 	walk_up
 	walk_up
-	walk_right
 	walk_right
 	walk_right
 	walk_right
@@ -199,12 +189,10 @@ OldaleTown_Movement_Player1:
 	walk_right
 	walk_right
 	walk_right
-	walk_right
 	walk_in_place_up
 	step_end
 
 OldaleTown_Movement_Player2:
-	walk_right
 	walk_right
 	walk_right
 	walk_right
@@ -220,7 +208,6 @@ OldaleTown_Movement_Player3:
 	walk_right
 	walk_right
 	walk_right
-	walk_right
 	walk_in_place_up
 	step_end
 
@@ -232,7 +219,6 @@ OldaleTown_Movement_Player4:
 	walk_right
 	walk_right
 	walk_right
-	walk_right
 	walk_in_place_up
 	step_end
 
@@ -240,7 +226,6 @@ OldaleTown_Movement_Player5:
 	walk_up
 	walk_up
 	walk_up
-	walk_right
 	walk_right
 	walk_right
 	walk_right
@@ -267,13 +252,11 @@ OldaleTown_EventScript_HelperToLab::
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_HelperSay3
 	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_HelperSay4
-	opendoor 12, 6
+	opendoor 11, 6
 	waitdooranim
 	addobject LOCALID_RIVAL
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalBump
 	waitmovement 0
-	@ closedoor 12, 6
-	@ waitdooranim
 	msgbox OldaleTown_Text_Thud, MSGBOX_DEFAULT
 	delay 48
 	delay 48
@@ -293,14 +276,13 @@ OldaleTown_EventScript_HelperToLab::
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_TurnUp
 	applymovement LOCALID_HELPER, OldaleTown_Movement_HelperEnter
 	waitmovement 0
-	setobjectxyperm LOCALID_HELPER, 12, 6
 	removeobject LOCALID_HELPER
 	delay 16
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerEnter
 	applymovement OBJ_EVENT_ID_CAMERA, OldaleTown_Movement_PlayerEnter
 	waitmovement 0
 	removeobject OBJ_EVENT_ID_PLAYER
-	closedoor 12, 6
+	closedoor 11, 6
 	waitdooranim
 	special RemoveCameraObject
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 0
@@ -367,8 +349,34 @@ OldaleTown_EventScript_TownSign::
 	msgbox OldaleTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-OldaleTown_EventScript_Girl::
-	msgbox OldaleTown_Text_SavingMyProgress, MSGBOX_NPC
+OldaleTown_EventScript_LabSign::
+	msgbox OldaleTown_Text_LabSign, MSGBOX_SIGN
+	end
+
+OldaleTown_EventScript_RivalSign::
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_DawnSign
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_LucasSign
+	end
+
+OldaleTown_EventScript_DawnSign::
+	msgbox OldaleTown_Text_DawnSign, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_LucasSign::
+	msgbox OldaleTown_Text_LucasSign, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Boy::
+	msgbox OldaleTown_Text_Boy, MSGBOX_NPC
+	end
+
+OldaleTown_EventScript_Lady::
+	msgbox OldaleTown_Text_Lady, MSGBOX_NPC
+	end
+
+OldaleTown_EventScript_Youngster::
+	msgbox OldaleTown_Text_Youngster, MSGBOX_NPC
 	end
 
 OldaleTown_Text_HelperSay1:
@@ -381,7 +389,7 @@ OldaleTown_Text_HelperSay2:
 
 OldaleTown_Text_HelperSay3:
 	.string "This is it!\n"
-	.string "Our Pokemon Research Lab!\p"
+	.string "Our Pokémon Research Lab!\p"
 	.string "Lets go...$"
 
 OldaleTown_Text_HelperSay4:
@@ -408,9 +416,34 @@ OldaleTown_Text_Rival:
 	.string "I'm out of here. See you later!$"
 
 OldaleTown_Text_TownSign:
-	.string "OLDALE TOWN\n"
-	.string "“Where things start off scarce.”$"
+	.string "Sandgem Town\n"
+	.string "Town of Sand!$"
 
-OldaleTown_Text_SavingMyProgress:
-	.string "I want to take a rest, so I'm saving my\n"
-	.string "progress.$"
+OldaleTown_Text_LabSign:
+	.string "Pokémon Research Lab$"
+
+OldaleTown_Text_DawnSign:
+	.string "Dawn's House$"
+
+OldaleTown_Text_LucasSign:
+	.string "Lucas's House$"
+
+OldaleTown_Text_Boy:
+	.string "The thing you have!\p"
+	.string "It's a Pokédex, isn't it?!\p"
+	.string "You're off to see all kinds of\n"
+	.string "Pokémon now! Lucky you!$"
+
+OldaleTown_Text_Lady:
+	.string "So I don't forget what's happened,\n"
+	.string "till now, I'd better save this...\p"
+	.string "There!\n"
+	.string "Now I can take a break.$"
+
+OldaleTown_Text_Youngster:
+	.string "Oh, wow!\n"
+	.string "Pokémon are so cool!\p"
+	.string "You can make yours battle and make\n"
+	.string "them stronger!\p"
+	.string "I wish I had some!\n"
+	.string "It's so cool!$"
