@@ -3,15 +3,22 @@
 
 OldaleTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OldaleTown_OnFrame
 	.byte 0
 
 	@ State descriptions for VAR_OLDALE_TOWN_STATE
-	@ 1: Entered initial lab scene
+	@ 1: Entered initial helper scene
+	@ 2: Entered lab scene
+	@ 3: Entered second helper scene
 
 OldaleTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	end
+
+OldaleTown_OnFrame:
+	map_script_2 VAR_OLDALE_TOWN_STATE, 2, OldaleTown_EventScript_X
+	.2byte 0
 
 OldaleTown_EventScript_HelperExclaim::
 	lock
@@ -285,7 +292,7 @@ OldaleTown_EventScript_HelperToLab::
 	closedoor 11, 6
 	waitdooranim
 	special RemoveCameraObject
-	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 0
+	warp MAP_OLDALE_TOWN_PROFESSOR_BIRCHS_LAB, 0
 	waitstate
 	release
 	end
