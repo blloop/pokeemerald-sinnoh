@@ -1,19 +1,11 @@
 .set LOCALID_AIDE, 1
-.set LOCALID_BIRCH, 2
+.set LOCALID_PROF, 2
 .set LOCALID_HELPER, 3
 
 LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_ProfessorBirchsLab_OnFrame
 	.byte 0
-
-	@ TODO: State descriptions for VAR_DEX_UPGRADE_JOHTO_STARTER_STATE
-	@ 1: Beat Elite Four, Dex upgrade ready
-	@ 2: Received National Dex
-	@ 3: Left lab after receiving National Dex
-	@ 4: Entered lab after catching all Hoenn mons
-	@ 5: Birch told player to choose Johto starter
-	@ 6: Chose Johto starter
 
 	@ State descriptions for VAR_BIRCH_LAB_STATE
 	@ 1: Received pokedex
@@ -23,32 +15,76 @@ LittlerootTown_ProfessorBirchsLab_OnTransition:
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
-	map_script_2 VAR_BIRCH_LAB_STATE, 0, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
+	map_script_2 VAR_BIRCH_LAB_STATE, 0, LittlerootTown_ProfessorBirchsLab_EventScript_ShowStarter
 	.2byte 0
 
-@ The starter is technically given prior to this on Route 101 by special ChooseStarter
-@ This is just where the game tells you its yours and lets you nickname it
-LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent::
+LittlerootTown_ProfessorBirchsLab_EventScript_ShowStarter::
 	lockall
-	bufferleadmonspeciesname STR_VAR_1
-	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
-	waitmessage
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
+	setvar VAR_BIRCH_LAB_STATE, 1
+	special SpawnCameraObject
+	delay 16
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_Player1
+	applymovement OBJ_EVENT_ID_CAMERA, LittlerootTown_ProfessorBirchsLab_Movement_Player1
+	applymovement LOCALID_HELPER, LittlerootTown_ProfessorBirchsLab_Movement_Helper1
 	waitmovement 0
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor1
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	closemessage
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor2
+	bufferleadmonspeciesname STR_VAR_1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor3, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor4, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper1, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 48
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
+	delay 16
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor5
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor6, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_DenyHelp
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
+
+LittlerootTown_ProfessorBirchsLab_EventScript_DenyHelp::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor7
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp
+
+LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor8
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
+	waitfanfare
+	setflag FLAG_SYS_POKEDEX_GET
+	special SetUnlockedPokedexFlags
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_SIGN
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 16
+	setflag FLAG_ADVENTURE_STARTED
+	special RemoveCameraObject
+	releaseall
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
 	setvar VAR_0x8004, 0
 	call Common_EventScript_NameReceivedPartyMon
-	end
+	return
 
-
-LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex:
+LittlerootTown_ProfessorBirchsLab_Movement_Player1:
+	walk_up
+	walk_up
+	walk_up
 	walk_up
 	walk_up
 	walk_up
@@ -58,28 +94,19 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex:
 	walk_up
 	step_end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
-	lock
-	faceplayer
-	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
-	release
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
-	lock
-	faceplayer
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
-	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
-	release
-	end
+LittlerootTown_ProfessorBirchsLab_Movement_Helper1:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_left
+	step_end
 
 EventScript_RegisterProfBirch::
 	msgbox MatchCall_Text_BirchRegisterCall, MSGBOX_DEFAULT
@@ -95,34 +122,20 @@ EventScript_RegisterProfBirch::
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	checkplayergender
-	setvar VAR_BIRCH_LAB_STATE, 5
-	setflag FLAG_ADVENTURE_STARTED
-	releaseall
+LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
+	lock
+	faceplayer
+	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
+	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
-	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
-	waitfanfare
-	setflag FLAG_SYS_POKEDEX_GET
-	special SetUnlockedPokedexFlags
-	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
-	return
-
-LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer:
-	walk_down
-	walk_in_place_faster_left
-	step_end
+LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
+	lock
+	faceplayer
+	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
+	release
+	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_PC::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_PC, MSGBOX_SIGN
@@ -148,38 +161,88 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Fridge::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_Fridge, MSGBOX_SIGN
 	end
 
-LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
-	.string "PROF. BIRCH: So, {PLAYER}{KUN}.\p"
-	.string "I've heard so much about you from\n"
-	.string "your father.\p"
-	.string "I've heard that you don't have your\n"
-	.string "own POKéMON yet.\p"
-	.string "But the way you battled earlier,\n"
-	.string "you pulled it off with aplomb!\p"
-	.string "I guess you have your father's blood\n"
-	.string "in your veins after all!\p"
-	.string "Oh, yes. As thanks for rescuing me,\n"
-	.string "I'd like you to have the POKéMON you\l"
-	.string "used earlier.\p"
-	.string "{PLAYER} received the {STR_VAR_1}!$"
+LittlerootTown_ProfessorBirchsLab_Text_Professor1:
+	.string "Professor: ...\p"
+	.string "Finally, you've come.\n"
+	.string "{PLAYER}, was it?\p"
+	.string "Let me see your Pokémon again.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
-	.string "PROF. BIRCH: While you're at it, why not\n"
-	.string "give a nickname to that {STR_VAR_1}?$"
+LittlerootTown_ProfessorBirchsLab_Text_Professor2:
+	.string "...\p"
+	.string "Hmm...\n"
+	.string "I see...\p"
+	.string "This Pokémon seems to be rather\n"
+	.string "happy.\p"
+	.string "All righty then!\p"
+	.string "I'll give that {STR_VAR_1} to you as\n"
+	.string "a gift.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Professor3:
+	.string "Professor: Now that it's yours, would\n"
+	.string "you like to give it a nickname?$"
+	
+LittlerootTown_ProfessorBirchsLab_Text_Professor4:
+	.string "Professor: Your friend {RIVAL}\n"
+	.string "told me what happened at the lake.\p"
+	.string "I heard you battled very well,\n"
+	.string "despite it being your first time.\p"
+	.string "And, from what I can see, there is\n"
+	.string "a growing bond between you and that\l"
+	.string "Pokémon, though it is still young.\p"
+	.string "That's why I would like to entrust\n"
+	.string "you with {STR_VAR_1}.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Professor5:
+	.string "Professor: Er-hem!\n"
+	.string "Let's move on to the main topic.\p"
+	.string "There is something I want you\n"
+	.string "to do for me.\p"
+	.string "My name is Rowan.\n"
+	.string "I study Pokémon.\p"
+	.string "First of all, I want to know exactly\n"
+	.string "what kinds of Pokémon live in the\l"
+	.string "Sinnoh region.\p"
+	.string "To do so, it is necessary to collect\n"
+	.string "data using the Pokédex\p"
+	.string "This is what I wish to ask of you.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Professor6:
+	.string "Will you use it to record data on all\n"
+	.string "the Pokémon in Sinnoh for me?\p"
+	.string "I want to entrust you with this\n"
+	.string "Pokédex.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Professor7:
+	.string "Rowan: ...\p"
+	.string "...\p"
+	.string "...\p"
+	.string "...\p"
+	.string "I can stand here without speaking for\n"
+	.string "hours. I'm a very patient man.\p"
+	.string "Let me ask you again, {PLAYER}.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Professor8:
+	.string "Rowan: Hm!/p"
+	.string "Good answer!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
-	.string "{PLAYER} received the POKéDEX!$"
+	.string "{PLAYER} obtained\n"
+	.string "the Pokédex!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
-	.string "PROF. BIRCH: The POKéDEX is a high-tech\n"
-	.string "tool that automatically makes a record\l"
-	.string "of any POKéMON you meet or catch.\p"
-	.string "My kid, {RIVAL}, goes everywhere\n"
-	.string "with it.\p"
-	.string "Whenever my kid catches a rare POKéMON\n"
-	.string "and records its data in the POKéDEX,\l"
-	.string "why, {RIVAL} looks for me while I'm out\l"
-	.string "doing fieldwork, and shows me.$"
+	.string "Rowan: That Pokédex is a very\n"
+	.string "high-tech device\p"
+	.string "It will automatically record data on\n"
+	.string "every kind of Pokémon you encounter.\p"
+	.string "{PLAYER}, I ask that you go\n"
+	.string "everywhere and meet every kind of\l"
+	.string "Pokémon in this region!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Helper1:
+	.string "Dawn: I'm so glad that you're kind\n"
+	.string "toward Pokémon!\p"
+	.string "If you weren't, I'd have to...\n"
+	.string "Oh, I just can't say it...$"
 
 LittlerootTown_ProfessorBirchsLab_Text_PC:
 	.string "{PLAYER} checked the PC.\p"
@@ -236,3 +299,9 @@ LittlerootTown_ProfessorBirchsLab_Text_Fridge:
 @ 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 @ 	setobjectxyperm LOCALID_RIVAL, 5, 10
 @ 	end
+
+@ LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
+	@ TODO: Figure out var below
+	@ goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
+	@ release
+	@ end
