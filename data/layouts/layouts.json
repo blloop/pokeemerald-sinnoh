@@ -574,7 +574,7 @@
     {
       "id": "LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
       "name": "LittlerootTown_ProfessorBirchsLab_Layout",
-      "width": 21,
+      "width": 20,
       "height": 16,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_Lab",
