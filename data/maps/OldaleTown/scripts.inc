@@ -17,7 +17,7 @@ OldaleTown_OnTransition:
 	end
 
 OldaleTown_OnFrame:
-	map_script_2 VAR_OLDALE_TOWN_STATE, 2, OldaleTown_EventScript_X
+	@ map_script_2 VAR_OLDALE_TOWN_STATE, 2, OldaleTown_EventScript_X
 	.2byte 0
 
 OldaleTown_EventScript_HelperExclaim::
@@ -292,7 +292,7 @@ OldaleTown_EventScript_HelperToLab::
 	closedoor 11, 6
 	waitdooranim
 	special RemoveCameraObject
-	warp MAP_OLDALE_TOWN_PROFESSOR_BIRCHS_LAB, 0
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 0
 	waitstate
 	release
 	end
