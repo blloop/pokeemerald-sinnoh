@@ -29,24 +29,23 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ShowStarter::
 	waitmovement 0
 	special RemoveCameraObject
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor1, MSGBOX_DEFAULT
-	closemessage
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 48
 	delay 48
 	bufferleadmonspeciesname STR_VAR_1
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor2, MSGBOX_DEFAULT
-	closemessage
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor3, MSGBOX_YESNO
-	closemessage
 	call_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
 	bufferleadmonspeciesname STR_VAR_1
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor4, MSGBOX_SIGN
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor5, MSGBOX_SIGN
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper1, MSGBOX_SIGN
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn1
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas1
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 48
@@ -54,50 +53,79 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ShowStarter::
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 16
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor5, MSGBOX_DEFAULT
-	releaseall
-	end
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor6, MSGBOX_DEFAULT
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp
 
 LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
 	setvar VAR_0x8004, 0
 	call Common_EventScript_NameReceivedPartyMon
+	@ AFTER RENAME
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor6, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor6, MSGBOX_YESNO
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor7, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_DenyHelp
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
 
 LittlerootTown_ProfessorBirchsLab_EventScript_DenyHelp::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor7, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor8, MSGBOX_DEFAULT
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_AskHelp
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor8, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor9, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
-	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	setflag FLAG_ADVENTURE_STARTED
+	special SetUnlockedPokedexFlags
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 16
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper2, MSGBOX_DEFAULT
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor9, MSGBOX_DEFAULT
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn2
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas2
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor0, MSGBOX_SIGN
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper3, MSGBOX_SIGN
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn3
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas3
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_Player2
 	applymovement LOCALID_HELPER, LittlerootTown_ProfessorBirchsLab_Movement_Helper2
 	waitmovement 0
 	removeobject LOCALID_HELPER
-	setflag FLAG_ADVENTURE_STARTED
 	releaseall
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn1::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn1, MSGBOX_SIGN
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn2::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn2, MSGBOX_SIGN
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Dawn3::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn3, MSGBOX_SIGN
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas1::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas1, MSGBOX_SIGN
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas2::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas2, MSGBOX_SIGN
+	end
+	
+LittlerootTown_ProfessorBirchsLab_EventScript_Helper_Lucas3::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas3, MSGBOX_SIGN
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_Player1:
@@ -138,6 +166,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_Helper2:
 	walk_down
 	walk_down
 	walk_down
+	walk_down
 	step_end
 
 EventScript_RegisterProfBirch::
@@ -158,7 +187,7 @@ EventScript_RegisterProfBirch::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_Professor0, MSGBOX_NPC
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ProfessorIdle, MSGBOX_NPC
 	@ goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	@ goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	@ goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -236,7 +265,7 @@ LittlerootTown_ProfessorBirchsLab_Text_Professor3:
 	.string "Professor: Now that it's yours, would\n"
 	.string "you like to give it a nickname?$"
 	
-LittlerootTown_ProfessorBirchsLab_Text_Professor4:
+LittlerootTown_ProfessorBirchsLab_Text_Professor5:
 	.string "Professor: Your friend {RIVAL}\n"
 	.string "told me what happened at the lake.\p"
 	.string "I heard you battled very well,\n"
@@ -247,7 +276,7 @@ LittlerootTown_ProfessorBirchsLab_Text_Professor4:
 	.string "That's why I would like to entrust\n"
 	.string "you with {STR_VAR_1}.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor5:
+LittlerootTown_ProfessorBirchsLab_Text_Professor6:
 	.string "Professor: Er-hem!\n"
 	.string "Let's move on to the main topic.\p"
 	.string "There is something I want you\n"
@@ -261,13 +290,13 @@ LittlerootTown_ProfessorBirchsLab_Text_Professor5:
 	.string "data using the Pokédex.\p"
 	.string "This is what I wish to ask of you.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor6:
+LittlerootTown_ProfessorBirchsLab_Text_Professor7:
 	.string "I want to entrust you with this\n"
 	.string "Pokédex.\p"
 	.string "Will you use it to record data on all\n"
 	.string "the Pokémon in Sinnoh for me?$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor7:
+LittlerootTown_ProfessorBirchsLab_Text_Professor8:
 	.string "Rowan: ...\p"
 	.string "...\p"
 	.string "...\p"
@@ -276,7 +305,7 @@ LittlerootTown_ProfessorBirchsLab_Text_Professor7:
 	.string "hours. I'm a very patient man.\p"
 	.string "Let me ask you again, {PLAYER}.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor8:
+LittlerootTown_ProfessorBirchsLab_Text_Professor9:
 	.string "Rowan: Hm!\p"
 	.string "Good answer!$"
 
@@ -293,7 +322,7 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
 	.string "everywhere and meet every kind of\l"
 	.string "Pokémon in this region!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor9:
+LittlerootTown_ProfessorBirchsLab_Text_Professor0:
 	.string "Rowan: When you walked up Route 201\n"
 	.string "with your Pokémon, what did you feel?\p"
 	.string "I've lived for 60 long years.\n"
@@ -307,21 +336,21 @@ LittlerootTown_ProfessorBirchsLab_Text_Professor9:
 	.string "{PLAYER}, your grand adventure\n"
 	.string "begins right now!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Professor0:
+LittlerootTown_ProfessorBirchsLab_Text_ProfessorIdle:
 	.string "Rowan: Go on!\p"
 	.string "{PLAYER}, your grand adventure\n"
 	.string "awaits you!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Helper1:
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn1:
 	.string "Dawn: I'm so glad that you're kind\n"
 	.string "toward Pokémon!\p"
 	.string "If you weren't, I'd have to...\n"
 	.string "Oh, I just can't say it...$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Helper2:
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn2:
 	.string "Dawn: I've got one, too!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_Helper3:
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn3:
 	.string "Dawn: The Pokémon that I used for\n"
 	.string "the first time was a TURTWIG!\p"
 	.string "If you would have chosen\n"
@@ -336,6 +365,24 @@ LittlerootTown_ProfessorBirchsLab_Text_Helper3:
 	.string "you, that's all.\p"
 	.string "I'll be happy to teach you things.\n"
 	.string "Glad to meet you, {PLAYER}!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas1:
+	.string "Lucas: Boy, am I glad you're kind\n"
+	.string "toward Pokemon.\p"
+	.string "If you weren't, well...\n"
+	.string "I don't even want to think about it.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas2:
+	.string "Lucas: I've got the same kind of\n"
+	.string "Pokedex as you.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas3:
+	.string "Lucas: The professor asked me to\n"
+	.string "help, so I'm going to go out and fill\l"
+	.string "the Pokedex pages, too.\p"
+	.string "That makes us comrades working\n"
+	.string "toward the same goal.\p"
+	.string "I'll teach you stuff later, OK?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_PC:
 	.string "{PLAYER} checked the PC.\p"

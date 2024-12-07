@@ -7,23 +7,24 @@ OldaleTown_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_OLDALE_TOWN_STATE
-	@ 1: Entered initial helper scene
-	@ 2: Entered lab scene
-	@ 3: Entered second helper scene
+	@ 1: Entered initial lab scene
+	@ 2: Entered second helper scene
 
 OldaleTown_OnTransition:
+	call_if_eq VAR_OLDALE_TOWN_STATE, 1, OldaleTown_EventScript_MoveHelper
+  @ TODO: Rename SetupRivalGfxId to SetupHelperGfxId
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	end
 
 OldaleTown_OnFrame:
-	@ map_script_2 VAR_OLDALE_TOWN_STATE, 2, OldaleTown_EventScript_X
+	map_script_2 VAR_OLDALE_TOWN_STATE, 1, OldaleTown_EventScript_HelperBuildings
 	.2byte 0
 
 OldaleTown_EventScript_HelperExclaim::
 	lock
-	setvar VAR_OLDALE_TOWN_STATE, 1
 	setflag FLAG_HIDE_OLDALE_HELPER
+	setvar VAR_OLDALE_TOWN_STATE, 1
 	special SpawnCameraObject
 	playse SE_PIN
 	applymovement LOCALID_HELPER, Common_Movement_ExclamationMark
@@ -243,22 +244,22 @@ OldaleTown_Movement_Player5:
 
 OldaleTown_EventScript_HelperTalk1::
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_HelperSay1
-	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_HelperSay2
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn1
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas1
 	return
 
-OldaleTown_EventScript_HelperSay1::
-	msgbox OldaleTown_Text_HelperSay1, MSGBOX_SIGN
+OldaleTown_EventScript_Helper_Dawn1::
+	msgbox OldaleTown_Text_Helper_Dawn1, MSGBOX_SIGN
 	return
 
-OldaleTown_EventScript_HelperSay2::
-	msgbox OldaleTown_Text_HelperSay2, MSGBOX_SIGN
+OldaleTown_EventScript_Helper_Lucas1::
+	msgbox OldaleTown_Text_Helper_Lucas1, MSGBOX_SIGN
 	return
 
 OldaleTown_EventScript_HelperToLab::
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_HelperSay3
-	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_HelperSay4
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn2
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas2
 	opendoor 11, 6
 	waitdooranim
 	addobject LOCALID_RIVAL
@@ -278,8 +279,8 @@ OldaleTown_EventScript_HelperToLab::
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalRun
 	waitmovement 0
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_HelperSay5
-	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_HelperSay6
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn3
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas3
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_TurnUp
 	applymovement LOCALID_HELPER, OldaleTown_Movement_HelperEnter
 	waitmovement 0
@@ -336,21 +337,162 @@ OldaleTown_Movement_TurnUp:
 	walk_in_place_up
 	step_end
 
-OldaleTown_EventScript_HelperSay3::
-	msgbox OldaleTown_Text_HelperSay3, MSGBOX_DEFAULT
+OldaleTown_EventScript_Helper_Dawn2::
+	msgbox OldaleTown_Text_Helper_Dawn2, MSGBOX_DEFAULT
 	return
 
-OldaleTown_EventScript_HelperSay4::
-	msgbox OldaleTown_Text_HelperSay4, MSGBOX_DEFAULT
+OldaleTown_EventScript_Helper_Lucas2::
+	msgbox OldaleTown_Text_Helper_Lucas2, MSGBOX_DEFAULT
 	return
 
-OldaleTown_EventScript_HelperSay5::
-	msgbox OldaleTown_Text_HelperSay5, MSGBOX_SIGN
+OldaleTown_EventScript_Helper_Dawn3::
+	msgbox OldaleTown_Text_Helper_Dawn3, MSGBOX_SIGN
 	return
 
-OldaleTown_EventScript_HelperSay6::
-	msgbox OldaleTown_Text_HelperSay6, MSGBOX_SIGN
+OldaleTown_EventScript_Helper_Lucas3::
+	msgbox OldaleTown_Text_Helper_Lucas3, MSGBOX_SIGN
 	return
+
+OldaleTown_EventScript_MoveHelper::
+	setobjectxyperm LOCALID_HELPER, 11, 8
+	setobjectmovementtype LOCALID_HELPER, MOVEMENT_TYPE_FACE_UP
+	return
+
+OldaleTown_EventScript_HelperBuildings::
+	lock
+	special SpawnCameraObject
+	applymovement LOCALID_HELPER, Common_Movement_WalkUp
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn4
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas4
+	applymovement LOCALID_HELPER, OldaleTown_Movement_Helper_Guide1
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_Player_Guide1
+	applymovement OBJ_EVENT_ID_CAMERA, OldaleTown_Movement_Player_Guide1
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn5
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas5
+	applymovement LOCALID_HELPER, OldaleTown_Movement_Helper_Guide2
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_Helper_Guide2
+	applymovement OBJ_EVENT_ID_CAMERA, OldaleTown_Movement_Helper_Guide2
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn6
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas6
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	applymovement LOCALID_HELPER, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 48
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_Helper_Dawn7
+	call_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_Helper_Lucas7
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_Player_Guide2
+	applymovement LOCALID_HELPER, OldaleTown_Movement_Helper_Guide3
+	waitmovement 0
+	removeobject LOCALID_HELPER
+	special RemoveCameraObject
+	delay 48
+	delay 48
+	release
+	end
+
+OldaleTown_EventScript_Helper_Dawn4::
+	msgbox OldaleTown_Text_Helper_Dawn4, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Dawn5::
+	msgbox OldaleTown_Text_Helper_Dawn5, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Dawn6::
+	msgbox OldaleTown_Text_Helper_Dawn6, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Dawn7::
+	msgbox OldaleTown_Text_Helper_Dawn7, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Lucas4::
+	msgbox OldaleTown_Text_Helper_Lucas4, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Lucas5::
+	msgbox OldaleTown_Text_Helper_Lucas5, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Lucas6::
+	msgbox OldaleTown_Text_Helper_Lucas6, MSGBOX_SIGN
+	return
+
+OldaleTown_EventScript_Helper_Lucas7::
+	msgbox OldaleTown_Text_Helper_Lucas7, MSGBOX_SIGN
+	return
+
+OldaleTown_Movement_Helper_Guide1:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_up
+	step_end
+
+OldaleTown_Movement_Helper_Guide2:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_up
+	step_end
+	
+OldaleTown_Movement_Helper_Guide3:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+OldaleTown_Movement_Player_Guide1:
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_up
+	step_end
+	
+OldaleTown_Movement_Player_Guide2:
+	delay_16
+	walk_in_place_down
+	delay_16
+	walk_in_place_left
+	step_end
 
 OldaleTown_EventScript_TownSign::
 	msgbox OldaleTown_Text_TownSign, MSGBOX_SIGN
@@ -386,32 +528,41 @@ OldaleTown_EventScript_Youngster::
 	msgbox OldaleTown_Text_Youngster, MSGBOX_NPC
 	end
 
-OldaleTown_Text_HelperSay1:
+OldaleTown_Text_Helper_Dawn1:
 	.string "Dawn: Oh! There you are!\n"
 	.string "Please, come with me!\l"
 	.string "The professor is waiting!$"
 
-OldaleTown_Text_HelperSay2:
-	.string "Lucas: Oh! There you are!$"
-
-OldaleTown_Text_HelperSay3:
+OldaleTown_Text_Helper_Dawn2:
 	.string "This is it!\n"
 	.string "Our Pokémon Research Lab!\p"
 	.string "Lets go...$"
 
-OldaleTown_Text_HelperSay4:
-	.string "This is it!$"
-
-OldaleTown_Text_HelperSay5:
+OldaleTown_Text_Helper_Dawn3:
 	.string "Dawn: Wow, what was that?\p"
 	.string "Your friend sure seems to be really\n"
 	.string "impatient.\p"
 	.string "Well, anyway...\n"
 	.string "Let's go inside.$"
 
-OldaleTown_Text_HelperSay6:
-	.string "Lucas: Wow, what was that?$"
+OldaleTown_Text_Helper_Lucas1:
+	.string "Lucas: Hi! I've been waiting for you!\n"
+	.string "Please, come with me.\l"
+	.string "The prof's waiting to see you.$"
 
+OldaleTown_Text_Helper_Lucas2:
+	.string "See? This is our Pokemon Research\n"
+	.string "Lab.\p"
+	.string "We'll just go ahead and...$"
+
+OldaleTown_Text_Helper_Lucas3:
+	.string "Lucas: What was that?!\p"
+	.string "Your friend always seems to be\n"
+	.string "in such a rush.\p"
+	.string "Anyway...\n"
+	.string "Let's go in.\p"
+
+@ TODO: THUD change to Thud? Also in LittlerootTown
 OldaleTown_Text_Thud:
 	.string "THUD!!$"
 
@@ -421,6 +572,81 @@ OldaleTown_Text_Rival:
 	.string "much as he is totally out there!\p"
 	.string "Aww, it doesn't matter, {PLAYER}.\n"
 	.string "I'm out of here. See you later!$"
+
+OldaleTown_Text_Helper_Dawn4:
+	.string "Dawn: OK, {PLAYER}, I'll act as\n"
+	.string "your mentor.\p"
+	.string "I've got a bit more experience than\n"
+	.string "you as a Trainer as as the\l"
+	.string "professor's assistant.\p"
+	.string "OK, follow me!$"
+	
+OldaleTown_Text_Helper_Dawn5:
+	.string "This building with the red roof is\n"
+	.string "the Pokemon Center.\p"
+	.string "It's the place that heals Pokemon\n"
+	.string "that have been hurt in battle.\p"
+	.string "You can find a Pokemon Center in\n"
+	.string "most towns.$"
+
+OldaleTown_Text_Helper_Dawn6:
+	.string "The building with the blue roof over\n"
+	.string "here is the Poke Mart.\p"
+	.string "It's a shop where you can buy and\n"
+	.string "sell items and medicine.\p"
+	.string "{PLAYER}, since you're a novice\n"
+	.string "Trainer, you won't be able to buy\l"
+	.string "many kinds of merchandise.\p"
+	.string "Don't let it bother you!$"
+	
+OldaleTown_Text_Helper_Dawn7:
+	.string "Oh, that's right!\n"
+	.string "{PLAYER}...\p"
+	.string "Don't you need to let your family\n"
+	.string "know that you're going to be helping\l"
+	.string "Prof. Rowan with the Pokedex?\p"
+	.string "You may need to go far away, so I\n"
+	.string "think you should let someone know.\p"
+	.string "Oh, but before you go, heal up your\n"
+	.string "Pokemon at the Poke Center.\p"
+	.string "It will be a lot less scary that way.\n"
+	.string "OK, bye now!$"
+	
+OldaleTown_Text_Helper_Lucas4:
+	.string "Lucas: Hey, {PLAYER}!\n"
+	.string "I want to show you a few things.\l"
+	.string "So, follow me!$"
+
+OldaleTown_Text_Helper_Lucas5:
+	.string "This building with the red roof is\n"
+	.string "the Pokemon Center.\p"
+	.string "You can get your Pokemon healed if\n"
+	.string "it's been hurt in battle.$"
+	.string "You'll find a Pokemon Center in most\n"
+	.string "towns.$"
+
+OldaleTown_Text_Helper_Lucas6:
+	.string "Over here, the building with the blue\n"
+	.string "roof is the Poke Mart.\p"
+	.string "It's a shop where you can buy and\n"
+	.string "sell all sorts of items.\p"
+	.string "{PLAYER}, since you're a rookie\n"
+	.string "Trainer, you won't be able to buy\l"
+	.string "very much stuff.\p"
+	.string "Don't worry about it, OK?$"
+
+OldaleTown_Text_Helper_Lucas7:
+	.string "Oh year, right!\n"
+	.string "{PLAYER}...\p"
+	.string "You should let your family know\n"
+	.string "you're helping Prof. Rowan put\l"
+	.string "together his Pokedex.\p"
+	.string "Sometimes, you have to go far away,\n"
+	.string "so you should let someone know.\p"
+	.string "Oh, but first, go heal up your\n"
+	.string "Pokemon at the Poke Center.\p"
+	.string "You'll be safe then.\n"
+	.string "OK, be seeing you!$"
 
 OldaleTown_Text_TownSign:
 	.string "Sandgem Town\n"
