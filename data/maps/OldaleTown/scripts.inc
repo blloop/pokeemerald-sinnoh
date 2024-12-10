@@ -23,7 +23,6 @@ OldaleTown_OnFrame:
 
 OldaleTown_EventScript_HelperExclaim::
 	lock
-	setflag FLAG_HIDE_OLDALE_HELPER
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	special SpawnCameraObject
 	playse SE_PIN
@@ -284,7 +283,8 @@ OldaleTown_EventScript_HelperToLab::
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_TurnUp
 	applymovement LOCALID_HELPER, OldaleTown_Movement_HelperEnter
 	waitmovement 0
-	removeobject LOCALID_HELPER
+	@ TODO: Cannot hide helper or will not show in next scene
+	setobjectxy LOCALID_HELPER 25, 5
 	delay 16
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerEnter
 	applymovement OBJ_EVENT_ID_CAMERA, OldaleTown_Movement_PlayerEnter
@@ -354,13 +354,15 @@ OldaleTown_EventScript_Helper_Lucas3::
 	return
 
 OldaleTown_EventScript_MoveHelper::
-	setobjectxyperm LOCALID_HELPER, 11, 8
+	addobject LOCALID_HELPER
+	setobjectxy LOCALID_HELPER, 11, 8
 	setobjectmovementtype LOCALID_HELPER, MOVEMENT_TYPE_FACE_UP
 	return
 
 OldaleTown_EventScript_HelperBuildings::
 	lock
 	special SpawnCameraObject
+	setvar VAR_OLDALE_TOWN_STATE, 2
 	applymovement LOCALID_HELPER, Common_Movement_WalkUp
 	waitmovement 0
 	checkplayergender
@@ -383,6 +385,7 @@ OldaleTown_EventScript_HelperBuildings::
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
+	playse SE_PIN
 	applymovement LOCALID_HELPER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 48
@@ -393,6 +396,7 @@ OldaleTown_EventScript_HelperBuildings::
 	applymovement LOCALID_HELPER, OldaleTown_Movement_Helper_Guide3
 	waitmovement 0
 	removeobject LOCALID_HELPER
+	setflag FLAG_HIDE_OLDALE_HELPER
 	special RemoveCameraObject
 	delay 48
 	delay 48
