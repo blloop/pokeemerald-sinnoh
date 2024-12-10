@@ -177,7 +177,7 @@
       "width": 30,
       "height": 36,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Rustboro",
+      "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route102/border.bin",
       "blockdata_filepath": "data/layouts/Route102/map.bin"
     },
@@ -584,8 +584,8 @@
     {
       "id": "LAYOUT_HOUSE1",
       "name": "House1_Layout",
-      "width": 10,
-      "height": 9,
+      "width": 9,
+      "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/House1/border.bin",
