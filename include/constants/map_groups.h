@@ -77,10 +77,11 @@
 
 // gMapGroup_IndoorOldale
 #define MAP_OLDALE_TOWN_HOUSE1            (0 | (2 << 8))
-#define MAP_OLDALE_TOWN_HOUSE2            (1 | (2 << 8))
-#define MAP_OLDALE_TOWN_POKEMON_CENTER_1F (2 | (2 << 8))
-#define MAP_OLDALE_TOWN_POKEMON_CENTER_2F (3 | (2 << 8))
-#define MAP_OLDALE_TOWN_MART              (4 | (2 << 8))
+#define MAP_OLDALE_TOWN_HELPER_HOUSE_1F   (1 | (2 << 8))
+#define MAP_OLDALE_TOWN_HELPER_HOUSE_2F   (2 | (2 << 8))
+#define MAP_OLDALE_TOWN_POKEMON_CENTER_1F (3 | (2 << 8))
+#define MAP_OLDALE_TOWN_POKEMON_CENTER_2F (4 | (2 << 8))
+#define MAP_OLDALE_TOWN_MART              (5 | (2 << 8))
 
 // gMapGroup_IndoorDewford
 #define MAP_DEWFORD_TOWN_HOUSE1            (0 | (3 << 8))
