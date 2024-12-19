@@ -555,7 +555,7 @@ OldaleTown_Text_Helper_Lucas1:
 	.string "The prof's waiting to see you.$"
 
 OldaleTown_Text_Helper_Lucas2:
-	.string "See? This is our Pokemon Research\n"
+	.string "See? This is our Pokémon Research\n"
 	.string "Lab.\p"
 	.string "We'll just go ahead and...$"
 
@@ -587,15 +587,15 @@ OldaleTown_Text_Helper_Dawn4:
 	
 OldaleTown_Text_Helper_Dawn5:
 	.string "This building with the red roof is\n"
-	.string "the Pokemon Center.\p"
-	.string "It's the place that heals Pokemon\n"
+	.string "the Pokémon Center.\p"
+	.string "It's the place that heals Pokémon\n"
 	.string "that have been hurt in battle.\p"
-	.string "You can find a Pokemon Center in\n"
+	.string "You can find a Pokémon Center in\n"
 	.string "most towns.$"
 
 OldaleTown_Text_Helper_Dawn6:
 	.string "The building with the blue roof over\n"
-	.string "here is the Poke Mart.\p"
+	.string "here is the Poké Mart.\p"
 	.string "It's a shop where you can buy and\n"
 	.string "sell items and medicine.\p"
 	.string "{PLAYER}, since you're a novice\n"
@@ -608,11 +608,11 @@ OldaleTown_Text_Helper_Dawn7:
 	.string "{PLAYER}...\p"
 	.string "Don't you need to let your family\n"
 	.string "know that you're going to be helping\l"
-	.string "Prof. Rowan with the Pokedex?\p"
+	.string "Prof. Rowan with the Pokédex?\p"
 	.string "You may need to go far away, so I\n"
 	.string "think you should let someone know.\p"
 	.string "Oh, but before you go, heal up your\n"
-	.string "Pokemon at the Poke Center.\p"
+	.string "Pokémon at the Poké Center.\p"
 	.string "It will be a lot less scary that way.\n"
 	.string "OK, bye now!$"
 	
@@ -623,15 +623,15 @@ OldaleTown_Text_Helper_Lucas4:
 
 OldaleTown_Text_Helper_Lucas5:
 	.string "This building with the red roof is\n"
-	.string "the Pokemon Center.\p"
-	.string "You can get your Pokemon healed if\n"
+	.string "the Pokémon Center.\p"
+	.string "You can get your Pokémon healed if\n"
 	.string "it's been hurt in battle.$"
-	.string "You'll find a Pokemon Center in most\n"
+	.string "You'll find a Pokémon Center in most\n"
 	.string "towns.$"
 
 OldaleTown_Text_Helper_Lucas6:
 	.string "Over here, the building with the blue\n"
-	.string "roof is the Poke Mart.\p"
+	.string "roof is the Poké Mart.\p"
 	.string "It's a shop where you can buy and\n"
 	.string "sell all sorts of items.\p"
 	.string "{PLAYER}, since you're a rookie\n"
@@ -644,11 +644,11 @@ OldaleTown_Text_Helper_Lucas7:
 	.string "{PLAYER}...\p"
 	.string "You should let your family know\n"
 	.string "you're helping Prof. Rowan put\l"
-	.string "together his Pokedex.\p"
+	.string "together his Pokédex.\p"
 	.string "Sometimes, you have to go far away,\n"
 	.string "so you should let someone know.\p"
 	.string "Oh, but first, go heal up your\n"
-	.string "Pokemon at the Poke Center.\p"
+	.string "Pokémon at the Poké Center.\p"
 	.string "You'll be safe then.\n"
 	.string "OK, be seeing you!$"
 

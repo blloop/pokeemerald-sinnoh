@@ -405,18 +405,18 @@ LittlerootTown_ProfessorBirchsLab_Text_Helper_Dawn6:
 
 LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas1:
 	.string "Lucas: Boy, am I glad you're kind\n"
-	.string "toward Pokemon.\p"
+	.string "toward Pokémon.\p"
 	.string "If you weren't, well...\n"
 	.string "I don't even want to think about it.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas2:
 	.string "Lucas: I've got the same kind of\n"
-	.string "Pokedex as you.$"
+	.string "Pokédex as you.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_Helper_Lucas3:
 	.string "Lucas: The professor asked me to\n"
 	.string "help, so I'm going to go out and fill\l"
-	.string "the Pokedex pages, too.\p"
+	.string "the Pokédex pages, too.\p"
 	.string "That makes us comrades working\n"
 	.string "toward the same goal.\p"
 	.string "I'll teach you stuff later, OK?$"
@@ -440,11 +440,11 @@ LittlerootTown_ProfessorBirchsLab_Text_Bookshelf2:
 
 LittlerootTown_ProfessorBirchsLab_Text_Bookshelf3:
 	.string "It's crammed full of books with all\n"
-	.string "sorts of Pokemon information.$"
+	.string "sorts of Pokémon information.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_Bookshelf4:
 	.string "There's a lot of reference material\n"
-	.string "and research reports on Pokemon.$"
+	.string "and research reports on Pokémon.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_Fridge:
 	.string "The refrigerator is filled with\n"
@@ -459,7 +459,7 @@ LittlerootTown_ProfessorBirchsLab_Text_Aide1:
 
 LittlerootTown_ProfessorBirchsLab_Text_Aide2:
 	.string "Professor Rowan invented a new\n"
-	.string "Pokedex while working alongside a\l"
+	.string "Pokédex while working alongside a\l"
 	.string "professor from the Kanto region!$"
 
 @ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
