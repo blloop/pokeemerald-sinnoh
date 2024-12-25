@@ -152,8 +152,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1::
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomDiff::
-	goto_if_eq VAR_ALTERNATE_TEXT, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
-	goto_if_eq VAR_ALTERNATE_TEXT, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
+	goto_if_lt VAR_ALTERNATE_TEXT, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
+	goto LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomBye1::
@@ -177,8 +177,19 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
+	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, 
 	release
 	end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomGotBack
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomEnvyKiddo, MSGBOX_DEFAULT
+	applymovement LOCALID_MOM, Common_Movement_FaceLeft
+	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_DEFAULT
+	@ Spawn rival mom
+
+LittlerootTown_BrendansHouse_1F_Text_JustJoking:
 
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Kitchen, MSGBOX_SIGN
@@ -191,24 +202,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_Counter::
 LittlerootTown_BrendansHouse_1F_EventScript_Fridge::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Fridge, MSGBOX_SIGN
 	end
-
-LittlerootTown_BrendansHouse_1F_Text_Kitchen:
-	.string "Mom's kitchen is spotless!\n"
-	.string "You can see your face on the floor!$"
-
-LittlerootTown_BrendansHouse_1F_Text_Counter:
-	.string "This is where Mom does all her\n"
-	.string "delicious cooking.$"
-
-LittlerootTown_BrendansHouse_1F_Text_Fridge:
-	.string "Mom's favorite dessert is in\n"
-	.string "the refrigerator.$"
-
-LittlerootTown_BrendansHouse_1F_Text_TheresAMovieOnTV:
-	.string "There is a movie on TV.\p"
-	.string "Two men are dancing on a big piano\n"
-	.string "keyboard.\p"
-	.string "Better get going!$"
 
 LittlerootTown_BrendansHouse_1F_Text_Emergency:
 	.string "Mom: {PLAYER}!\p"
@@ -290,3 +283,60 @@ LittlerootTown_BrendansHouse_1F_Text_TakeQuickRest:
 	.string "Are you and your Pokémon healthy?\p"
 	.string "I just made dinner.\n"
 	.string "Take a quick rest, dear.$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomGotBack:
+	.string "Mom: What's up, {PLAYER}?\p"
+	.string "...\p"
+	.string "Wow. Professor Rowan asked you\n"
+	.string "to do something that big.\p"
+	.string "OK, dear, go for it!\n"
+	.string "Your mom's got your back!$"
+
+@ LittlerootTown_BrendansHouse_1F_Text_MomGiveJournal:
+@ 	.string "Oh, I know! {PLAYER}, I've got\n"
+@ 	.string "something that you'll find useful.\p"
+@ 	.string "{PLAYER} obtained\n"
+@ 	.string "the Journal!\p"
+@ 	.string "{PLAYER} put the Journal\n"
+@ 	.string "in the KEY ITEMS Pocket.\p"
+@ 	.string "That's a Journal. It keeps a record\n"
+@ 	.string "of your daily events.\p"
+@ 	.string "Check it, and you'll be able to\n"
+@ 	.string "remember what you did last.\p"
+
+LittlerootTown_BrendansHouse_1F_Text_MomEnvyKiddo:
+	.string "Gee, a journey full of adventure...\n"
+	.string "I envy you, kiddo.\p"
+	.string "Plus, you're not alone.\n"
+	.string "You have your Pokémon with you.\l"
+	.string "I wish I could go instead!$"
+
+LittlerootTown_BrendansHouse_1F_Text_JustJoking:
+	.string "I'm just joking, dear!\n"
+	.string "Yup, {PLAYER}!\p"
+	.string "I'll be all right by myself, so you\n"
+	.string "go and enjoy your adventure!\p"
+	.string "When you're exposed to new things,\n"
+	.string "and experience new sensations...\l"
+	.string "It makes your mother happy too.\p"
+	.string "...But come back sometimes.\p"
+	.string "I would like to see the kinds of\n"
+	.string "Pokémon you've caught, dear.$"
+
+LittlerootTown_BrendansHouse_1F_Text_Kitchen:
+	.string "Mom's kitchen is spotless!\n"
+	.string "You can see your face on the floor!$"
+
+LittlerootTown_BrendansHouse_1F_Text_Counter:
+	.string "This is where Mom does all her\n"
+	.string "delicious cooking.$"
+
+LittlerootTown_BrendansHouse_1F_Text_Fridge:
+	.string "Mom's favorite dessert is in\n"
+	.string "the refrigerator.$"
+
+LittlerootTown_BrendansHouse_1F_Text_TheresAMovieOnTV:
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"

@@ -11,6 +11,7 @@ LittlerootTown_MapScripts::
 	@ 2: Entered lake event
 	@ 3: Left Twinleaf with Running Shoes
 	@ 4: Received Pokédex
+	@ 5: Leave for adventure
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
@@ -20,6 +21,7 @@ LittlerootTown_MapScripts::
 	@ 5: Returned from lake event
 	@ 6: Received Running Shoes
 	@ 7: Received Pokédex
+	@ 8: Received Parcel
 
 	@ State descriptions for VAR_ALTERNATE_TEXT
 	@ 1: Talked to Mom saying bye in intro event
@@ -27,11 +29,20 @@ LittlerootTown_MapScripts::
 
 LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_LeaveRunning
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_LeavePokedex
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
 
 LittlerootTown_OnFrame:
 	.2byte 0
+
+LittlerootTown_EventScript_LeaveRunning::
+	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	end
+
+LittlerootTown_EventScript_LeavePokedex::
+	setvar VAR_LITTLEROOT_INTRO_STATE, 8
+	end
 
 LittlerootTown_EventScript_RivalMeet::
 	lock
@@ -347,10 +358,6 @@ LittlerootTown_Movement_WalkLeft7:
 	walk_down
 	step_end
 
-LittlerootTown_EventScript_LeaveRunning::
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
-	end
-
 LittlerootTown_Text_Thud:
 	.string "THUD!!$"
 
@@ -408,8 +415,8 @@ LittlerootTown_EventScript_FatMan::
 	end
 
 LittlerootTown_EventScript_Aroma::
-	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Aroma_Talk1
-	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_EventScript_Aroma_Talk2
+	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_Aroma_Talk1
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_Aroma_Talk2
 	goto LittlerootTown_EventScript_Aroma_Talk3
 	end
 
