@@ -71,7 +71,7 @@ LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	delay 30
-	msgbox LittlerootTown_BrendansHouse_1F_Text_LeaveHouse, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_TallGrass, MSGBOX_DEFAULT
 	release
 	return
 
@@ -94,17 +94,17 @@ LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn::
 	waitmovement 0
 	delay 48
 	delay 48
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen1, MSGBOX_SIGN
+	msgbox LittlerootTown_BrendansHouse_1F_Text_Unharmed, MSGBOX_SIGN
 	delay 48
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen2, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_PutOn, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_BrendansHouse_1F_Text_RunningShoesGet
+	message LittlerootTown_BrendansHouse_1F_Text_ReceivedShoes
 	waitfanfare
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
 	delay 48
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomKitchen3, MSGBOX_DEFAULT
-	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
+	msgbox LittlerootTown_BrendansHouse_1F_Text_GoingSandGem, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_ShoesManual, MSGBOX_SIGN
 	release
 	end
 
@@ -140,40 +140,40 @@ LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen:
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1
-	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomDiff
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_Impatient
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomAlternate
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
 	@ goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomTalk1::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomTalk1, MSGBOX_NPC
+LittlerootTown_BrendansHouse_1F_EventScript_Impatient::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_Impatient, MSGBOX_NPC
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomDiff::
-	goto_if_lt VAR_ALTERNATE_TEXT, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomBye1
-	goto LittlerootTown_BrendansHouse_1F_EventScript_MomBye2
+LittlerootTown_BrendansHouse_1F_EventScript_MomAlternate::
+	goto_if_lt VAR_ALTERNATE_TEXT, 1, LittlerootTown_BrendansHouse_1F_EventScript_TakeCare
+	goto LittlerootTown_BrendansHouse_1F_EventScript_RivalWaiting
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomBye1::
+LittlerootTown_BrendansHouse_1F_EventScript_TakeCare::
 	setvar VAR_ALTERNATE_TEXT, 1
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye1, MSGBOX_NPC
+	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeCare, MSGBOX_NPC
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomBye2::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye2, MSGBOX_NPC
+LittlerootTown_BrendansHouse_1F_EventScript_RivalWaiting::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_RivalWaiting, MSGBOX_NPC
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomRead, MSGBOX_DEFAULT
-	msgbox LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
+	msgbox LittlerootTown_BrendansHouse_1F_Text_ReadInfo, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_ShoesManual, MSGBOX_SIGN
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	lock
 	faceplayer
-	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeQuickRest, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_WelcomeHome, MSGBOX_DEFAULT
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
@@ -184,7 +184,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomGotBack
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MomEnvyKiddo, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_EnvyKiddo, MSGBOX_DEFAULT
 	applymovement LOCALID_MOM, Common_Movement_FaceLeft
 	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_DEFAULT
 	@ Spawn rival mom
@@ -208,28 +208,28 @@ LittlerootTown_BrendansHouse_1F_Text_Emergency:
 	.string "I don't know what it was about, but he\n"
 	.string "said it was an emergency.$"
 
-LittlerootTown_BrendansHouse_1F_Text_LeaveHouse:
+LittlerootTown_BrendansHouse_1F_Text_TallGrass:
 	.string "Mom: Oh yes! {PLAYER}!\p"
 	.string "Don't go into the tall grass. Wild\n"
 	.string "Pokémon might attack you.\p"
 	.string "It would be OK if you had your own\n"
 	.string "Pokémon, but you don't so...$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomTalk1:
+LittlerootTown_BrendansHouse_1F_Text_Impatient:
 	.string "Mom: You know how impatient\n"
 	.string "{RIVAL} is.\p"
 	.string "He took off before I could even\n"
 	.string "ask what it was about.$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomBye1:
+LittlerootTown_BrendansHouse_1F_Text_TakeCare:
 	.string "Mom: Bye-bye, {PLAYER}!\n"
 	.string "You take care now!$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomBye2:
+LittlerootTown_BrendansHouse_1F_Text_RivalWaiting:
 	.string "Mom: What is it, dear?\n"
 	.string "Isn't {RIVAL} waiting for you?$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomKitchen1:
+LittlerootTown_BrendansHouse_1F_Text_Unharmed:
 	.string "Mom: What's up, dear?\p"
 	.string "...\p"
 	.string "Wow.\n"
@@ -249,11 +249,11 @@ LittlerootTown_BrendansHouse_1F_Text_MomKitchen1:
 	.string "Don't worry!\n"
 	.string "I'm sure he will understand.$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomKitchen2:
+LittlerootTown_BrendansHouse_1F_Text_PutOn:
 	.string "Oh, I know!\n"
 	.string "{PLAYER}, put these on.$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomKitchen3:
+LittlerootTown_BrendansHouse_1F_Text_GoingSandGem:
 	.string "Going to Sandgem Town is like an\n"
 	.string "adventure in itself, right?\p"
 	.string "With those Running Shoes, you can\n"
@@ -261,24 +261,25 @@ LittlerootTown_BrendansHouse_1F_Text_MomKitchen3:
 	.string "OK...\n"
 	.string "Let me read the instructions...$"
 
-LittlerootTown_BrendansHouse_1F_Text_MomRead:
+LittlerootTown_BrendansHouse_1F_Text_ReadInfo:
 	.string "Mom: I'll read you the instructions\n"
 	.string "for the Running Shoes...$"
 
-LittlerootTown_BrendansHouse_1F_Text_RunningShoesGet:
+LittlerootTown_BrendansHouse_1F_Text_ReceivedShoes:
 	.string "{PLAYER} received a pair of\n"
 	.string "Running Shoes!$"
 
-LittlerootTown_BrendansHouse_1F_Text_RunningShoesManual:
+LittlerootTown_BrendansHouse_1F_Text_ShoesManual:
 	.string "“Press the B Button and dash\n"
 	.string "about faster than ever before!\p"
 	.string "“Put on the Running Shoes and\n"
 	.string "blaze new trails of adventure!“\p"
 	.string "Well, isn't that just nifty!$"
 
-LittlerootTown_BrendansHouse_1F_Text_TakeQuickRest:
+LittlerootTown_BrendansHouse_1F_WelcomeHome:
 	.string "Mom: Welcome home, {PLAYER}.\n"
 	.string "Are you and your Pokémon healthy?\p"
+	@ TODO: Does this change from time of day?
 	.string "I just made dinner.\n"
 	.string "Take a quick rest, dear.$"
 
@@ -302,7 +303,7 @@ LittlerootTown_BrendansHouse_1F_Text_MomGotBack:
 @ 	.string "Check it, and you'll be able to\n"
 @ 	.string "remember what you did last.\p"
 
-LittlerootTown_BrendansHouse_1F_Text_MomEnvyKiddo:
+LittlerootTown_BrendansHouse_1F_Text_EnvyKiddo:
 	.string "Gee, a journey full of adventure...\n"
 	.string "I envy you, kiddo.\p"
 	.string "Plus, you're not alone.\n"
@@ -333,7 +334,7 @@ LittlerootTown_BrendansHouse_1F_Text_Fridge:
 	.string "Mom's favorite dessert is in\n"
 	.string "the refrigerator.$"
 
-LittlerootTown_BrendansHouse_1F_Text_TheresAMovieOnTV:
+LittlerootTown_BrendansHouse_1F_Text_MovieOnTV:
 	.string "There is a movie on TV.\p"
 	.string "Two men are dancing on a big piano\n"
 	.string "keyboard.\p"
