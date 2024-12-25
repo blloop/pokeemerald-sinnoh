@@ -10,6 +10,7 @@ LittlerootTown_MapScripts::
 	@ 1: Left with Rival to see lake
 	@ 2: Entered lake event
 	@ 3: Left Twinleaf with Running Shoes
+	@ 4: Received Pokédex
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
@@ -18,6 +19,7 @@ LittlerootTown_MapScripts::
 	@ 4: Spoken to Rival in room
 	@ 5: Returned from lake event
 	@ 6: Received Running Shoes
+	@ 7: Received Pokédex
 
 	@ State descriptions for VAR_ALTERNATE_TEXT
 	@ 1: Talked to Mom saying bye in intro event
@@ -407,7 +409,8 @@ LittlerootTown_EventScript_FatMan::
 
 LittlerootTown_EventScript_Aroma::
 	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Aroma_Talk1
-	goto LittlerootTown_EventScript_Aroma_Talk2
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_EventScript_Aroma_Talk2
+	goto LittlerootTown_EventScript_Aroma_Talk3
 	end
 
 LittlerootTown_EventScript_Aroma_Talk1::
@@ -418,10 +421,15 @@ LittlerootTown_EventScript_Aroma_Talk2::
 	msgbox LittlerootTown_Text_Aroma2, MSGBOX_NPC
 	end
 
+LittlerootTown_EventScript_Aroma_Talk3::
+	msgbox LittlerootTown_Text_Aroma3, MSGBOX_NPC
+	end
+
 LittlerootTown_EventScript_Guitarist::
 	goto_if_lt VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Guitarist_Talk1
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_EventScript_Guitarist_Talk2
-	goto LittlerootTown_EventScript_Guitarist_Talk3
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_Guitarist_Talk3
+	goto LittlerootTown_EventScript_Guitarist_Talk4
 	end
 
 LittlerootTown_EventScript_Guitarist_Talk1::
@@ -434,6 +442,10 @@ LittlerootTown_EventScript_Guitarist_Talk2::
 
 LittlerootTown_EventScript_Guitarist_Talk3::
 	msgbox LittlerootTown_Text_Guitarist3, MSGBOX_NPC
+	end
+
+LittlerootTown_EventScript_Guitarist_Talk4::
+	msgbox LittlerootTown_Text_Guitarist4, MSGBOX_NPC
 	end
 
 LittlerootTown_Text_FatMan:
@@ -450,6 +462,14 @@ LittlerootTown_Text_Aroma1:
 LittlerootTown_Text_Aroma2:
 	.string "Oh! A Pokémon!\n"
 	.string "You look good together!$"
+
+LittlerootTown_Text_Aroma3:
+	.string "Oh, you're helping put together\n"
+	.string "a Pokédex?\p"
+	.string "That means you're going to travel\n"
+	.string "all over the region with Pokémon!\p"
+	.string "That sounds like a lot of fun\n"
+	.string "I'm a little envious, to be honest!$"
 	
 LittlerootTown_Text_Guitarist1:
 	.string "Hiya, {PLAYER}.\n"
@@ -468,6 +488,10 @@ LittlerootTown_Text_Guitarist2:
 LittlerootTown_Text_Guitarist3:
 	.string "{RIVAL}? He went tearing off\n"
 	.string "in a huge rush a while ago.$"
+
+LittlerootTown_Text_Guitarist4:
+	.string "Everyone goes off on adventures,\n"
+	.string "and then they gradually group up...$"
 
 LittlerootTown_Text_TownSign:
 	.string "Twinleaf Town\n"
