@@ -177,7 +177,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
-	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, 
+	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure
 	release
 	end
 
@@ -188,8 +188,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	applymovement LOCALID_MOM, Common_Movement_FaceLeft
 	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_DEFAULT
 	@ Spawn rival mom
-
-LittlerootTown_BrendansHouse_1F_Text_JustJoking:
 
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Kitchen, MSGBOX_SIGN
