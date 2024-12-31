@@ -29,9 +29,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC::
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_Controls::
-	lockall
-	msgbox LittlerootTown_BrendansHouse_2F_EventScript_Controls
-	releaseall
+	msgbox LittlerootTown_BrendansHouse_2F_Text_Controls, MSGBOX_SIGN
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_Notebook::
@@ -46,7 +44,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_GameCube::
 	msgbox LittlerootTown_BrendansHouse_2F_Text_GameCube, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_Controls:
+LittlerootTown_BrendansHouse_2F_Text_Controls:
 	.string "The X button opens the menu!$"
 
 LittlerootTown_BrendansHouse_2F_Text_Notebook:

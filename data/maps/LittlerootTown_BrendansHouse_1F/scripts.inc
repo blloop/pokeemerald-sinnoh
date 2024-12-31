@@ -1,4 +1,5 @@
 .set LOCALID_MOM, 1
+.set LOCALID_RIVALMOM, 2
 
 LittlerootTown_BrendansHouse_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_1F_OnTransition
@@ -187,7 +188,46 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_EnvyKiddo, MSGBOX_DEFAULT
 	applymovement LOCALID_MOM, Common_Movement_FaceLeft
 	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_DEFAULT
-	@ Spawn rival mom
+	addobject LOCALID_RIVALMOM
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_MOM, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_MOM, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomEnter
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_Headstrong, MSGBOX_DEFAULT
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_WontYou, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_RIVALMOM, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeThis, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_BrendansHouse_1F_Text_ReceivedParcel
+	waitfanfare
+	msgbox LittlerootTown_BrendansHouse_1F_Text_KnowingMyBoy, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave
+	waitmovement 0
+	removeobject LOCALID_RIVALMOM
+	setvar VAR_LITTLEROOT_INTRO_STATE, 8
+	return
+
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomEnter:
+	walk_up
+	walk_in_place_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave:
+	walk_down
+	walk_in_place_down
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Kitchen, MSGBOX_SIGN
@@ -321,6 +361,46 @@ LittlerootTown_BrendansHouse_1F_Text_JustJoking:
 	.string "...But come back sometimes.\p"
 	.string "I would like to see the kinds of\n"
 	.string "Pokémon you've caught, dear.$"
+	
+LittlerootTown_BrendansHouse_1F_Text_Headstrong:
+	.string "{RIVAL}'s mom: Excuse me.\n"
+	.string "Is my little {RIVAL} here?\p"
+	.string "Mom: Oh?\n"
+	.string "No, he's not...\p"
+	.string "{RIVAL}'s mom: Oh...\n"
+	.string "Then he must have left already...\l"
+	.string "What to do...\p"
+	.string "That boy shouted about going on an\n"
+	.string "adventure, then he bolted.\p"
+	.string "He's so headstrong and reckless...\n"
+	.string "I at least wanted him to take this...\p"
+	.string "Mom: Not to worry, {PLAYER} will\n"
+	.string "deliver that to him.$"
+
+LittlerootTown_BrendansHouse_1F_Text_WontYou:
+	.string "Won't you, {PLAYER}?$"
+
+LittlerootTown_BrendansHouse_1F_Text_TakeThis:
+	.string "{RIVAL}'s mom: Oh really?\n"
+	.string "You'd do that for me?\p"
+	.string "{PLAYER}, please take this to\n"
+	.string "{RIVAL} for me.$"
+
+LittlerootTown_BrendansHouse_1F_Text_ReceivedParcel:
+	.string "{PLAYER} obtained\n"
+	.string "the Parcel!$"
+	.string ""
+
+LittlerootTown_BrendansHouse_1F_Text_KnowingMyBoy:
+	.string "{PLAYER} put the Parcel\n"
+	.string "in the KEY ITEMS Pocket.\p"
+	.string "Mom: Bye-bye, {PLAYER}!\n"
+	.string "Enjoy your adventure!\p"
+	.string "{RIVAL}'s mom: Let me think...\p"
+	.string "Knowing my boy, he would probably\n"
+	.string "head straight to Jubilife City...\p"
+	.string "OK, please take that to my\n"
+	.string "{RIVAL}.$"
 
 LittlerootTown_BrendansHouse_1F_Text_Kitchen:
 	.string "Mom's kitchen is spotless!\n"

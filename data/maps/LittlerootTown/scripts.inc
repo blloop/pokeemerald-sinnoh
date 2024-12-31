@@ -30,6 +30,7 @@ LittlerootTown_MapScripts::
 LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_LeaveRunning
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_LeavePokedex
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_EventScript_StartAdventure
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
 
@@ -42,6 +43,10 @@ LittlerootTown_EventScript_LeaveRunning::
 
 LittlerootTown_EventScript_LeavePokedex::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 8
+	end
+
+LittlerootTown_EventScript_StartAdventure::
+	setvar VAR_LITTLEROOT_TOWN_STATE, 5
 	end
 
 LittlerootTown_EventScript_RivalMeet::
