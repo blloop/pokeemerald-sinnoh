@@ -173,6 +173,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_ShoesManual, MSGBOX_SIGN
 	end
 
+LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck::
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_BrendansHouse_1F_EventScript_MomBye
+	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
+	return
+
 LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	lock
 	faceplayer
@@ -186,9 +191,12 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomGotBack
-	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_BrendansHouse_1F_EventScript_MomTurnNorth
+	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_BrendansHouse_1F_EventScript_MomTurnNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_BrendansHouse_1F_EventScript_MomTurnSouth
+	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_BrendansHouse_1F_EventScript_MomTurnNorth
 	msgbox LittlerootTown_BrendansHouse_1F_Text_EnvyKiddo, MSGBOX_DEFAULT
-	applymovement LOCALID_MOM, Common_Movement_FaceLeft
+	faceplayer
 	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_SIGN
 	@ TODO: Play door open sound
 	addobject LOCALID_RIVALMOM
@@ -204,22 +212,28 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	waitmovement 0
 	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomEnter
 	waitmovement 0
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_BrendansHouse_1F_EventScript_PlayerTurnWest
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MyLittle, MSGBOX_DEFAULT
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Headstrong, MSGBOX_DEFAULT
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
-	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_BrendansHouse_1F_EventScript_FaceMomSouth
+	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_BrendansHouse_1F_EventScript_FaceMomEast
+	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_BrendansHouse_1F_EventScript_FaceMomNorth
+	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_BrendansHouse_1F_EventScript_FaceMomWest
 	msgbox LittlerootTown_BrendansHouse_1F_Text_WontYou, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
-	applymovement LOCALID_RIVALMOM, Common_Movement_WalkInPlaceUp
-	waitmovement 0
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomEast
+	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomRight2
+	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomUp2
+	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomNorth
 	msgbox LittlerootTown_BrendansHouse_1F_Text_TakeThis, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_BrendansHouse_1F_Text_ReceivedParcel
 	waitfanfare
 	msgbox LittlerootTown_BrendansHouse_1F_Text_KnowingMyBoy, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
-	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave
-	waitmovement 0
+	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomWestSouthLeave
+	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomEastLeave
+	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomNorthLeave
+	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomWestSouthLeave
 	removeobject LOCALID_RIVALMOM
 	setvar VAR_LITTLEROOT_INTRO_STATE, 8
 	return
@@ -229,15 +243,116 @@ LittlerootTown_BrendansHouse_1F_Movement_RivalMomEnter:
 	walk_in_place_right
 	step_end
 
-LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave:
+LittlerootTown_BrendansHouse_1F_EventScript_PlayerTurnWest::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomTurnSouth::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomTurnNorth::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceMomNorth::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceMomWest::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceMomSouth::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceMomEast::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomNorth::
+	applymovement LOCALID_RIVALMOM, Common_Movement_WalkInPlaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomEast::
+	applymovement LOCALID_RIVALMOM, Common_Movement_WalkInPlaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_RivalMomUp2::
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomUp2
+	waitmovement 0
+	call LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomEast
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_RivalMomRight2::
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeft2
+	waitmovement 0
+	call LittlerootTown_BrendansHouse_1F_EventScript_FaceRivalMomNorth
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_RivalMomNorthLeave::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomNorthLeave
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_RivalMomWestSouthLeave::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomWestSouthLeave
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_RivalMomEastLeave::
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomEastLeave
+	waitmovement 0
+	return
+
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeft2:
+	walk_right
+	walk_right
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomUp2:
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomNorthLeave:
+	walk_down
+	walk_down
 	walk_down
 	walk_in_place_down
 	step_end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck::
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_BrendansHouse_1F_EventScript_MomBye
-	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
-	return
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomWestSouthLeave:
+	walk_down
+	walk_in_place_down
+	step_end
+	
+LittlerootTown_BrendansHouse_1F_Movement_RivalMomEastLeave:
+	walk_left
+	walk_left
+	walk_down
+	walk_in_place_down
+	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomBye::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye, MSGBOX_NPC
@@ -380,13 +495,15 @@ LittlerootTown_BrendansHouse_1F_Text_MomBye:
 	.string "Mom: Bye-bye, {PLAYER}!\n"
 	.string "Enjoy your adventure!$"
 	
-LittlerootTown_BrendansHouse_1F_Text_Headstrong:
+LittlerootTown_BrendansHouse_1F_Text_MyLittle:
 	.string "{RIVAL}'s mom: Excuse me.\n"
-	.string "Is my little {RIVAL} here?\p"
+	.string "Is my little {RIVAL} here?$"
+
+LittlerootTown_BrendansHouse_1F_Text_Headstrong:
 	.string "Mom: Oh?\n"
 	.string "No, he's not...\p"
 	.string "{RIVAL}'s mom: Oh...\n"
-	.string "Then he must have left already...\l"
+	.string "Then, he must have left already...\l"
 	.string "What to do...\p"
 	.string "That boy shouted about going on an\n"
 	.string "adventure, then he bolted.\p"
@@ -399,7 +516,7 @@ LittlerootTown_BrendansHouse_1F_Text_WontYou:
 	.string "Won't you, {PLAYER}?$"
 
 LittlerootTown_BrendansHouse_1F_Text_TakeThis:
-	.string "{RIVAL}'s mom: Oh really?\n"
+	.string "{RIVAL}'s mom: Oh, really?\n"
 	.string "You'd do that for me?\p"
 	.string "{PLAYER}, please take this to\n"
 	.string "{RIVAL} for me.$"
