@@ -11,7 +11,7 @@ LittlerootTown_MapScripts::
 	@ 2: Entered lake event
 	@ 3: Left Twinleaf with Running Shoes
 	@ 4: Received Pokédex
-	@ 5: Leave for adventure
+	@ 5: Leave Twinleaf with Pokédex
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: Talked to Mom once
@@ -29,8 +29,7 @@ LittlerootTown_MapScripts::
 
 LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_LeaveRunning
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_LeavePokedex
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_EventScript_StartAdventure
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_EventScript_LeaveParcel
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
 
@@ -41,11 +40,7 @@ LittlerootTown_EventScript_LeaveRunning::
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	end
 
-LittlerootTown_EventScript_LeavePokedex::
-	setvar VAR_LITTLEROOT_INTRO_STATE, 8
-	end
-
-LittlerootTown_EventScript_StartAdventure::
+LittlerootTown_EventScript_LeaveParcel::
 	setvar VAR_LITTLEROOT_TOWN_STATE, 5
 	end
 

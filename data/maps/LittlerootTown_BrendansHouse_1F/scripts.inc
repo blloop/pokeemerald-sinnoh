@@ -144,7 +144,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_Mom::
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_Impatient
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomAlternate
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
-	@ goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck
+	@ goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	end
 
@@ -167,6 +168,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_RivalWaiting::
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
+	faceplayer
 	msgbox LittlerootTown_BrendansHouse_1F_Text_ReadInfo, MSGBOX_DEFAULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_ShoesManual, MSGBOX_SIGN
 	end
@@ -178,7 +180,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
-	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure
 	release
 	end
 
@@ -187,13 +189,16 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
 	msgbox LittlerootTown_BrendansHouse_1F_Text_EnvyKiddo, MSGBOX_DEFAULT
 	applymovement LOCALID_MOM, Common_Movement_FaceLeft
-	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_JustJoking, MSGBOX_SIGN
+	@ TODO: Play door open sound
 	addobject LOCALID_RIVALMOM
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_MOM, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_MOM, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_MOM, Common_Movement_Delay48
 	waitmovement 0
@@ -212,7 +217,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	message LittlerootTown_BrendansHouse_1F_Text_ReceivedParcel
 	waitfanfare
 	msgbox LittlerootTown_BrendansHouse_1F_Text_KnowingMyBoy, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	applymovement LOCALID_RIVALMOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave
 	waitmovement 0
 	removeobject LOCALID_RIVALMOM
@@ -228,6 +233,15 @@ LittlerootTown_BrendansHouse_1F_Movement_RivalMomLeave:
 	walk_down
 	walk_in_place_down
 	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck::
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_BrendansHouse_1F_EventScript_MomBye
+	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
+	return
+
+LittlerootTown_BrendansHouse_1F_EventScript_MomBye::
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomBye, MSGBOX_NPC
+	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Kitchen::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Kitchen, MSGBOX_SIGN
@@ -361,6 +375,10 @@ LittlerootTown_BrendansHouse_1F_Text_JustJoking:
 	.string "...But come back sometimes.\p"
 	.string "I would like to see the kinds of\n"
 	.string "Pokémon you've caught, dear.$"
+
+LittlerootTown_BrendansHouse_1F_Text_MomBye:
+	.string "Mom: Bye-bye, {PLAYER}!\n"
+	.string "Enjoy your adventure!$"
 	
 LittlerootTown_BrendansHouse_1F_Text_Headstrong:
 	.string "{RIVAL}'s mom: Excuse me.\n"
