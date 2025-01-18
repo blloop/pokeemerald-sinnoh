@@ -70,6 +70,8 @@ Route102_EventScript_HelperTeach4::
 	call Route102_EventScript_HelperExclaim
 	applymovement LOCALID_HELPER, Route102_Movement_Helper4
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
 	@ TODO: Add normal interaction
 	@ goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, Route102_EventScript_HelperAccept4
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, Route102_EventScript_HelperDecline
@@ -162,31 +164,31 @@ Route102_Movement_HelperBump:
 Route102_EventScript_HelperDecline::
 	goto_if_lt VAR_ALTERNATE_TEXT, 3, Route102_EventScript_HelperDeclineFirst
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route102_Text_TellFamilyA
-	call_if_eq VAR_RESULT, FEMALE, Route102_Text_TellFamilyB
+	call_if_eq VAR_RESULT, MALE, Route102_EventScript_TellFamilyA
+	call_if_eq VAR_RESULT, FEMALE, Route102_EventScript_TellFamilyB
 	return
 
 Route102_EventScript_HelperDeclineFirst::
 	setvar VAR_ALTERNATE_TEXT, 3
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route102_EventScript_EagerA
-	call_if_eq VAR_RESULT, FEMALE, Route102_EventScript_EagerB
+	call_if_eq VAR_RESULT, MALE, Route102_EventScript_ReallyEagerA
+	call_if_eq VAR_RESULT, FEMALE, Route102_EventScript_ReallyEagerB
 	return
 
 Route102_EventScript_ReallyEagerA::
-	msgbox Route102_Text_ReallyEagerA, MSGBOX_NPC
+	msgbox Route102_Text_ReallyEagerA, MSGBOX_SIGN
 	return
 
 Route102_EventScript_ReallyEagerB::
-	msgbox Route102_Text_ReallyEagerB, MSGBOX_NPC
+	msgbox Route102_Text_ReallyEagerB, MSGBOX_SIGN
 	return
 
 Route102_EventScript_TellFamilyA::
-	msgbox Route102_Text_TellFamilyA, MSGBOX_NPC
+	msgbox Route102_Text_TellFamilyA, MSGBOX_SIGN
 	return
 
 Route102_EventScript_TellFamilyB::
-	msgbox Route102_Text_TellFamilyB, MSGBOX_NPC
+	msgbox Route102_Text_TellFamilyB, MSGBOX_SIGN
 	return
 
 Route102_EventScript_LittleBoy::

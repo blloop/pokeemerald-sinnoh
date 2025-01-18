@@ -165,7 +165,7 @@
       "x": 18,
       "y": 26,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_ROUTE102_STATE",
       "var_value": "0",
       "script": "Route102_EventScript_HelperTeach1"
     },
@@ -174,7 +174,7 @@
       "x": 18,
       "y": 27,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_ROUTE102_STATE",
       "var_value": "0",
       "script": "Route102_EventScript_HelperTeach2"
     },
@@ -183,7 +183,7 @@
       "x": 18,
       "y": 28,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_ROUTE102_STATE",
       "var_value": "0",
       "script": "Route102_EventScript_HelperTeach3"
     },
@@ -192,7 +192,7 @@
       "x": 18,
       "y": 29,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_ROUTE102_STATE",
       "var_value": "0",
       "script": "Route102_EventScript_HelperTeach4"
     }
