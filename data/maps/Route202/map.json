@@ -1,9 +1,9 @@
 {
-  "id": "MAP_ROUTE102",
-  "name": "Route102",
-  "layout": "LAYOUT_ROUTE102",
+  "id": "MAP_ROUTE202",
+  "name": "Route202",
+  "layout": "LAYOUT_ROUTE202",
   "music": "MUS_ROUTE201",
-  "region_map_section": "MAPSEC_ROUTE_102",
+  "region_map_section": "MAPSEC_ROUTE_202",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",
@@ -36,7 +36,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_ROUTE_102_HELPER"
+      "flag": "FLAG_HIDE_ROUTE_202_HELPER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
@@ -48,7 +48,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_LittleBoy",
+      "script": "Route202_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_Calvin",
+      "script": "Route202_EventScript_Calvin",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route102_EventScript_Rick",
+      "script": "Route202_EventScript_Rick",
       "flag": "0"
     },
     {
@@ -87,7 +87,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_Tiana",
+      "script": "Route202_EventScript_Tiana",
       "flag": "0"
     },
     {
@@ -100,7 +100,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_Boy",
+      "script": "Route202_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -113,8 +113,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_ItemPotion",
-      "flag": "FLAG_ITEM_ROUTE_102_POTION"
+      "script": "Route202_EventScript_ItemPotion",
+      "flag": "FLAG_ITEM_ROUTE_202_POTION"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -125,7 +125,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_102_ORAN",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_202_ORAN",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -138,7 +138,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_102_PECHA",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_202_PECHA",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -152,7 +152,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_Allen",
+      "script": "Route202_EventScript_Allen",
       "flag": "0"
     }
   ],
@@ -165,36 +165,36 @@
       "x": 18,
       "y": 26,
       "elevation": 0,
-      "var": "VAR_ROUTE102_STATE",
+      "var": "VAR_ROUTE202_STATE",
       "var_value": "0",
-      "script": "Route102_EventScript_HelperTeach1"
+      "script": "Route202_EventScript_HelperTeach1"
     },
     {
       "type": "trigger",
       "x": 18,
       "y": 27,
       "elevation": 0,
-      "var": "VAR_ROUTE102_STATE",
+      "var": "VAR_ROUTE202_STATE",
       "var_value": "0",
-      "script": "Route102_EventScript_HelperTeach2"
+      "script": "Route202_EventScript_HelperTeach2"
     },
     {
       "type": "trigger",
       "x": 18,
       "y": 28,
       "elevation": 0,
-      "var": "VAR_ROUTE102_STATE",
+      "var": "VAR_ROUTE202_STATE",
       "var_value": "0",
-      "script": "Route102_EventScript_HelperTeach3"
+      "script": "Route202_EventScript_HelperTeach3"
     },
     {
       "type": "trigger",
       "x": 18,
       "y": 29,
       "elevation": 0,
-      "var": "VAR_ROUTE102_STATE",
+      "var": "VAR_ROUTE202_STATE",
       "var_value": "0",
-      "script": "Route102_EventScript_HelperTeach4"
+      "script": "Route202_EventScript_HelperTeach4"
     }
   ],
   "bg_events": [
@@ -204,7 +204,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route102_EventScript_RouteSignPetalburg"
+      "script": "Route202_EventScript_RouteSignPetalburg"
     },
     {
       "type": "sign",
@@ -212,7 +212,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route102_EventScript_RouteSignOldale"
+      "script": "Route202_EventScript_RouteSignOldale"
     }
   ]
 }

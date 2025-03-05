@@ -1,4 +1,4 @@
-Route102_EventScript_ItemPotion::
+Route202_EventScript_ItemPotion::
 	finditem ITEM_POTION
 	end
 
