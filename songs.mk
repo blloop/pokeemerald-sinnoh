@@ -132,7 +132,7 @@ $(MID_SUBDIR)/mus_route120.s: %.s: %.mid
 $(MID_SUBDIR)/mus_route122.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G021 -V080
 
-$(MID_SUBDIR)/mus_route101.s: %.s: %.mid
+$(MID_SUBDIR)/mus_route201.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G011 -V080
 
 $(MID_SUBDIR)/mus_dummy.s: %.s: %.mid
