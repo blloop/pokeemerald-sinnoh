@@ -1942,6 +1942,7 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
     [SPECIES_KYOGRE - 1]     = 60,
     [SPECIES_RAYQUAZA - 1]   = 60,
     [SPECIES_ROTOMFAN - 1]   = 7,
+    [SPECIES_ROTOMFAN - 1]   = 7,
 };
 
 #define PP_UP_SHIFTS(val)           val,        (val) << 2,        (val) << 4,        (val) << 6
