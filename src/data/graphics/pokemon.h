@@ -3296,12 +3296,12 @@ const u32 gMonShinyPalette_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/
 const u8 gMonIcon_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/icon.4bpp");
 const u8 gMonFootprint_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/footprint.1bpp");
 
-const u32 gMonStillFrontPic_Lickylicky[] = INCBIN_U32("graphics/pokemon/lickylicky/front.4bpp.lz");
-const u32 gMonPalette_Lickylicky[] = INCBIN_U32("graphics/pokemon/lickylicky/normal.gbapal.lz");
-const u32 gMonBackPic_Lickylicky[] = INCBIN_U32("graphics/pokemon/lickylicky/back.4bpp.lz");
-const u32 gMonShinyPalette_Lickylicky[] = INCBIN_U32("graphics/pokemon/lickylicky/shiny.gbapal.lz");
-const u8 gMonIcon_Lickylicky[] = INCBIN_U8("graphics/pokemon/lickylicky/icon.4bpp");
-const u8 gMonFootprint_Lickylicky[] = INCBIN_U8("graphics/pokemon/lickylicky/footprint.1bpp");
+const u32 gMonStillFrontPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/front.4bpp.lz");
+const u32 gMonPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/normal.gbapal.lz");
+const u32 gMonBackPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/back.4bpp.lz");
+const u32 gMonShinyPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/shiny.gbapal.lz");
+const u8 gMonIcon_Lickilicky[] = INCBIN_U8("graphics/pokemon/lickilicky/icon.4bpp");
+const u8 gMonFootprint_Lickilicky[] = INCBIN_U8("graphics/pokemon/lickilicky/footprint.1bpp");
 
 const u32 gMonStillFrontPic_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/front.4bpp.lz");
 const u32 gMonPalette_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/normal.gbapal.lz");

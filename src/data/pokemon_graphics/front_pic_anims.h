@@ -6493,7 +6493,7 @@ SINGLE_ANIMATION(Snover);
 SINGLE_ANIMATION(Abomasnow);
 SINGLE_ANIMATION(Weavile);
 SINGLE_ANIMATION(Magnezone);
-SINGLE_ANIMATION(Lickylicky);
+SINGLE_ANIMATION(Lickilicky);
 SINGLE_ANIMATION(Rhyperior);
 SINGLE_ANIMATION(Tangrowth);
 SINGLE_ANIMATION(Electivire);
@@ -7057,7 +7057,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_ABOMASNOW]       = sAnims_Abomasnow,
     [SPECIES_WEAVILE]         = sAnims_Weavile,
     [SPECIES_MAGNEZONE]       = sAnims_Magnezone,
-    [SPECIES_LICKYLICKY]      = sAnims_Lickylicky,
+    [SPECIES_LICKILICKY]      = sAnims_Lickilicky,
     [SPECIES_RHYPERIOR]       = sAnims_Rhyperior,
     [SPECIES_TANGROWTH]       = sAnims_Tangrowth,
     [SPECIES_ELECTIVIRE]      = sAnims_Electivire,
