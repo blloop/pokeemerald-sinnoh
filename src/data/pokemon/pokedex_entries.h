@@ -4944,7 +4944,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_BURMY] =
+    [NATIONAL_DEX_BURMYPLANT] =
     {
         .categoryName = _("BAGWORM"),
         .height = 2,
@@ -4956,7 +4956,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_WORMADAM] =
+    [NATIONAL_DEX_WORMADAMPLANT] =
     {
         .categoryName = _("BAGWORM"),
         .height = 5,
@@ -5064,7 +5064,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_SHELLOS] =
+    [NATIONAL_DEX_SHELLOSWEST] =
     {
         .categoryName = _("SEA SLUG"),
         .height = 3,
@@ -5076,7 +5076,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_GASTRODON] =
+    [NATIONAL_DEX_GASTRODONWEST] =
     {
         .categoryName = _("SEA SLUG"),
         .height = 9,
