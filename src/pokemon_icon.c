@@ -504,9 +504,10 @@ const u8 *const gMonIconTable[] =
     [SPECIES_MUNCHLAX] = gMonIcon_Munchlax,
     [SPECIES_RIOLU] = gMonIcon_Riolu,
     [SPECIES_LUCARIO] = gMonIcon_Lucario,
-    // TODOO: Figure out M-F icon difference
     [SPECIES_HIPPOPOTAS] = gMonIcon_Hippopotas,
+    [SPECIES_HIPPOPOTASF] = gMonIcon_HippopotasF,
     [SPECIES_HIPPOWDON] = gMonIcon_Hippowdon,
+    [SPECIES_HIPPOWDONF] = gMonIcon_HippowdonF,
     [SPECIES_SKORUPI] = gMonIcon_Skorupi,
     [SPECIES_DRAPION] = gMonIcon_Drapion,
     [SPECIES_CROAGUNK] = gMonIcon_Croagunk,
@@ -1063,7 +1064,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_MIMEJR] = 0,
     [SPECIES_HAPPINY] = 0,
     [SPECIES_CHATOT] = 0,
-    // TODOO: Figure out palette index 5
+    // FODO: Figure out palette index 5
     [SPECIES_SPIRITOMB] = 2,
     [SPECIES_GIBLE] = 0,
     [SPECIES_GABITE] = 0,
@@ -1071,9 +1072,10 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_MUNCHLAX] = 3,
     [SPECIES_RIOLU] = 2,
     [SPECIES_LUCARIO] = 2,
-    // TODOO: Figure out M-F palette
     [SPECIES_HIPPOPOTAS] = 1,
+    [SPECIES_HIPPOPOTASF] = 1,
     [SPECIES_HIPPOWDON] = 1,
+    [SPECIES_HIPPOWDONF] = 1,
     [SPECIES_SKORUPI] = 0,
     [SPECIES_DRAPION] = 2,
     [SPECIES_CROAGUNK] = 0,
@@ -1105,7 +1107,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_ROTOM] = 0,
     [SPECIES_ROTOMHEAT] = 0,
     [SPECIES_ROTOMWASH] = 0,
-    // TODOO: Figure out palette index 5
+    // FODO: Figure out palette index 5
     [SPECIES_ROTOMFROST] = 2,
     [SPECIES_ROTOMFAN] = 0,
     [SPECIES_ROTOMMOW] = 0,
@@ -1124,7 +1126,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_DARKRAI] = 0,
     [SPECIES_SHAYMINLAND] = 1,
     [SPECIES_SHAYMINSKY] = 1,
-    // TODOO: Figure out Arceus palette
+    // FODO: Figure out Arceus palette
     [SPECIES_ARCEUS] = 1,
     [SPECIES_EGG] = 1,
     [SPECIES_UNOWN_B] = 0,

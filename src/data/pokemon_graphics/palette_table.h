@@ -481,9 +481,10 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(MUNCHLAX, gMonPalette_Munchlax),
     SPECIES_PAL(RIOLU, gMonPalette_Riolu),
     SPECIES_PAL(LUCARIO, gMonPalette_Lucario),
-    // TODOO: Figure out M-F palette
     SPECIES_PAL(HIPPOPOTAS, gMonPalette_Hippopotas),
+    SPECIES_PAL(HIPPOPOTASF, gMonPalette_HippopotasF),
     SPECIES_PAL(HIPPOWDON, gMonPalette_Hippowdon),
+    SPECIES_PAL(HIPPOWDONF, gMonPalette_HippowdonF),
     SPECIES_PAL(SKORUPI, gMonPalette_Skorupi),
     SPECIES_PAL(DRAPION, gMonPalette_Drapion),
     SPECIES_PAL(CROAGUNK, gMonPalette_Croagunk),
@@ -533,7 +534,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(DARKRAI, gMonPalette_Darkrai),
     SPECIES_PAL(SHAYMINLAND, gMonPalette_ShayminLand),
     SPECIES_PAL(SHAYMINSKY, gMonPalette_ShayminSky),
-    // TODOO: Figure out Arceus palette
+    // FODO: Figure out Arceus palette
     SPECIES_PAL(ARCEUS, gMonPalette_Arceus),
     SPECIES_PAL(EGG, gMonPalette_Egg),
     SPECIES_PAL(UNOWN_B, gMonPalette_Unown),

@@ -12416,7 +12416,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_BURMY_PLANT] =
+    [SPECIES_BURMYPLANT] =
     {
         .baseHP        = 40,
         .baseAttack    = 29,
@@ -12446,7 +12446,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_BURMY_SANDY] =
+    [SPECIES_BURMYSANDY] =
     {
         .baseHP        = 40,
         .baseAttack    = 29,
@@ -12476,7 +12476,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_BURMY_TRASH] =
+    [SPECIES_BURMYTRASH] =
     {
         .baseHP        = 40,
         .baseAttack    = 29,
@@ -12506,7 +12506,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_WORMADAM_PLANT] =
+    [SPECIES_WORMADAMPLANT] =
     {
         .baseHP        = 60,
         .baseAttack    = 59,
@@ -12536,7 +12536,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_WORMADAM_SANDY] =
+    [SPECIES_WORMADAMSANDY] =
     {
         .baseHP        = 60,
         .baseAttack    = 79,
@@ -12566,7 +12566,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_WORMADAM_TRASH] =
+    [SPECIES_WORMADAMTRASH] =
     {
         .baseHP        = 60,
         .baseAttack    = 69,
@@ -12866,7 +12866,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_SHELLOS_WEST] =
+    [SPECIES_SHELLOSWEST] =
     {
         .baseHP        = 76,
         .baseAttack    = 48,
@@ -12896,7 +12896,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_SHELLOS_EAST] =
+    [SPECIES_SHELLOSEAST] =
     {
         .baseHP        = 76,
         .baseAttack    = 48,
@@ -12926,7 +12926,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_GASTRODON_WEST] =
+    [SPECIES_GASTRODONWEST] =
     {
         .baseHP        = 111,
         .baseAttack    = 83,
@@ -12956,7 +12956,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     }
 
-    [SPECIES_GASTRODON_EAST] =
+    [SPECIES_GASTRODONEAST] =
     {
         .baseHP        = 111,
         .baseAttack    = 83,
@@ -13755,7 +13755,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_SpDefense = 0,
         .itemCommon = ITEM_NONE,
         .itemRare   = ITEM_NONE,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(0),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
+        .abilities = { ABILITY_SAND_STREAM, ABILITY_NONE },
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    }
+
+    [SPECIES_HIPPOPOTASF] =
+    {
+        .baseHP        = 68,
+        .baseAttack    = 72,
+        .baseDefense   = 78,
+        .baseSpeed     = 32,
+        .baseSpAttack  = 38,
+        .baseSpDefense = 42,
+        .types = { TYPE_GROUND },
+        .catchRate = 140,
+        .expYield = 95,
+        .evYield_HP        = 0,
+        .evYield_Attack    = 0,
+        .evYield_Defense   = 1,
+        .evYield_Speed     = 0,
+        .evYield_SpAttack  = 0,
+        .evYield_SpDefense = 0,
+        .itemCommon = ITEM_NONE,
+        .itemRare   = ITEM_NONE,
+        .genderRatio = PERCENT_FEMALE(100),
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
@@ -13785,7 +13815,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_SpDefense = 0,
         .itemCommon = ITEM_NONE,
         .itemRare   = ITEM_NONE,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(0),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
+        .abilities = { ABILITY_SAND_STREAM, ABILITY_NONE },
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_BROWN,
+        .noFlip = FALSE,
+    }
+
+    [SPECIES_HIPPOWDONF] =
+    {
+        .baseHP        = 108,
+        .baseAttack    = 112,
+        .baseDefense   = 118,
+        .baseSpeed     = 47,
+        .baseSpAttack  = 68,
+        .baseSpDefense = 72,
+        .types = { TYPE_GROUND },
+        .catchRate = 60,
+        .expYield = 198,
+        .evYield_HP        = 0,
+        .evYield_Attack    = 0,
+        .evYield_Defense   = 2,
+        .evYield_Speed     = 0,
+        .evYield_SpAttack  = 0,
+        .evYield_SpDefense = 0,
+        .itemCommon = ITEM_NONE,
+        .itemRare   = ITEM_NONE,
+        .genderRatio = PERCENT_FEMALE(100),
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,

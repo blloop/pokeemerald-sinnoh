@@ -481,9 +481,10 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(MUNCHLAX, gMonShinyPalette_Munchlax),
     SPECIES_SHINY_PAL(RIOLU, gMonShinyPalette_Riolu),
     SPECIES_SHINY_PAL(LUCARIO, gMonShinyPalette_Lucario),
-    // TODOO: Figure out M-F palette
     SPECIES_SHINY_PAL(HIPPOPOTAS, gMonShinyPalette_Hippopotas),
+    SPECIES_SHINY_PAL(HIPPOPOTASF, gMonShinyPalette_HippopotasF),
     SPECIES_SHINY_PAL(HIPPOWDON, gMonShinyPalette_Hippowdon),
+    SPECIES_SHINY_PAL(HIPPOWDONF, gMonShinyPalette_HippowdonF),
     SPECIES_SHINY_PAL(SKORUPI, gMonShinyPalette_Skorupi),
     SPECIES_SHINY_PAL(DRAPION, gMonShinyPalette_Drapion),
     SPECIES_SHINY_PAL(CROAGUNK, gMonShinyPalette_Croagunk),
@@ -533,7 +534,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(DARKRAI, gMonShinyPalette_Darkrai),
     SPECIES_SHINY_PAL(SHAYMINLAND, gMonShinyPalette_ShayminLand),
     SPECIES_SHINY_PAL(SHAYMINSKY, gMonShinyPalette_ShayminSky),
-    // TODOO: Figure out Arceus palette
+    // FODO: Figure out Arceus palette
     SPECIES_SHINY_PAL(ARCEUS, gMonShinyPalette_Arceus),
     SPECIES_SHINY_PAL(EGG, gMonPalette_Egg),
     SPECIES_SHINY_PAL(UNOWN_B, gMonShinyPalette_Unown),
