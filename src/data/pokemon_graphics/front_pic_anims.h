@@ -1,4 +1,4 @@
-﻿static const union AnimCmd sAnim_None_1[] =
+static const union AnimCmd sAnim_None_1[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
@@ -4956,7 +4956,8 @@ static const union AnimCmd sAnim_Cherubi_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_CherrimOvercast_1[] =
+// static const union AnimCmd sAnim_CherrimOvercast_1[] =
+static const union AnimCmd sAnim_Cherrim_1[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 20),
@@ -4966,16 +4967,16 @@ static const union AnimCmd sAnim_CherrimOvercast_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_CherrimSunshine_1[] =
-{
-    ANIMCMD_FRAME(1, 6),
-    ANIMCMD_FRAME(0, 28),
-    ANIMCMD_FRAME(1, 12),
-    ANIMCMD_FRAME(0, 28),
-    ANIMCMD_FRAME(1, 7),
-    ANIMCMD_FRAME(0, 8),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_CherrimSunshine_1[] =
+// {
+//     ANIMCMD_FRAME(1, 6),
+//     ANIMCMD_FRAME(0, 28),
+//     ANIMCMD_FRAME(1, 12),
+//     ANIMCMD_FRAME(0, 28),
+//     ANIMCMD_FRAME(1, 7),
+//     ANIMCMD_FRAME(0, 8),
+//     ANIMCMD_END,
+// };
 
 static const union AnimCmd sAnim_ShellosWest_1[] =
 {
@@ -5576,62 +5577,62 @@ static const union AnimCmd sAnim_Rotom_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_RotomHeat_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_RotomHeat_1[] =
+// {
+//     ANIMCMD_FRAME(0, 30),
+//     ANIMCMD_FRAME(1, 30),
+//     ANIMCMD_FRAME(0, 20),
+//     ANIMCMD_END,
+// };
 
-static const union AnimCmd sAnim_RotomWash_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_RotomWash_1[] =
+// {
+//     ANIMCMD_FRAME(0, 30),
+//     ANIMCMD_FRAME(1, 30),
+//     ANIMCMD_FRAME(0, 1),
+//     ANIMCMD_END,
+// };
 
-static const union AnimCmd sAnim_RotomFrost_1[] =
-{
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_RotomFrost_1[] =
+// {
+//     ANIMCMD_FRAME(1, 50),
+//     ANIMCMD_FRAME(0, 20),
+//     ANIMCMD_END,
+// };
 
-static const union AnimCmd sAnim_RotomFan_1[] =
-{
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_RotomFan_1[] =
+// {
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_FRAME(0, 3),
+//     ANIMCMD_FRAME(1, 3),
+//     ANIMCMD_END,
+// };
 
-static const union AnimCmd sAnim_RotomMow_1[] =
-{
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_RotomMow_1[] =
+// {
+//     ANIMCMD_FRAME(0, 15),
+//     ANIMCMD_FRAME(1, 15),
+//     ANIMCMD_FRAME(0, 15),
+//     ANIMCMD_FRAME(1, 15),
+//     ANIMCMD_FRAME(0, 15),
+//     ANIMCMD_END,
+// };
 
 static const union AnimCmd sAnim_Uxie_1[] =
 {
@@ -5691,7 +5692,8 @@ static const union AnimCmd sAnim_Regigigas_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GiratinaAltered_1[] =
+// static const union AnimCmd sAnim_GiratinaAltered_1[] =
+static const union AnimCmd sAnim_Giratina_1[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(1, 45),
@@ -5699,15 +5701,15 @@ static const union AnimCmd sAnim_GiratinaAltered_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GiratinaOrigin_1[] =
-{
-    ANIMCMD_FRAME(0, 11),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_GiratinaOrigin_1[] =
+// {
+//     ANIMCMD_FRAME(0, 11),
+//     ANIMCMD_FRAME(1, 10),
+//     ANIMCMD_FRAME(0, 10),
+//     ANIMCMD_FRAME(1, 10),
+//     ANIMCMD_FRAME(0, 10),
+//     ANIMCMD_END,
+// };
 
 static const union AnimCmd sAnim_Cresselia_1[] =
 {
@@ -5744,7 +5746,8 @@ static const union AnimCmd sAnim_Darkrai_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_ShayminLand_1[] =
+// static const union AnimCmd sAnim_ShayminLand_1[] =
+static const union AnimCmd sAnim_Shaymin_1[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(1, 10),
@@ -5752,13 +5755,13 @@ static const union AnimCmd sAnim_ShayminLand_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_ShayminSky_1[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 36),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
+// static const union AnimCmd sAnim_ShayminSky_1[] =
+// {
+//     ANIMCMD_FRAME(0, 1),
+//     ANIMCMD_FRAME(1, 36),
+//     ANIMCMD_FRAME(0, 10),
+//     ANIMCMD_END,
+// };
 
 static const union AnimCmd sAnim_Arceus_1[] =
 {
@@ -6448,8 +6451,9 @@ SINGLE_ANIMATION(Pachirisu);
 SINGLE_ANIMATION(Buizel);
 SINGLE_ANIMATION(Floatzel);
 SINGLE_ANIMATION(Cherubi);
-SINGLE_ANIMATION(CherrimOvercast);
-SINGLE_ANIMATION(CherrimSunshine);
+SINGLE_ANIMATION(Cherrim);
+// SINGLE_ANIMATION(CherrimOvercast);
+// SINGLE_ANIMATION(CherrimSunshine);
 SINGLE_ANIMATION(ShellosWest);
 SINGLE_ANIMATION(ShellosEast);
 SINGLE_ANIMATION(GastrodonWest);
@@ -6510,11 +6514,11 @@ SINGLE_ANIMATION(Probopass);
 SINGLE_ANIMATION(Dusknoir);
 SINGLE_ANIMATION(Froslass);
 SINGLE_ANIMATION(Rotom);
-SINGLE_ANIMATION(RotomHeat);
-SINGLE_ANIMATION(RotomWash);
-SINGLE_ANIMATION(RotomFrost);
-SINGLE_ANIMATION(RotomFan);
-SINGLE_ANIMATION(RotomMow);
+// SINGLE_ANIMATION(RotomHeat);
+// SINGLE_ANIMATION(RotomWash);
+// SINGLE_ANIMATION(RotomFrost);
+// SINGLE_ANIMATION(RotomFan);
+// SINGLE_ANIMATION(RotomMow);
 SINGLE_ANIMATION(Uxie);
 SINGLE_ANIMATION(Mesprit);
 SINGLE_ANIMATION(Azelf);
@@ -6522,15 +6526,18 @@ SINGLE_ANIMATION(Dialga);
 SINGLE_ANIMATION(Palkia);
 SINGLE_ANIMATION(Heatran);
 SINGLE_ANIMATION(Regigigas);
-SINGLE_ANIMATION(GiratinaAltered);
-SINGLE_ANIMATION(GiratinaOrigin);
+SINGLE_ANIMATION(Giratina);
+// SINGLE_ANIMATION(GiratinaAltered);
+// SINGLE_ANIMATION(GiratinaOrigin);
 SINGLE_ANIMATION(Cresselia);
 SINGLE_ANIMATION(Phione);
 SINGLE_ANIMATION(Manaphy);
 SINGLE_ANIMATION(Darkrai);
-SINGLE_ANIMATION(ShayminLand);
+// SINGLE_ANIMATION(Shaymin);
+// SINGLE_ANIMATION(ShayminLand);
 SINGLE_ANIMATION(ShayminSky);
 SINGLE_ANIMATION(Arceus);
+// SINGLE_ANIMATION(ArceusNormal);
 SINGLE_ANIMATION(Egg);
 SINGLE_ANIMATION(UnownB);
 SINGLE_ANIMATION(UnownC);
@@ -7012,8 +7019,9 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_BUIZEL]          = sAnims_Buizel,
     [SPECIES_FLOATZEL]        = sAnims_Floatzel,
     [SPECIES_CHERUBI]         = sAnims_Cherubi,
-    [SPECIES_CHERRIMOVERCAST] = sAnims_CherrimOvercast,
-    [SPECIES_CHERRIMSUNSHINE] = sAnims_CherrimSunshine,
+    [SPECIES_CHERRIM]         = sAnims_Cherrim,
+    // [SPECIES_CHERRIMOVERCAST] = sAnims_CherrimOvercast,
+    // [SPECIES_CHERRIMSUNSHINE] = sAnims_CherrimSunshine,
     [SPECIES_SHELLOSWEST]     = sAnims_ShellosWest,
     [SPECIES_SHELLOSEAST]     = sAnims_ShellosEast,
     [SPECIES_GASTRODONWEST]   = sAnims_GastrodonWest,
@@ -7076,11 +7084,11 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_DUSKNOIR]        = sAnims_Dusknoir,
     [SPECIES_FROSLASS]        = sAnims_Froslass,
     [SPECIES_ROTOM]           = sAnims_Rotom,
-    [SPECIES_ROTOMHEAT]       = sAnims_RotomHeat,
-    [SPECIES_ROTOMWASH]       = sAnims_RotomWash,
-    [SPECIES_ROTOMFROST]      = sAnims_RotomFrost,
-    [SPECIES_ROTOMFAN]        = sAnims_RotomFan,
-    [SPECIES_ROTOMMOW]        = sAnims_RotomMow,
+    // [SPECIES_ROTOMHEAT]       = sAnims_RotomHeat,
+    // [SPECIES_ROTOMWASH]       = sAnims_RotomWash,
+    // [SPECIES_ROTOMFROST]      = sAnims_RotomFrost,
+    // [SPECIES_ROTOMFAN]        = sAnims_RotomFan,
+    // [SPECIES_ROTOMMOW]        = sAnims_RotomMow,
     [SPECIES_UXIE]            = sAnims_Uxie,
     [SPECIES_MESPRIT]         = sAnims_Mesprit,
     [SPECIES_AZELF]           = sAnims_Azelf,
@@ -7088,15 +7096,34 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_PALKIA]          = sAnims_Palkia,
     [SPECIES_HEATRAN]         = sAnims_Heatran,
     [SPECIES_REGIGIGAS]       = sAnims_Regigigas,
-    [SPECIES_GIRATINAALTERED] = sAnims_GiratinaAltered,
-    [SPECIES_GIRATINAORIGIN]  = sAnims_GiratinaOrigin,
+    [SPECIES_GIRATINA]        = sAnims_Giratina,
+    // [SPECIES_GIRATINAALTERED] = sAnims_GiratinaAltered,
+    // [SPECIES_GIRATINAORIGIN]  = sAnims_GiratinaOrigin,
     [SPECIES_CRESSELIA]       = sAnims_Cresselia,
     [SPECIES_PHIONE]          = sAnims_Phione,
     [SPECIES_MANAPHY]         = sAnims_Manaphy,
     [SPECIES_DARKRAI]         = sAnims_Darkrai,
-    [SPECIES_SHAYMINLAND]     = sAnims_ShayminLand,
-    [SPECIES_SHAYMINSKY]      = sAnims_ShayminSky,
+    [SPECIES_SHAYMIN]         = sAnims_Shaymin,
+    // [SPECIES_SHAYMINLAND]     = sAnims_ShayminLand,
+    // [SPECIES_SHAYMINSKY]      = sAnims_ShayminSky,
     [SPECIES_ARCEUS]          = sAnims_Arceus,
+    // [SPECIES_ARCEUSNORMAL]    = sAnims_Arceus,
+    // [SPECIES_ARCEUSFIGHTING]  = sAnims_Arceus,
+    // [SPECIES_ARCEUSFLYING]    = sAnims_Arceus,
+    // [SPECIES_ARCEUSPOISON]    = sAnims_Arceus,
+    // [SPECIES_ARCEUSGROUND]    = sAnims_Arceus,
+    // [SPECIES_ARCEUSROCK]      = sAnims_Arceus,
+    // [SPECIES_ARCEUSBUG]       = sAnims_Arceus,
+    // [SPECIES_ARCEUSGHOST]     = sAnims_Arceus,
+    // [SPECIES_ARCEUSSTEEL]     = sAnims_Arceus,
+    // [SPECIES_ARCEUSFIRE]      = sAnims_Arceus,
+    // [SPECIES_ARCEUSWATER]     = sAnims_Arceus,
+    // [SPECIES_ARCEUSGRASS]     = sAnims_Arceus,
+    // [SPECIES_ARCEUSELECTRIC]  = sAnims_Arceus,
+    // [SPECIES_ARCEUSPSYCHIC]   = sAnims_Arceus,
+    // [SPECIES_ARCEUSICE]       = sAnims_Arceus,
+    // [SPECIES_ARCEUSDRAGON]    = sAnims_Arceus,
+    // [SPECIES_ARCEUSDARK]      = sAnims_Arceus,
     [SPECIES_EGG]         = sAnims_Egg,
     [SPECIES_UNOWN_B]     = sAnims_UnownB,
     [SPECIES_UNOWN_C]     = sAnims_UnownC,

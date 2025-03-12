@@ -5052,6 +5052,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    // [NATIONAL_DEX_CHERRIMOVERCAST] =
     [NATIONAL_DEX_CHERRIM] =
     {
         .categoryName = _("BLOSSOM"),
@@ -5844,6 +5845,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 17,
     },
 
+    // [NATIONAL_DEX_GIRATINAALTERED] =
     [NATIONAL_DEX_GIRATINA] =
     {
         .categoryName = _("RENEGADE"),
@@ -5904,6 +5906,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    // [NATIONAL_DEX_SHAYMINLAND] =
     [NATIONAL_DEX_SHAYMIN] =
     {
         .categoryName = _("GRATITUDE"),
@@ -5916,6 +5919,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    // [NATIONAL_DEX_ARCEUSNORMAL] =
     [NATIONAL_DEX_ARCEUS] =
     {
         .categoryName = _("ALPHA"),
