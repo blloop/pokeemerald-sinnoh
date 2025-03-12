@@ -1,4 +1,4 @@
-static const union AnimCmd sAnim_None_1[] =
+﻿static const union AnimCmd sAnim_None_1[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
@@ -4814,48 +4814,14 @@ static const union AnimCmd sAnim_Bastiodon_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BurmyPlant_1[] =
+static const union AnimCmd sAnim_Burmy_1[] =
 {
     ANIMCMD_FRAME(1, 32),
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_BurmySandy_1[] =
-{
-    ANIMCMD_FRAME(1, 32),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_BurmyTrash_1[] =
-{
-    ANIMCMD_FRAME(1, 32),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_WormadamPlant_1[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_WormadamSandy_1[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_WormadamTrash_1[] =
+static const union AnimCmd sAnim_Wormadam_1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -4978,7 +4944,7 @@ static const union AnimCmd sAnim_Cherrim_1[] =
 //     ANIMCMD_END,
 // };
 
-static const union AnimCmd sAnim_ShellosWest_1[] =
+static const union AnimCmd sAnim_Shellos_1[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 36),
@@ -4986,26 +4952,7 @@ static const union AnimCmd sAnim_ShellosWest_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_ShellosEast_1[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 36),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_GastrodonWest_1[] =
-{
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_GastrodonEast_1[] =
+static const union AnimCmd sAnim_Gastrodon_1[] =
 {
     ANIMCMD_FRAME(1, 15),
     ANIMCMD_FRAME(0, 15),
@@ -6438,12 +6385,8 @@ SINGLE_ANIMATION(Cranidos);
 SINGLE_ANIMATION(Rampardos);
 SINGLE_ANIMATION(Shieldon);
 SINGLE_ANIMATION(Bastiodon);
-SINGLE_ANIMATION(BurmyPlant);
-SINGLE_ANIMATION(BurmySandy);
-SINGLE_ANIMATION(BurmyTrash);
-SINGLE_ANIMATION(WormadamPlant);
-SINGLE_ANIMATION(WormadamSandy);
-SINGLE_ANIMATION(WormadamTrash);
+SINGLE_ANIMATION(Burmy);
+SINGLE_ANIMATION(Wormadam);
 SINGLE_ANIMATION(Mothim);
 SINGLE_ANIMATION(Combee);
 SINGLE_ANIMATION(Vespiquen);
@@ -6454,10 +6397,8 @@ SINGLE_ANIMATION(Cherubi);
 SINGLE_ANIMATION(Cherrim);
 // SINGLE_ANIMATION(CherrimOvercast);
 // SINGLE_ANIMATION(CherrimSunshine);
-SINGLE_ANIMATION(ShellosWest);
-SINGLE_ANIMATION(ShellosEast);
-SINGLE_ANIMATION(GastrodonWest);
-SINGLE_ANIMATION(GastrodonEast);
+SINGLE_ANIMATION(Shellos);
+SINGLE_ANIMATION(Gastrodon);
 SINGLE_ANIMATION(Ambipom);
 SINGLE_ANIMATION(Drifloon);
 SINGLE_ANIMATION(Drifblim);
@@ -7006,12 +6947,12 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_RAMPARDOS]       = sAnims_Rampardos,
     [SPECIES_SHIELDON]        = sAnims_Shieldon,
     [SPECIES_BASTIODON]       = sAnims_Bastiodon,
-    [SPECIES_BURMYPLANT]      = sAnims_BurmyPlant,
-    [SPECIES_BURMYSANDY]      = sAnims_BurmySandy,
-    [SPECIES_BURMYTRASH]      = sAnims_BurmyTrash,
-    [SPECIES_WORMADAMPLANT]   = sAnims_WormadamPlant,
-    [SPECIES_WORMADAMSANDY]   = sAnims_WormadamSandy,
-    [SPECIES_WORMADAMTRASH]   = sAnims_WormadamTrash,
+    [SPECIES_BURMYPLANT]      = sAnims_Burmy,
+    [SPECIES_BURMYSANDY]      = sAnims_Burmy,
+    [SPECIES_BURMYTRASH]      = sAnims_Burmy,
+    [SPECIES_WORMADAMPLANT]   = sAnims_Wormadam,
+    [SPECIES_WORMADAMSANDY]   = sAnims_Wormadam,
+    [SPECIES_WORMADAMTRASH]   = sAnims_Wormadam,
     [SPECIES_MOTHIM]          = sAnims_Mothim,
     [SPECIES_COMBEE]          = sAnims_Combee,
     [SPECIES_VESPIQUEN]       = sAnims_Vespiquen,
@@ -7022,10 +6963,10 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_CHERRIM]         = sAnims_Cherrim,
     // [SPECIES_CHERRIMOVERCAST] = sAnims_CherrimOvercast,
     // [SPECIES_CHERRIMSUNSHINE] = sAnims_CherrimSunshine,
-    [SPECIES_SHELLOSWEST]     = sAnims_ShellosWest,
-    [SPECIES_SHELLOSEAST]     = sAnims_ShellosEast,
-    [SPECIES_GASTRODONWEST]   = sAnims_GastrodonWest,
-    [SPECIES_GASTRODONEAST]   = sAnims_GastrodonEast,
+    [SPECIES_SHELLOSWEST]     = sAnims_Shellos,
+    [SPECIES_SHELLOSEAST]     = sAnims_Shellos,
+    [SPECIES_GASTRODONWEST]   = sAnims_Gastrodon,
+    [SPECIES_GASTRODONEAST]   = sAnims_Gastrodon,
     [SPECIES_AMBIPOM]         = sAnims_Ambipom,
     [SPECIES_DRIFLOON]        = sAnims_Drifloon,
     [SPECIES_DRIFBLIM]        = sAnims_Drifblim,
