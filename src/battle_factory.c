@@ -52,6 +52,8 @@ static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
     [FACTORY_STYLE_WEATHER - 1]       = 2
 };
 
+// FODO: Add Gen4 moves to battle factory
+
 static const u16 sMoves_TotalPreparation[] =
 {
     MOVE_SWORDS_DANCE, MOVE_GROWTH, MOVE_MEDITATE, MOVE_AGILITY, MOVE_DOUBLE_TEAM, MOVE_HARDEN,
