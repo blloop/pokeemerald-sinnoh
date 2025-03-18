@@ -12649,7 +12649,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_SpDefense = 0,
         .itemCommon = ITEM_NONE,
         .itemRare   = ITEM_NONE,
-        // FODO: Add ITEM_HONEY
+        // FODO: Add item honey
         // .itemRare   = ITEM_HONEY,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 15,
@@ -13491,7 +13491,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_SpAttack  = 0,
         .evYield_SpDefense = 0,
         .itemCommon = ITEM_NONE,
-        // FODO: Add ITEM_OVAL_STONE
+        // FODO: Add item oval stone
         // .itemCommon = ITEM_OVAL_STONE,
         .itemRare   = ITEM_NONE,
         .genderRatio = MON_FEMALE,

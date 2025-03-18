@@ -2833,7 +2833,7 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboMoves = {COMBO_STARTER_CALM_MIND},
     },
     
-    // FODO: Update moves in contest
+    // FODO: Add Gen4 moves to contests
     [MOVE_ROOST] = 
 	{
 	    .effect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
