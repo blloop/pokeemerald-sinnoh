@@ -18,7 +18,6 @@ static void AnimConfuseRayBallSpiral(struct Sprite *);
 static void AnimConfuseRayBallSpiral_Step(struct Sprite *);
 static void AnimTask_NightShadeClone_Step1(u8 taskId);
 static void AnimTask_NightShadeClone_Step2(u8 taskId);
-static void AnimShadowBall(struct Sprite *);
 static void AnimShadowBall_Step(struct Sprite *);
 static void AnimLick(struct Sprite *);
 static void AnimLick_Step(struct Sprite *);
@@ -82,7 +81,7 @@ static const union AffineAnimCmd sAffineAnim_ShadowBall[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_ShadowBall[] =
+const union AffineAnimCmd *const gAffineAnims_ShadowBall[] =
 {
     sAffineAnim_ShadowBall,
 };
@@ -94,7 +93,7 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_ShadowBall,
+    .affineAnims = gAffineAnims_ShadowBall,
     .callback = AnimShadowBall,
 };
 
@@ -215,6 +214,17 @@ static const struct SpriteTemplate sMonMoveCircularSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimMonMoveCircular,
+};
+
+const struct SpriteTemplate gFlashCannonBallMovementTemplate =
+{
+    .tileTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .paletteTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
 };
 
 static void AnimConfuseRayBallBounce(struct Sprite *sprite)
@@ -395,7 +405,7 @@ static void AnimTask_NightShadeClone_Step2(u8 taskId)
 // arg 0: duration step 1 (attacker -> center)
 // arg 1: duration step 2 (spin center)
 // arg 2: duration step 3 (center -> target)
-static void AnimShadowBall(struct Sprite *sprite)
+void AnimShadowBall(struct Sprite *sprite)
 {
     s16 oldPosX = sprite->x;
     s16 oldPosY = sprite->y;

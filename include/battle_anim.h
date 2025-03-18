@@ -155,6 +155,7 @@ void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 u8 GetBattlerSide(u8 battler);
 u8 GetBattlerPosition(u8 battler);
 u8 GetBattlerAtPosition(u8 position);
+u8 IsBattlerAlly(u8 battlerAtk, u8 battlerDef);
 void ConvertPosDataToTranslateLinearData(struct Sprite *sprite);
 void InitAnimFastLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
 
@@ -214,9 +215,6 @@ enum {
 
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
-// battle_anim_ground.c
-void AnimTask_HorizontalShake(u8 taskId);
-
 // battle_anim_throw.c
 void TryShinyAnimation(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
@@ -231,12 +229,39 @@ void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler,
 void SetSpriteNextToMonHead(u8 battler, struct Sprite *sprite);
 void AnimMoveTwisterParticle(struct Sprite *sprite);
 void AnimParticleBurst(struct Sprite *);
+void AnimAbsorptionOrb(struct Sprite *sprite);
+void AnimTask_CompressTargetHorizontally(u8 taskId);
+extern const union AnimCmd *const gMusicNotesAnimTable[];
 
 // battle_anim_water.c
 void AnimWaterPulseRing(struct Sprite *sprite);
 
 // battle_anim_flying.c
 void DestroyAnimSpriteAfterTimer(struct Sprite *sprite);
+void AnimAirWaveCrescent(struct Sprite *sprite);
+extern const union AnimCmd *const sAffineAnims_AirWaveCrescent[];
+
+// battle_anim_poison.c
+void AnimSludgeBombHitParticle(struct Sprite *);
+extern const union AffineAnimCmd *const sAffineAnims_PoisonProjectile[];
+
+// battle_anim_ghost.c
+void AnimShadowBall(struct Sprite *sprite);
+extern const union AffineAnimCmd *const gAffineAnims_ShadowBall[];
+
+// battle_anim_ground.c
+void AnimTask_HorizontalShake(u8 taskId);
+extern const union AffineAnimCmd *const sAffineAnims_SpinningBone[];
+
+// battle_anim_fight.c
+void AnimBrickBreakWall_Step(struct Sprite *sprite);
+
+// battle_anim_ice.c
+void AnimIceEffectParticle(struct Sprite *sprite);
+extern const union AffineAnimCmd *const sAffineAnims_IceCrystalHit[];
+
+// battle_anim_new.c
+extern const union AffineAnimCmd* const sSpriteAffineAnimTable_HydroCannonBall[];
 
 // battle_anim_smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, bool8 persist);
@@ -289,6 +314,7 @@ extern const struct OamData gOamData_AffineDouble_ObjNormal_32x16;
 extern const struct OamData gOamData_AffineOff_ObjNormal_64x32;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x32;
 extern const struct OamData gOamData_AffineOff_ObjBlend_16x32;
+extern const struct OamData gOamData_AffineDouble_ObjBlend_32x8;
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];

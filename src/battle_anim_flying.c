@@ -12,7 +12,6 @@ static void AnimEllipticalGust(struct Sprite *);
 static void AnimEllipticalGust_Step(struct Sprite *);
 static void AnimGustToTarget(struct Sprite *);
 static void AnimGustToTarget_Step(struct Sprite *);
-static void AnimAirWaveCrescent(struct Sprite *);
 static void AnimFlyBallUp(struct Sprite *);
 static void AnimFlyBallUp_Step(struct Sprite *);
 static void AnimFlyBallAttack(struct Sprite *);
@@ -80,7 +79,7 @@ static const union AnimCmd sAffineAnim_AirWaveCrescent[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAffineAnims_AirWaveCrescent[] =
+const union AnimCmd *const sAffineAnims_AirWaveCrescent[] =
 {
     sAffineAnim_AirWaveCrescent,
 };
@@ -427,7 +426,7 @@ static void AnimGustToTarget_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void AnimAirWaveCrescent(struct Sprite *sprite)
+void AnimAirWaveCrescent(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {

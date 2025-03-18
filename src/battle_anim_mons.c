@@ -868,6 +868,11 @@ u8 GetBattlerAtPosition(u8 position)
     return i;
 }
 
+u8 IsBattlerAlly(u8 battlerAtk, u8 battlerDef)
+{
+    return (GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef));
+}
+
 bool8 IsBattlerSpritePresent(u8 battlerId)
 {
     if (IsContest())

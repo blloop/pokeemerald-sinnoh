@@ -271,6 +271,22 @@
 	.byte 0x2f
 	.endm
 
+	@ does not overwrite gBattleAnimArgs[battlerargindex], some sprite templates are too dependent on the value (e.g. heal block)
+	.macro createspriteontargets_onpos template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
+	.byte 0x32
+	.4byte \template
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
+	.byte \battlerargindex
+	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
+.Lsprite_\@_1:
+	.2byte \argv
+.Lsprite_\@_2:
+	.endm
+
 @ useful macros
 	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr

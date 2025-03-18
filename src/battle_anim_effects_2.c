@@ -951,6 +951,18 @@ const struct SpriteTemplate gRedHeartRisingSpriteTemplate =
     .callback = AnimRedHeartRising,
 };
 
+// New struct that's just a copy of 'gMagentaHeartSpriteTemplate', without need to make new anim tags 
+const struct SpriteTemplate gRedHeartCharmSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_RED_HEART,
+    .paletteTag = ANIM_TAG_RED_HEART,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMagentaHeart,
+};
+
 const union AffineAnimCmd gHiddenPowerOrbAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
@@ -978,6 +990,28 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RED_ORB,
     .paletteTag = ANIM_TAG_RED_ORB,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitScatter,
+};
+
+const struct SpriteTemplate gPowerGemOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitFast,
+};
+
+const struct SpriteTemplate gPowerGemOrbScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1260,6 +1294,28 @@ const struct SpriteTemplate gGuardRingSpriteTemplate =
     .images = NULL,
     .affineAnims = gGuardRingAffineAnimTable,
     .callback = AnimGuardRing,
+};
+
+const struct SpriteTemplate gCrushGripExplosionTemplate =
+{
+    .tileTag = ANIM_TAG_EXPLOSION,
+    .paletteTag = ANIM_TAG_EXPLOSION,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos
+};
+
+const struct SpriteTemplate gRoarOfTimeBombTemplate =
+{
+    .tileTag = ANIM_TAG_EXPLOSION,
+    .paletteTag = ANIM_TAG_WATER_GUN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos
 };
 
 #define sAmplitudeX  data[1]

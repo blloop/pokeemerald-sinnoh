@@ -44,7 +44,7 @@ static const union AffineAnimCmd *const sAffineAnims_Bonemerang[] =
     sAffineAnim_Bonemerang,
 };
 
-static const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
+const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
 {
     sAffineAnim_SpinningBone,
 };
@@ -135,6 +135,28 @@ const struct SpriteTemplate gDirtMoundSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDigDirtMound,
+};
+
+const struct SpriteTemplate gMudBombSplash =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSludgeBombHitParticle,
+};
+
+const struct SpriteTemplate gMudBombToss =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_MudSlapMud,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimThrowProjectile,
 };
 
 // Moves a bone projectile towards the target mon, which moves like

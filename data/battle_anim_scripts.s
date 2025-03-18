@@ -3235,6 +3235,26 @@ Move_SPITE:
 	clearmonbg ANIM_TARGET
 	end
 
+SetHighSpeedBg:
+	createvisualtask AnimTask_GetAttackerSide, 2
+	jumprettrue SetHighSpeedBgPlayer
+	fadetobg BG_HIGHSPEED_OPPONENT
+	goto SetHighSpeedBgFade
+SetHighSpeedBgPlayer:
+	fadetobg BG_HIGHSPEED_PLAYER
+SetHighSpeedBgFade:
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
+	waitbgfadein
+	return
+
+UnsetHighSpeedBg:
+	restorebg
+	waitbgfadeout
+	setarg 7, -1
+	waitbgfadein
+	return
+
 Move_MACH_PUNCH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
@@ -9267,6 +9287,32 @@ Move_ROCK_TOMB:
 	waitforvisualfinish
 	end
 
+SetBugBackground:
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 1, 0, 0, 4, RGB_BLACK
+	createvisualtask AnimTask_GetAttackerSide, 2
+	jumprettrue SetBugBackgroundPlayer
+	fadetobg BG_BUG_OPPONENT
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, 1536, 0, 0, -1
+	goto SetBugBackgroundFade
+SetBugBackgroundPlayer:
+	fadetobg BG_BUG_PLAYER
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, -1536, 0, 0, -1
+SetBugBackgroundFade:
+	delay 0
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 1, 0, 4, 4, RGB_BLACK
+	waitbgfadein
+	return
+
+UnSetBugBackground:
+	restorebg
+	waitbgfadeout
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 1, 0, 4, 0, RGB_BLACK
+	setarg 7, -1
+	waitbgfadein
+	return
+
 Move_SILVER_WIND:
 	loadspritegfx ANIM_TAG_SPARKLE_6
 	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
@@ -9723,7 +9769,7 @@ Move_MIRACLE_EYE:
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_BG, 1, 2, 0, 10, RGB_BLACK
 	call MindReaderEyeSpikeEffect
 	waitforvisualfinish
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
@@ -11128,7 +11174,7 @@ Move_BUG_BUZZ:
 	loadspritegfx ANIM_TAG_JAGGED_MUSIC_NOTE
 	loadspritegfx ANIM_TAG_THIN_RING
 	monbg ANIM_DEF_PARTNER
-	call SetBugBg
+	call SetBugBackground
 	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
@@ -11148,7 +11194,7 @@ Move_BUG_BUZZ:
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, -24, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
-	call UnsetBugBg
+	call UnSetBugBackground
 	end
 
 Move_DRAGON_PULSE:
@@ -11466,7 +11512,7 @@ Move_NASTY_PLOT:
 	delay 54
 	loopsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER, 16, 3
 	waitforvisualfinish
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	end
 
 Move_BULLET_PUNCH:
@@ -12387,7 +12433,7 @@ RockWrecker_1:
 	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 130, 0, 5, 20, -18, 14, 2
 	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 130, -5, 0, -20, -18, 14, 2
 	waitforvisualfinish
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	end
 RockWrecker_2:
 	loadspritegfx ANIM_TAG_ROCKS
@@ -12405,7 +12451,7 @@ RockWrecker_2:
 	createsprite gRockFragmentSpriteTemplate ANIM_ATTACKER, 130, 0, 5, 20, -18, 14, 2
 	createsprite gRockFragmentSpriteTemplate ANIM_ATTACKER, 130, -5, 0, -20, -18, 14, 2
 	waitforvisualfinish
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	end
 
 Move_CROSS_POISON:
@@ -12465,11 +12511,11 @@ Move_GUNK_SHOT:
 	blendoff
 	end
 GunkShotParticles:
-	createsprite gGunkShoParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, 16
-	createsprite gGunkShoParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, -16
+	createsprite gGunkShotParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, 16
+	createsprite gGunkShotParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, -16
 	delay 1
-	createsprite gGunkShoParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, 16
-	createsprite gGunkShoParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, -16
+	createsprite gGunkShotParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, 16
+	createsprite gGunkShotParticlesSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, -16
 	delay 1
 	return
 GunkShotImpact:
@@ -13317,7 +13363,7 @@ Move_DARK_VOID:
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0, 16
 	createsprite gSlideMonToOriginalPosPartnerSpriteTemplate, ANIM_ATTACKER, 2, ANIM_DEF_PARTNER, 0, 16
 	delay 32
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	visible ANIM_TARGET
 	visible ANIM_DEF_PARTNER
 	end
@@ -13509,7 +13555,7 @@ ShadowForceAttack:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	delay 1
-	call UnsetPsychicBg
+	call UnsetPsychicBackground
 	waitbgfadein
 	goto ShadowForceWaitEnd
 ShadowForceBg:
