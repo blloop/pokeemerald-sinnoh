@@ -4657,7 +4657,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WAKE_UP_SLAP] =
     {
-        .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
+        .effect = EFFECT_WAKE_UP_SLAP,
         .power = 60,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -4893,7 +4893,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_TRUMP_CARD] =
     {
         .effect = EFFECT_TRUMP_CARD,
-        .power = 1,
+        // .power = 1,
+        .power = 100,
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 5,
