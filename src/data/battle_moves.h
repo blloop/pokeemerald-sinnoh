@@ -250,7 +250,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FLY] =
     {
         .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 70,
+        .power = 90,
         .type = TYPE_FLYING,
         .accuracy = 95,
         .pp = 15,
@@ -341,7 +341,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_JUMP_KICK] =
     {
         .effect = EFFECT_RECOIL_IF_MISS,
-        .power = 70,
+        .power = 85,
         .type = TYPE_FIGHTING,
         .accuracy = 95,
         .pp = 25,
@@ -1043,7 +1043,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_PETAL_DANCE] =
     {
         .effect = EFFECT_RAMPAGE,
-        .power = 70,
+        .power = 90,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 20,
@@ -1186,7 +1186,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DIG] =
     {
         .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 60,
+        .power = 80,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .pp = 10,
@@ -1771,7 +1771,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_HI_JUMP_KICK] =
     {
         .effect = EFFECT_RECOIL_IF_MISS,
-        .power = 85,
+        .power = 100,
         .type = TYPE_FIGHTING,
         .accuracy = 90,
         .pp = 20,
@@ -2499,7 +2499,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ZAP_CANNON] =
     {
         .effect = EFFECT_PARALYZE_HIT,
-        .power = 100,
+        .power = 120,
         .type = TYPE_ELECTRIC,
         .accuracy = 50,
         .pp = 5,
@@ -2603,7 +2603,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_OUTRAGE] =
     {
         .effect = EFFECT_RAMPAGE,
-        .power = 90,
+        .power = 120,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 15,
@@ -3240,7 +3240,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ROCK_SMASH] =
     {
         .effect = EFFECT_DEFENSE_DOWN_HIT,
-        .power = 20,
+        .power = 40,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 15,
@@ -3786,7 +3786,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DIVE] =
     {
         .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 60,
+        .power = 80,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 10,
@@ -4527,7 +4527,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_LEAF_BLADE] =
     {
         .effect = EFFECT_HIGH_CRITICAL,
-        .power = 70,
+        .power = 90,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 15,
