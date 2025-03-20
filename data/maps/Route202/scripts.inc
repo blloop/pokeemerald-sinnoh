@@ -17,7 +17,6 @@ Route202_OnFrame:
 
 Route202_EventScript_HelperExclaim::
 	lockall
-	setvar VAR_ROUTE202_STATE, 1
 	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 10
@@ -121,7 +120,7 @@ Route202_EventScript_HelperAccept::
 	waitmovement 0
 	removeobject LOCALID_HELPER
 	setflag FLAG_HIDE_ROUTE_202_HELPER
-	setvar VAR_ROUTE202_STATE, 2
+	setvar VAR_ROUTE202_STATE, 1
 	delay 48
 	releaseall
 	end
