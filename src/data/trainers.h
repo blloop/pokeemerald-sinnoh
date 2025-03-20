@@ -3817,16 +3817,16 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Shelby5),
     },
 
-    [TRAINER_CALVIN_1] =
+    [TRAINER_TRISTAN_1] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("CALVIN"),
+        .trainerName = _("TRISTAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin1),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tristan1),
     },
 
     [TRAINER_BILLY] =
@@ -3937,52 +3937,52 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Dillon),
     },
 
-    [TRAINER_CALVIN_2] =
+    [TRAINER_TRISTAN_2] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("CALVIN"),
+        .trainerName = _("TRISTAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin2),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tristan2),
     },
 
-    [TRAINER_CALVIN_3] =
+    [TRAINER_TRISTAN_3] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("CALVIN"),
+        .trainerName = _("TRISTAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin3),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tristan3),
     },
 
-    [TRAINER_CALVIN_4] =
+    [TRAINER_TRISTAN_4] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("CALVIN"),
+        .trainerName = _("TRISTAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin4),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tristan4),
     },
 
-    [TRAINER_CALVIN_5] =
+    [TRAINER_TRISTAN_5] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("CALVIN"),
+        .trainerName = _("TRISTAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin5),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tristan5),
     },
 
     [TRAINER_EDDIE] =
@@ -3997,16 +3997,16 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Eddie),
     },
 
-    [TRAINER_ALLEN] =
+    [TRAINER_LOGAN] =
     {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
-        .trainerName = _("ALLEN"),
+        .trainerName = _("LOGAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Allen),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Logan),
     },
 
     [TRAINER_TIMMY] =
@@ -7237,16 +7237,16 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_MaxieMtChimney),
     },
 
-    [TRAINER_TIANA] =
+    [TRAINER_NATALIE] =
     {
         .trainerClass = TRAINER_CLASS_LASS,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LASS,
-        .trainerName = _("TIANA"),
+        .trainerName = _("NATALIE"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tiana),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Natalie),
     },
 
     [TRAINER_HALEY_1] =
