@@ -73,14 +73,14 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_STARYU]     = {{EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE}},
     [SPECIES_SCYTHER]    = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}},
     [SPECIES_MAGIKARP]   = {{EVO_LEVEL, 20, SPECIES_GYARADOS}},
+                            // FODO: Add custom evolution methods mossy/ice rock
     [SPECIES_EEVEE]      = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
                             {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
                             {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
-                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON}
-                            // FODO: Add custom evolution methods mossy/ice rock
+                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
                             {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
-                            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GLACEON},},
+                            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GLACEON}},
     [SPECIES_PORYGON]    = {{EVO_TRADE_ITEM, ITEM_UP_GRADE, SPECIES_PORYGON2}},
     [SPECIES_OMANYTE]    = {{EVO_LEVEL, 40, SPECIES_OMASTAR}},
     [SPECIES_KABUTO]     = {{EVO_LEVEL, 40, SPECIES_KABUTOPS}},
@@ -162,7 +162,10 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SPHEAL]     = {{EVO_LEVEL, 32, SPECIES_SEALEO}},
     [SPECIES_SEALEO]     = {{EVO_LEVEL, 44, SPECIES_WALREIN}},
     [SPECIES_CACNEA]     = {{EVO_LEVEL, 32, SPECIES_CACTURNE}},
-    [SPECIES_SNORUNT]    = {{EVO_LEVEL, 42, SPECIES_GLALIE}},
+    [SPECIES_SNORUNT]    = {{EVO_LEVEL, 42, SPECIES_GLALIE},
+                            // FODO: Add dawn stone item
+                            // FODO: Separate method by gender
+                            {EVO_ITEM, ITEM_SUN_STONE, SPECIES_FROSLASS}},
     [SPECIES_AZURILL]    = {{EVO_FRIENDSHIP, 0, SPECIES_MARILL}},
     [SPECIES_SPOINK]     = {{EVO_LEVEL, 32, SPECIES_GRUMPIG}},
     [SPECIES_MEDITITE]   = {{EVO_LEVEL, 37, SPECIES_MEDICHAM}},
@@ -208,12 +211,12 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CRANIDOS]    = {{EVO_LEVEL, 30, SPECIES_RAMPARDOS}},
     [SPECIES_SHIELDON]    = {{EVO_LEVEL, 30, SPECIES_BASTIODON}},
                             // FODO: Separate method by gender
-    [SPECIES_BURMYPLANT]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
-    [SPECIES_BURMYSANDY]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
-    [SPECIES_BURMYTRASH]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
-    [SPECIES_BURMYPLANT]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMPLANT}},
-    [SPECIES_BURMYSANDY]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMSANDY}},
-    [SPECIES_BURMYTRASH]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMTRASH}},
+    [SPECIES_BURMYPLANT]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMPLANT},
+                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+    [SPECIES_BURMYSANDY]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMSANDY},
+                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+    [SPECIES_BURMYTRASH]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMTRASH},
+                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
     [SPECIES_COMBEE]      = {{EVO_LEVEL, 20, SPECIES_VESPIQUEN}},
     [SPECIES_BUIZEL]      = {{EVO_LEVEL, 26, SPECIES_FLOATZEL}},
     [SPECIES_CHERUBI]     = {{EVO_LEVEL, 25, SPECIES_CHERRIM}},
@@ -277,7 +280,4 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_NOSEPASS]    = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_PROBOPASS}},
                             // FODO: Add new trade item reaper cloth
     [SPECIES_DUSCLOPS]    = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_DUSKNOIR}},
-                            // FODO: Add dawn stone item
-                            // FODO: Separate method by gender
-    [SPECIES_SNORUNT]     = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_FROSLASS}},
 };

@@ -252,7 +252,7 @@
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
 // FODO: Add new evolution methods
 
-#define EVOS_PER_MON 5
+#define EVOS_PER_MON 7
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0
