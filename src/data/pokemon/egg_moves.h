@@ -2121,6 +2121,8 @@ const u16 gEggMoves[] = {
               MOVE_MIST,
               MOVE_SEED_BOMB,
               MOVE_STOMP),
+              
+    // FODO: Add manaphy breeding method
 
     EGG_MOVES_TERMINATOR
 };

@@ -77,7 +77,10 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                             {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
                             {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
                             {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
-                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON}},
+                            {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON}
+                            // FODO: Add custom evolution methods mossy/ice rock
+                            {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
+                            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GLACEON},},
     [SPECIES_PORYGON]    = {{EVO_TRADE_ITEM, ITEM_UP_GRADE, SPECIES_PORYGON2}},
     [SPECIES_OMANYTE]    = {{EVO_LEVEL, 40, SPECIES_OMASTAR}},
     [SPECIES_KABUTO]     = {{EVO_LEVEL, 40, SPECIES_KABUTOPS}},
@@ -179,9 +182,102 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_LILEEP]     = {{EVO_LEVEL, 40, SPECIES_CRADILY}},
     [SPECIES_ANORITH]    = {{EVO_LEVEL, 40, SPECIES_ARMALDO}},
     [SPECIES_RALTS]      = {{EVO_LEVEL, 20, SPECIES_KIRLIA}},
-    [SPECIES_KIRLIA]     = {{EVO_LEVEL, 30, SPECIES_GARDEVOIR}},
+    [SPECIES_KIRLIA]     = {{EVO_LEVEL, 30, SPECIES_GARDEVOIR},
+                            // FODO: Add dawn stone item
+                            // FODO: Separate method by gender
+                            {EVO_ITEM, ITEM_SUN_STONE, SPECIES_GALLADE}},
     [SPECIES_BAGON]      = {{EVO_LEVEL, 30, SPECIES_SHELGON}},
     [SPECIES_SHELGON]    = {{EVO_LEVEL, 50, SPECIES_SALAMENCE}},
     [SPECIES_BELDUM]     = {{EVO_LEVEL, 20, SPECIES_METANG}},
     [SPECIES_METANG]     = {{EVO_LEVEL, 45, SPECIES_METAGROSS}},
+    [SPECIES_TURTWIG]     = {{EVO_LEVEL, 18, SPECIES_GROTLE}},
+    [SPECIES_GROTLE]      = {{EVO_LEVEL, 32, SPECIES_TORTERRA}},
+    [SPECIES_CHIMCHAR]    = {{EVO_LEVEL, 14, SPECIES_MONFERNO}},
+    [SPECIES_MONFERNO]    = {{EVO_LEVEL, 36, SPECIES_INFERNAPE}},
+    [SPECIES_PIPLUP]      = {{EVO_LEVEL, 16, SPECIES_PRINPLUP}},
+    [SPECIES_PRINPLUP]    = {{EVO_LEVEL, 36, SPECIES_EMPOLEON}},
+    [SPECIES_STARLY]      = {{EVO_LEVEL, 14, SPECIES_STARAVIA}},
+    [SPECIES_STARAVIA]    = {{EVO_LEVEL, 34, SPECIES_STARAPTOR}},
+    [SPECIES_BIDOOF]      = {{EVO_LEVEL, 15, SPECIES_BIBAREL}},
+    [SPECIES_KRICKETOT]   = {{EVO_LEVEL, 10, SPECIES_KRICKETUNE}},
+    [SPECIES_SHINX]       = {{EVO_LEVEL, 15, SPECIES_GLALIE}},
+    [SPECIES_LUXIO]       = {{EVO_LEVEL, 30, SPECIES_LUXIO}},
+    [SPECIES_BUDEW]       = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_ROSELIA}},
+                            // FODO: Add shiny stone item
+    [SPECIES_ROSELIA]     = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_ROSERADE}},
+    [SPECIES_CRANIDOS]    = {{EVO_LEVEL, 30, SPECIES_RAMPARDOS}},
+    [SPECIES_SHIELDON]    = {{EVO_LEVEL, 30, SPECIES_BASTIODON}},
+                            // FODO: Separate method by gender
+    [SPECIES_BURMYPLANT]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+    [SPECIES_BURMYSANDY]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+    [SPECIES_BURMYTRASH]  = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+    [SPECIES_BURMYPLANT]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMPLANT}},
+    [SPECIES_BURMYSANDY]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMSANDY}},
+    [SPECIES_BURMYTRASH]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMTRASH}},
+    [SPECIES_COMBEE]      = {{EVO_LEVEL, 20, SPECIES_VESPIQUEN}},
+    [SPECIES_BUIZEL]      = {{EVO_LEVEL, 26, SPECIES_FLOATZEL}},
+    [SPECIES_CHERUBI]     = {{EVO_LEVEL, 25, SPECIES_CHERRIM}},
+    [SPECIES_SHELLOSWEST] = {{EVO_LEVEL, 30, SPECIES_GASTRODONWEST}},
+    [SPECIES_SHELLOSEAST] = {{EVO_LEVEL, 30, SPECIES_GASTRODONEAST}},
+                            // FODO: Add custom move method DOUBLE_HIT
+    [SPECIES_AIPOM]       = {{EVO_LEVEL, 33, SPECIES_AMBIPOM}},
+    [SPECIES_DRIFLOON]    = {{EVO_LEVEL, 28, SPECIES_DRIFBLIM}},
+    [SPECIES_BUNEARY]     = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_LOPUNNY}},
+                            // FODO: Add dusk stone item x2
+    [SPECIES_MISDREAVUS]  = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_MISMAGIUS}},
+    [SPECIES_MURKROW]     = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_HONCHKROW}},
+    [SPECIES_GLAMEOW]     = {{EVO_LEVEL, 38, SPECIES_PURUGLY}},
+    [SPECIES_CHINGLING]   = {{EVO_FRIENDSHIP_NIGHT, 0, SPECIES_CHIMECHO}},
+    [SPECIES_STUNKY]      = {{EVO_LEVEL, 34, SPECIES_SKUNTANK}},
+    [SPECIES_BRONZOR]     = {{EVO_LEVEL, 33, SPECIES_BRONZONG}},
+                            // FODO: Add custom move method MIMIC
+    [SPECIES_BONSLY]      = {{EVO_LEVEL, 33, SPECIES_SUDOWOODO}},
+                            // FODO: Add custom move method MIMIC
+    [SPECIES_MIMEJR]      = {{EVO_LEVEL, 33, SPECIES_MR_MIME}},
+                            // FODO: Add oval stone day HOLD method
+    [SPECIES_HAPPINY]     = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_CHANSEY}},
+    [SPECIES_GIBLE]       = {{EVO_LEVEL, 24, SPECIES_GABITE}},
+    [SPECIES_GABITE]      = {{EVO_LEVEL, 48, SPECIES_GARCHOMP}},
+    [SPECIES_MUNCHLAX]    = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_SNORLAX},
+                             {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_SNORLAX}},
+    [SPECIES_RIOLU]       = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_LUCARIO}},
+    [SPECIES_HIPPOPOTAS]  = {{EVO_LEVEL, 34, SPECIES_HIPPOWDON}},
+    [SPECIES_HIPPOPOTASF] = {{EVO_LEVEL, 34, SPECIES_HIPPOWDONF}},
+    [SPECIES_SKORUPI]     = {{EVO_LEVEL, 40, SPECIES_DRAPION}},
+    [SPECIES_CROAGUNK]    = {{EVO_LEVEL, 37, SPECIES_TOXICROAK}},
+    [SPECIES_FINNEON]     = {{EVO_LEVEL, 31, SPECIES_LUMINEON}},
+                            // FODO: Add custom remoraid method
+    [SPECIES_MANTYKE]     = {{EVO_FRIENDSHIP_DAY, 0, SPECIES_MANTINE}},
+    [SPECIES_SNOVER]      = {{EVO_LEVEL, 40, SPECIES_ABOMASNOW}},
+                            // FODO: Add custom razor claw night HOLD method
+    [SPECIES_SNEASEL]     = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_WEAVILE}},
+                            // FODO: Add magnetic area method
+    [SPECIES_MAGNETON]    = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_MAGNEZONE}},
+                            // FODO: Add custom move method ROLLOUT
+    [SPECIES_LICKITUNG]   = {{EVO_LEVEL, 33, SPECIES_LICKILICKY}},
+                            // FODO: Add new trade item protector
+    [SPECIES_RHYDON]      = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_RHYPERIOR}},
+                            // FODO: Add custom move method ANCIENT_POWER
+    [SPECIES_TANGELA]     = {{EVO_LEVEL, 33, SPECIES_TANGROWTH}},
+                            // FODO: Add new trade item electirizer
+    [SPECIES_ELECTABUZZ]  = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_ELECTIVIRE}},
+                            // FODO: Add new trade item magmarizer
+    [SPECIES_MAGMAR]      = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_MAGMORTAR}},
+                            // FODO: Add shiny stone item
+    [SPECIES_TOGETIC]     = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_TOGEKISS}},
+                            // FODO: Add custom move method ANCIENT_POWER
+    [SPECIES_YANMA]       = {{EVO_LEVEL, 33, SPECIES_YANMEGA}},
+                            // FODO: Add custom razor fang night HOLD method
+    [SPECIES_GLIGAR]      = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_GLISCOR}},
+                            // FODO: Add custom move method ANCIENT_POWER
+    [SPECIES_PILOSWINE]   = {{EVO_LEVEL, 33, SPECIES_MAMOSWINE}},
+                            // FODO: Add new trade item dubious disc
+    [SPECIES_PORYGON2]    = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_PORYGONZ}},
+                            // FODO: Add magnetic area method
+    [SPECIES_NOSEPASS]    = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_PROBOPASS}},
+                            // FODO: Add new trade item reaper cloth
+    [SPECIES_DUSCLOPS]    = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_DUSKNOIR}},
+                            // FODO: Add dawn stone item
+                            // FODO: Separate method by gender
+    [SPECIES_SNORUNT]     = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_FROSLASS}},
 };
