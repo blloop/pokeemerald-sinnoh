@@ -4111,7 +4111,8 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_FLASH] =
+    // FODO: Update HM Flash to Defog
+    [ITEM_HM_DEFOG] =
     {
         .name = _("HM05"),
         .itemId = ITEM_HM05,
@@ -4147,7 +4148,8 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_DIVE] =
+    // FODO: Update HM Dive to Rock Climb
+    [ITEM_HM_ROCK_CLIMB] =
     {
         .name = _("HM08"),
         .itemId = ITEM_HM08,

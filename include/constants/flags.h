@@ -126,7 +126,7 @@
 #define FLAG_RECEIVED_HM_STRENGTH            0x6A
 #define FLAG_RECEIVED_HM_ROCK_SMASH          0x6B
 #define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
-#define FLAG_RECEIVED_HM_FLASH               0x6D
+#define FLAG_RECEIVED_HM_DEFOG               0x6D
 #define FLAG_RECEIVED_HM_FLY                 0x6E
 #define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT  0x6F
 #define FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE  0x70
@@ -142,7 +142,7 @@
 #define FLAG_LANDMARK_MIRAGE_TOWER           0x78
 #define FLAG_RECEIVED_TM_BRICK_BREAK         0x79
 #define FLAG_RECEIVED_HM_SURF                0x7A
-#define FLAG_RECEIVED_HM_DIVE                0x7B
+#define FLAG_RECEIVED_HM_ROCK_CLIMB          0x7B
 #define FLAG_REGISTER_RIVAL_POKENAV          0x7C
 #define FLAG_DEFEATED_RIVAL_ROUTE_104        0x7D
 #define FLAG_DEFEATED_WALLY_VICTORY_ROAD     0x7E
