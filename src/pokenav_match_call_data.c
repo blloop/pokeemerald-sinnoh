@@ -341,6 +341,7 @@ static const struct MatchCallStructNPC sScottMatchCallHeader =
 {
     .type = 0,
     .mapSec = MAPSEC_NONE,
+    // TODO: Flag unused
     .flag = FLAG_ENABLE_SCOTT_MATCH_CALL,
     .desc = gText_ScottMatchCallDesc,
     .name = gText_ScottMatchCallName,
