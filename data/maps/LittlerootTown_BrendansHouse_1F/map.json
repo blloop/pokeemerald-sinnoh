@@ -71,7 +71,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "1",
+      "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_Trigger_Exit"
     },
     {
@@ -80,7 +80,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "1",
+      "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_Trigger_Exit"
     }
   ],

@@ -14,8 +14,8 @@ LittlerootTown_MaysHouse_1F_OnFrame:
 
 LittlerootTown_MaysHouse_1F_EventScript_Mom::
 
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_RunningBack
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_MaysHouse_1F_EventScript_MomAlternate
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_MaysHouse_1F_EventScript_RunningBack
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_MomAlternate
 	@ goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_BecomeFriends
 	goto LittlerootTown_MaysHouse_1F_EventScript_BecomeFriends
 	end

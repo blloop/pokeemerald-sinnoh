@@ -8,21 +8,21 @@ LittlerootTown_BrendansHouse_1F_MapScripts::
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_OnTransition:
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_MoveMom
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_MoveMom
 	end
 
 LittlerootTown_BrendansHouse_1F_OnFrame:
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomMessage
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_MomMessage
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_OnWarp:
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_TurnPlayerNorth
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_BrendansHouse_1F_TurnPlayerNorth
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	lock
-	setvar VAR_LITTLEROOT_INTRO_STATE, 1
+	setvar VAR_LITTLEROOT_INTRO_STATE, 2
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
@@ -36,7 +36,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomMessage::
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_1
 	waitmovement 0
 	delay 10
-	msgbox LittlerootTown_BrendansHouse_1F_Text_Emergency, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_Hurry, MSGBOX_DEFAULT
 	closemessage
 	delay 60
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2
@@ -65,7 +65,7 @@ LittlerootTown_BrendansHouse_1F_Movement_MomTalk_2:
 
 LittlerootTown_BrendansHouse_1F_Trigger_Exit::
 	lock
-	setvar VAR_LITTLEROOT_INTRO_STATE, 2
+	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 10
@@ -87,7 +87,7 @@ LittlerootTown_BrendansHouse_1F_TurnPlayerNorth::
 
 LittlerootTown_BrendansHouse_1F_EventScript_LakeReturn::
 	lock
-	setvar VAR_LITTLEROOT_INTRO_STATE, 6
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
 	delay 48
 	delay 48
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_MomKitchen
@@ -141,7 +141,7 @@ LittlerootTown_BrendansHouse_1F_Movement_PlayerKitchen:
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_Mom::
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_Impatient
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_Impatient
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_BrendansHouse_1F_EventScript_MomAlternate
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 2, LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck
@@ -170,7 +170,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_RunningShoesManual::
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MomByeCheck::
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_BrendansHouse_1F_EventScript_MomBye
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 9, LittlerootTown_BrendansHouse_1F_EventScript_MomBye
 	goto LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty
 	return
 
@@ -181,7 +181,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomHealsParty::
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure
 	release
 	end
 
@@ -231,7 +231,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MomAdventure::
 	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomNorthLeave
 	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_BrendansHouse_1F_EventScript_RivalMomWestSouthLeave
 	removeobject LOCALID_RIVALMOM
-	setvar VAR_LITTLEROOT_INTRO_STATE, 8
+	setvar VAR_LITTLEROOT_INTRO_STATE, 9
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_RivalMomEnter:
@@ -366,19 +366,21 @@ LittlerootTown_BrendansHouse_1F_EventScript_Fridge::
 	msgbox LittlerootTown_BrendansHouse_1F_Text_Fridge, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_1F_Text_Emergency:
+LittlerootTown_BrendansHouse_1F_Text_Hurry:
 	.string "Mom: {PLAYER}!\p"
-	.string "{RIVAL} came calling for you a little\n"
+	.string "{RIVAL} already left.\n"
 	.string "while ago.\p"
-	.string "I don't know what it was about, but he\n"
-	.string "said it was an emergency.$"
+	.string "I don't know what it was about, but\n"
+	.string "he sure was in a hurry!$"
 
 LittlerootTown_BrendansHouse_1F_Text_TallGrass:
-	.string "Mom: Oh yes! {PLAYER}!\p"
+	.string "Mom: Oh yes!\n"
+	.string "{PLAYER}!\p"
 	.string "Don't go into the tall grass. Wild\n"
 	.string "Pokémon might attack you.\p"
 	.string "It would be OK if you had your own\n"
-	.string "Pokémon, but you don't so...$"
+	.string "Pokémon, but you don't so...\p"
+	.string "Well, take care, sweetie!$"
 
 LittlerootTown_BrendansHouse_1F_Text_Impatient:
 	.string "Mom: You know how impatient\n"

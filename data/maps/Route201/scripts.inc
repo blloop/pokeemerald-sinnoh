@@ -235,7 +235,7 @@ Route201_EventScript_Professor2::
 	removeobject LOCALID_HELPER
 	msgbox Route201_Text_RivalLeave, MSGBOX_SIGN
 	delay 48
-	setvar VAR_LITTLEROOT_INTRO_STATE, 5
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
 	fadedefaultbgm
 	fadescreen FADE_TO_BLACK

@@ -101,7 +101,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	waitmovement 0
 	removeobject LOCALID_HELPER
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
-	setvar VAR_LITTLEROOT_INTRO_STATE, 7
+	setvar VAR_LITTLEROOT_INTRO_STATE, 8
 	releaseall
 	end
 	
