@@ -217,6 +217,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                              {EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
     [SPECIES_BURMYTRASH]  = {{EVO_LEVEL, 20, SPECIES_WORMADAMTRASH},
                              {EVO_FRIENDSHIP_DAY, 0, SPECIES_MOTHIM}},
+                            // FODO: Separate method by gender
     [SPECIES_COMBEE]      = {{EVO_LEVEL, 20, SPECIES_VESPIQUEN}},
     [SPECIES_BUIZEL]      = {{EVO_LEVEL, 26, SPECIES_FLOATZEL}},
     [SPECIES_CHERUBI]     = {{EVO_LEVEL, 25, SPECIES_CHERRIM}},
