@@ -2265,7 +2265,9 @@ static void AnimTask_Splash_Step(u8 taskId)
             task->data[4] -= 2;
         }
         else
+        {
             task->data[1]++;
+        }
         break;
     case 3:
         if (!RunAffineAnimFromTaskData(task))
@@ -3012,7 +3014,9 @@ static void AnimTask_SpeedDust_Step(u8 taskId)
                     task->data[8] = 1;
                 }
                 else
+                {
                     task->data[8] = 2;
+                }
             }
         }
         break;
