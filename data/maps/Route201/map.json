@@ -80,7 +80,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route201_EventScript_BoyTalk",
-      "flag": "0"
+      "flag": "FLAG_HIDE_ROUTE_201_MAN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
@@ -204,7 +204,7 @@
       "y": 11,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
-      "var_value": "1",
+      "var_value": "4",
       "script": "Route201_EventScript_FollowGrass"
     },
     {
@@ -213,7 +213,7 @@
       "y": 12,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
-      "var_value": "1",
+      "var_value": "4",
       "script": "Route201_EventScript_FollowGrass"
     },
     {
@@ -222,7 +222,7 @@
       "y": 13,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
-      "var_value": "1",
+      "var_value": "4",
       "script": "Route201_EventScript_FollowGrass"
     },
     {

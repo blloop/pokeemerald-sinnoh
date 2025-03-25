@@ -19,7 +19,7 @@ LittlerootTown_MapScripts::
 	@ 3: Talked to Mom twice
 	@ 4: Bumped into Rival
 	@ 5: Spoken to Rival in their room
-	@ 6: Returned from lake event
+	@ 6: Obtained first Pokémon
 	@ 7: Received Running Shoes
 	@ 8: Received Pokédex
 	@ 9: Received Parcel

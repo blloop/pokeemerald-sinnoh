@@ -8,10 +8,10 @@ Route201_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_ROUTE201_STATE
-	@ 1: Prior to first lake event
-	@ 2: Post first lake event
-	@ 3: Returned from first lake event
-	@ 4: Post professor event
+	@ 1: Prior to obtaining Pokémon
+	@ 2: Entered rival running scene
+	@ 3: Obtained first Pokémon
+	@ 4: Entered lake event
 	@ 5: Received Potion sample
 
 Route201_OnTransition:
@@ -51,14 +51,38 @@ Route201_EventScript_RivalSee::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	msgbox Route201_Text_TooSlow, MSGBOX_SIGN
 	call_if_eq VAR_0x8004, 1, Route201_EventScript_RivalShift1
 	call_if_eq VAR_0x8004, 2, Route201_EventScript_RivalShift2
 	call_if_eq VAR_0x8004, 3, Route201_EventScript_RivalShift3
 	call_if_eq VAR_0x8004, 4, Route201_EventScript_RivalShift4
-	msgbox Route201_Text_RivalMeet, MSGBOX_SIGN
-	setflag FLAG_HIDE_ROUTE_201_RIVAL
-	loadword 0 Route201_EventScript_Rival
-	setfollower LOCALID_RIVAL 0x100
+	waitmovement 0
+	msgbox Route201_Text_GetMoving, MSGBOX_SIGN
+	call_if_eq VAR_0x8004, 1, Route201_EventScript_RivalGrass1
+	call_if_eq VAR_0x8004, 2, Route201_EventScript_RivalGrass2
+	call_if_eq VAR_0x8004, 3, Route201_EventScript_RivalGrass3
+	call_if_eq VAR_0x8004, 4, Route201_EventScript_RivalGrass4
+	msgbox Route201_Text_DoNotGo, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkLeft
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route201_Text_ScootOver, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_RunWatch
+	applymovement LOCALID_RIVAL, Route201_Movement_RunPrep
+	waitmovement 0
+	msgbox Route201_Text_HereGoes, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Route201_Movement_RunGrass
+	waitmovement 0
+	msgbox Route201_Text_HoldIt, MSGBOX_SIGN
+	@ setflag FLAG_HIDE_ROUTE_201_RIVAL
+	@ loadword 0 Route201_EventScript_Rival
+	@ setfollower LOCALID_RIVAL 0x100
+
+	@ clearflag FLAG_HIDE_ROUTE_201_MAN
 	release
 	end
 
@@ -67,24 +91,13 @@ Route201_EventScript_RivalShift1::
 	waitmovement 0
 	return
 
-Route201_Movement_RivalShift1:
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
 Route201_EventScript_RivalShift2::
 	applymovement LOCALID_RIVAL, Route201_Movement_RivalShift2
 	waitmovement 0
 	return
 
-Route201_Movement_RivalShift2:
-	walk_left
-	walk_down
-	step_end
-
 Route201_EventScript_RivalShift3::
-	applymovement LOCALID_RIVAL, Common_Movement_WalkDown
+	applymovement LOCALID_RIVAL, Route201_Movement_RunDown
 	waitmovement 0
 	return
 
@@ -93,14 +106,139 @@ Route201_EventScript_RivalShift4::
 	waitmovement 0
 	return
 
-Route201_Movement_RivalShift4:
-	walk_right
-	walk_down
-	step_end
-
 Route201_EventScript_RouteSign::
 	msgbox Route201_Text_RouteSign, MSGBOX_SIGN
 	end
+
+Route201_Movement_RunDown:
+	walk_fast_down
+	step_end
+
+Route201_Movement_RivalShift1:
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	step_end
+
+Route201_Movement_RivalShift2:
+	walk_fast_left
+	walk_fast_down
+	step_end
+
+Route201_Movement_RivalShift4:
+	walk_fast_right
+	walk_fast_down
+	step_end
+
+Route201_EventScript_RivalGrass1::
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_PlayerGrass1
+	applymovement LOCALID_RIVAL, Route201_Movement_RivalGrass1
+	waitmovement 0
+	return
+
+Route201_EventScript_RivalGrass2::
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_PlayerGrass2
+	applymovement LOCALID_RIVAL, Route201_Movement_RivalGrass2
+	waitmovement 0
+	return
+
+Route201_EventScript_RivalGrass3::
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_PlayerGrass3
+	applymovement LOCALID_RIVAL, Route201_Movement_RivalGrass3
+	waitmovement 0
+	return
+
+Route201_EventScript_RivalGrass4::
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_PlayerGrass4
+	applymovement LOCALID_RIVAL, Route201_Movement_RivalGrass4
+	waitmovement 0
+	return
+
+Route201_Movement_RivalGrass1:
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_left
+	step_end
+
+Route201_Movement_RivalGrass2:
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_left
+	step_end
+
+Route201_Movement_RivalGrass3:
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_left
+	step_end
+
+Route201_Movement_RivalGrass4:
+	walk_up
+	walk_right
+	walk_up
+	walk_right
+	walk_in_place_left
+	step_end
+
+Route201_Movement_PlayerGrass1:
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+Route201_Movement_PlayerGrass2:
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+Route201_Movement_PlayerGrass3:
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	step_end
+
+Route201_Movement_PlayerGrass4:
+	walk_up
+	walk_up
+	walk_right
+	step_end
+
+Route201_Movement_RunWatch:
+	delay_16
+	walk_in_place_left
+	step_end
+
+Route201_Movement_RunPrep:
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_right
+	step_end
+
+Route201_Movement_RunGrass:
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
 
 Route201_EventScript_Rival::
 	facefollower
@@ -397,17 +535,41 @@ Route201_Text_RouteSign:
 	.string "{DOWN_ARROW} R.201\n"
 	.string "   Twinleaf Town$"
 
-Route201_Text_RivalMeet:
-	.string "{RIVAL}: Hey you saw that news\n"
-	.string "report that was on TV, right?\p"
-	.string "You know, “Search for the Red\n"
-	.string "GYARADOS! The mysterious appearance\l"
-	.string "of the furious Pokémon in a lake!“\p"
-	.string "That show got me to thinking.\p"
-	.string "I'll bet our local lake has a Pokémon\n"
-	.string "like that in it, too!\p"
-	.string "So that's what we're gonna do.\n"
-	.string "We'll go find a Pokémon like that!$"
+Route201_Text_TooSlow:
+	.string "Too slow!$"
+
+Route201_Text_GetMoving:
+	.string "{RIVAL}: All right!\n"
+	.string "Let's get moving to Prof. Rowan's lab.$"
+
+Route201_Text_DoNotGo:
+	.string "{RIVAL}: ...\n"
+	.string "...\p"
+	.string "What?\n"
+	.string "Don't go into the grass, right?\l"
+	.string "No worries! No problem!\p"
+	.string "It doesn't matter that we don't have\n"
+	.string "any Pokémon.\p"
+	.string "Trust me on this one.\n"
+	.string "I've got an idea!\p"
+	.string "Now listen. You know how wild Pokémon\n"
+	.string "jump out when you go into tall grass?$"
+
+Route201_Text_ScootOver:
+	.string "So, what you do is, you scoot over to\n"
+	.string "the next patch of grass before any\l"
+	.string "wild Pokémon can appear!\p"
+	.string "If we just keep dashing, we can get to\n"
+	.string "Sandgem Town without running into\l"
+	.string "wild Pokémon!\p"
+	.string "OK, stick with me!$"
+
+Route201_Text_HereGoes:
+	.string "OK, here goes!\p"
+	.string "On your marks...$"
+
+Route201_Text_HoldIt:
+	.string "Hold it!$"
 
 Route201_Text_RivalTalk1:
 	.string "{RIVAL}: Hey, if we run into a\n"
