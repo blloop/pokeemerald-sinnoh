@@ -38,7 +38,6 @@ LakefrontVerity_EventScript_ExitLake::
 	setvar VAR_FOLLOWER_TEXT, 0
 	setvar VAR_ROUTE201_STATE, 3
 	setflag FLAG_HIDE_VERITY_LAKEFRONT_RIVAL
-	clearflag FLAG_HIDE_ROUTE_201_PROF
 	loadword 0 LakefrontVerity_EventScript_Rival
 	setfollower LOCALID_RIVAL 0x100
 	release

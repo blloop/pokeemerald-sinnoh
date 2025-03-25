@@ -1,6 +1,7 @@
 .set LOCALID_RIVAL, 1
 .set LOCALID_PROF, 2
 .set LOCALID_HELPER, 3
+.set LOCALID_BRIEFCASE, 8
 
 Route201_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route201_OnTransition
@@ -69,22 +70,27 @@ Route201_EventScript_RivalSee::
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route201_Text_ScootOver, MSGBOX_SIGN
-	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_RunWatch
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_RunWatch1
 	applymovement LOCALID_RIVAL, Route201_Movement_RunPrep
 	waitmovement 0
 	msgbox Route201_Text_HereGoes, MSGBOX_SIGN
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Route201_Movement_RunWatch2
 	applymovement LOCALID_RIVAL, Route201_Movement_RunGrass
 	waitmovement 0
 	msgbox Route201_Text_HoldIt, MSGBOX_SIGN
-	@ setflag FLAG_HIDE_ROUTE_201_RIVAL
-	@ loadword 0 Route201_EventScript_Rival
-	@ setfollower LOCALID_RIVAL 0x100
-
-	@ clearflag FLAG_HIDE_ROUTE_201_MAN
-	release
-	end
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	goto Route201_EventScript_ProfessorMeet
 
 Route201_EventScript_RivalShift1::
 	applymovement LOCALID_RIVAL, Route201_Movement_RivalShift1
@@ -222,9 +228,14 @@ Route201_Movement_PlayerGrass4:
 	walk_right
 	step_end
 
-Route201_Movement_RunWatch:
+Route201_Movement_RunWatch1:
 	delay_16
 	walk_in_place_left
+	step_end
+
+Route201_Movement_RunWatch2:
+	delay_16
+	walk_in_place_up
 	step_end
 
 Route201_Movement_RunPrep:
@@ -238,6 +249,164 @@ Route201_Movement_RunGrass:
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
+	step_end
+
+
+Route201_EventScript_ProfessorMeet::
+	addobject LOCALID_PROF
+	applymovement LOCALID_PROF, Route201_Movement_ProfessorEnter
+	waitmovement 0
+	msgbox Route201_Text_DoNotSeem, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route201_Text_ThisOldGuy, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_PROF, Route201_Movement_ProfessorWalkAway
+	waitmovement 0
+	msgbox Route201_Text_TheyTried, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_PROF, Route201_Movement_ProfessorWalkBack
+	waitmovement 0
+	goto Route201_EventScript_TrulyLove
+
+Route201_EventScript_TrulyLove::
+	msgbox Route201_Text_TrulyLove, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route201_EventScript_TrulyFail
+	goto Route201_EventScript_TrulyPass
+
+Route201_EventScript_TrulyFail::
+	applymovement LOCALID_RIVAL, Common_Movement_FaceDown
+	waitmovement 0
+	msgbox Route201_Text_HoldUp, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route201_Text_DidNotCatch, MSGBOX_DEFAULT
+	goto Route201_EventScript_TrulyLove
+
+Route201_EventScript_TrulyPass::
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route201_Text_MeToo, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	goto Route201_EventScript_HundredTimes
+
+Route201_EventScript_HundredTimes::
+	msgbox Route201_Text_HundredTimes, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
+	msgbox Route201_Text_RightPlayer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route201_EventScript_HundredFail
+	goto Route201_EventScript_HundredPass
+
+Route201_EventScript_HundredFail::
+	msgbox Route201_Text_OldJoke, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	goto Route201_EventScript_HundredTimes
+
+Route201_EventScript_HundredPass::
+	msgbox Route201_Text_RecklessKids, MSGBOX_DEFAULT
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route201_Text_FriendHere, MSGBOX_SIGN
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	applymovement LOCALID_PROF, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	applymovement LOCALID_PROF, Common_Movement_Delay48
+	waitmovement 0
+	addobject LOCALID_HELPER
+	applymovement LOCALID_HELPER, Route201_Movement_HelperEnter
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route201_EventScript_LeftBriefcaseDawn
+	call_if_eq VAR_RESULT, FEMALE, Route201_EventScript_LeftBriefcaseLucas
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	addobject LOCALID_BRIEFCASE
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route201_EventScript_SomethingWrongDawn
+	call_if_eq VAR_RESULT, FEMALE, Route201_EventScript_SomethingWrongLucas
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route201_Text_ChooseYour, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	msgbox Route201_Text_StraightFace, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route201_Text_SomeClass, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
+	waitmovement 0
+	@ setflag FLAG_HIDE_ROUTE_201_RIVAL
+	@ loadword 0 Route201_EventScript_Rival
+	@ setfollower LOCALID_RIVAL 0x100
+
+	@ clearflag FLAG_HIDE_ROUTE_201_MAN
+	release
+	end
+
+Route201_EventScript_LeftBriefcaseDawn::
+	msgbox Route201_Text_LeftBriefcaseDawn, MSGBOX_SIGN
+	return
+
+Route201_EventScript_LeftBriefcaseLucas::
+	msgbox Route201_Text_LeftBriefcaseLucas, MSGBOX_SIGN
+	return
+	
+Route201_EventScript_SomethingWrongDawn::
+	msgbox Route201_Text_SomethingWrongDawn, MSGBOX_DEFAULT
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route201_Text_HardReplaceDawn, MSGBOX_SIGN
+	return
+
+	
+Route201_EventScript_SomethingWrongLucas::
+	msgbox Route201_Text_SomethingWrongLucas, MSGBOX_DEFAULT
+	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route201_Text_HardReplaceLucas, MSGBOX_SIGN
+	return
+
+Route201_Movement_ProfessorEnter:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+Route201_Movement_ProfessorWalkAway:
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+Route201_Movement_ProfessorWalkBack:
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+Route201_Movement_HelperEnter:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Route201_EventScript_Rival::
@@ -326,7 +495,6 @@ Route201_EventScript_ProfessorB::
 
 Route201_EventScript_Professor1::
 	setvar VAR_ROUTE201_STATE, 4
-	setflag FLAG_HIDE_ROUTE_201_PROF
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -570,6 +738,167 @@ Route201_Text_HereGoes:
 
 Route201_Text_HoldIt:
 	.string "Hold it!$"
+
+Route201_Text_DoNotSeem:
+	.string "Professor: You two don't seem to have\n"
+	.string "any Pokémon between you?\p"
+	.string "Then, what is the meaning of going into\n"
+	.string "the tall grass?!\p"
+	.string "{RIVAL}: ...\n"
+	.string "...\p"
+	.string "Professor: ...\n"
+	.string "...\p"
+	.string "...\n"
+	.string "...$"
+
+Route201_Text_ThisOldGuy:
+	.string "{RIVAL}: Hey, {PLAYER}.\n"
+	.string "This old guy...\p"
+	.string "It's Prof. Rowan, isn't it?\n"
+	.string "What's he doing here...?$"
+
+Route201_Text_TheyTried:
+	.string "Professor: ...\n"
+	.string "...\p"
+	.string "They tried to go into the tall grass\n"
+	.string "because they wanted Pokémon...\p"
+	.string "Hmm...\n"
+	.string "What to do...?\p"
+	.string "Their world would surely change if\n"
+	.string "they were to meet Pokémon...\p"
+	.string "Is it right for me to put them on that\n"
+	.string "path...?\p"
+	.string "...\n"
+	.string "...$"
+
+Route201_Text_TrulyLove:
+	.string "You two.\n"
+	.string "You truly love Pokémon, do you?$"
+
+Route201_Text_HoldUp:
+	.string "{RIVAL}: Whoa, hold up!\n"
+	.string "You're not making any sense here!$"
+
+Route201_Text_DidNotCatch:
+	.string "Professor: Er-hem!\p"
+	.string "I didn't quite catch that, so I will\n"
+	.string "ask you again.$"
+
+Route201_Text_MeToo:
+	.string "{RIVAL}: Me, too!\n"
+	.string "I love Pokémon, too!\p"
+	.string "Professor: I will ask you once again.\p"
+	.string "You two.\n"
+	.string "You truly love Pokémon, do you?$"
+
+Route201_Text_HundredTimes:
+	.string "{RIVAL}: What?!\n"
+	.string "You can ask a hundred times!\l"
+	.string "The answer will never change!\p"
+	.string "We'll both answer a hundred times,\n"
+	.string "we love Pokémon!$"
+
+Route201_Text_RightPlayer:
+	.string "Right, {PLAYER}?$"
+
+Route201_Text_OldJoke:
+	.string "{RIVAL}: ...\n"
+	.string "That joke's getting old!$"
+
+Route201_Text_RecklessKids:
+	.string "Professor: ...A pair of reckless kids\n"
+	.string "who foolishly try to enter tall grass\l"
+	.string "without Pokémon of their own...?\p"
+	.string "It worries me what people like that\n"
+	.string "would do with Pokémon.$"
+
+Route201_Text_FriendHere:
+	.string "{RIVAL}: ...Uh..\n"
+	.string "Well, I, uh...\p"
+	.string "...\n"
+	.string "...\p"
+	.string "Well, then forget about me, but give\n"
+	.string "a Pokémon to my friend here!\p"
+	.string "I mean, it was me who tried to go into\n"
+	.string "the tall grass and all...\p"
+	.string "Professor: !\p"
+	.string "How big of you...\p"
+	.string "Ver well, then!\n"
+	.string "I will entrust you two with Pokémon!\p"
+	.string "I apologize for putting you through\n"
+	.string "that exercise.\p"
+	.string "However!\p"
+	.string "You must promise me that you will never\n"
+	.string "recklessly endanger yourselves again.\p"
+	.string "Now, then...\p"
+	.string "Hm?\n"
+	.string "Now, where...?$"
+
+Route201_Text_LeftBriefcaseDawn:
+	.string "Dawn: Professor Rowan.\p"
+	.string "You left your briefcase at the lake!$"
+
+Route201_Text_LeftBriefcaseLucas:
+	.string "Lucas: Professor Rowan.\p"
+	.string "You left your briefcase at the lake!$"
+
+Route201_Text_SomethingWrongDawn:
+	.string "Oh?\n"
+	.string "Is something wrong here?\p"
+	.string "Rowan: Ah! There it is!\n"
+	.string "Dawn, nice work.\p"
+	.string "What I was about to do was to entrust\n"
+	.string "these two with their own Pokémon.$"
+
+Route201_Text_SomethingWrongLucas:
+	.string "Oh?\n"
+	.string "Is something wrong here?\p"
+	.string "Rowan: Ah! There it is!\n"
+	.string "Lucas, nice work.\p"
+	.string "What I was about to do was to entrust\n"
+	.string "these two with their own Pokémon.$"
+
+Route201_Text_HardReplaceDawn:
+	.string "Dawn: Pardon?!\p"
+	.string "Those Pokémon are hard to replace.\n"
+	.string "Are you sure about giving them away?\p"
+	.string "Rowan: Hm!\p"
+	.string "We exist side by side with Pokémon.\p"
+	.string "There comes a time when people should\n"
+	.string "meet Pokémon.\p"
+	.string "There is a world that should be\n"
+	.string "explored together.\p"
+	.string "For them, today is that time.\n"
+	.string "The place, right here.$"
+
+Route201_Text_HardReplaceLucas:
+	.string "Lucas: Pardon?!\p"
+	.string "Those Pokémon are hard to replace.\n"
+	.string "Are you sure about giving them away?\p"
+	.string "Rowan: Hm!\p"
+	.string "We exist side by side with Pokémon.\p"
+	.string "There comes a time when people should\n"
+	.string "meet Pokémon.\p"
+	.string "There is a world that should be\n"
+	.string "explored together.\p"
+	.string "For them, today is that time.\n"
+	.string "The place, right here.$"
+
+Route201_Text_ChooseYour:
+	.string "Go on! Open the briefcase and choose\n"
+	.string "a Pokémon!$"
+
+Route201_Text_StraightFace:
+	.string "{RIVAL}: Really?!\n"
+	.string "Prof. Rowan!\p"
+	.string "I can't believe it! I'm so happy now\n"
+	.string "that I can't keep a straight face!$"
+
+Route201_Text_SomeClass:
+	.string "Hey, {PLAYER}.\n"
+	.string "You can choose first.\p"
+	.string "Hey, I'm practically a grown-up.\n"
+	.string "I have to show some class here.$"
 
 Route201_Text_RivalTalk1:
 	.string "{RIVAL}: Hey, if we run into a\n"
