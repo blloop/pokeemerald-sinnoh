@@ -398,28 +398,28 @@ LittlerootTown_BrendansHouse_1F_Text_RivalWaiting:
 	.string "Isn't {RIVAL} waiting for you?$"
 
 LittlerootTown_BrendansHouse_1F_Text_Unharmed:
-	.string "Mom: What's up, dear?\p"
+	.string "Mom: What's the matter, dear?\p"
 	.string "...\p"
 	.string "Wow.\n"
-	.string "I can't believe that happened to you.\p"
-	.string "Am I ever glad that both you and\n"
-	.string "{RIVAL} are unharmed.\p"
-	.string "The professor you mentioned is\n"
-	.string "most likely Professor Rowan of\l"
-	.string "Sandgem Town.\p"
-	.string "I've heard that he is well known for\n"
-	.string "his studies on Pokémon.\p"
-	.string "I hear he's also quite intimidating...\p"
-	.string "{PLAYER}, I think you need to\n"
-	.string "visit him in Sandgem Town.\p"
-	.string "You need to properly explain why you\n"
-	.string "had no choice but to use his Pokémon.\p"
-	.string "Don't worry!\n"
-	.string "I'm sure he will understand.$"
+	.string "That's what happened to you?\p"
+	.string "You and {RIVAL} are lucky to have\n"
+	.string "met Prof. Rowan.\p"
+	.string "Imagine if you didn't...\p"
+	.string "I wouldn't like to think what the wild\n"
+	.string "Pokémon might have done to you two.\p"
+	.string "{PLAYER}, go see Prof. Rowan, and\n"
+	.string "thank him properly for your Pokémon.\p"
+	.string "His lab is in Sandgem Town, isn't it?\p"
+	.string "Now that you have your own Pokémon,\n"
+	.string "the tall grass won't be so threatening.$"
 
 LittlerootTown_BrendansHouse_1F_Text_PutOn:
 	.string "Oh, I know!\n"
 	.string "{PLAYER}, put these on.$"
+
+LittlerootTown_BrendansHouse_1F_Text_ReceivedShoes:
+	.string "{PLAYER} received a pair of\n"
+	.string "Running Shoes!$"
 
 LittlerootTown_BrendansHouse_1F_Text_GoingSandGem:
 	.string "Going to Sandgem Town is like an\n"
@@ -432,10 +432,6 @@ LittlerootTown_BrendansHouse_1F_Text_GoingSandGem:
 LittlerootTown_BrendansHouse_1F_Text_ReadInfo:
 	.string "Mom: I'll read you the instructions\n"
 	.string "for the Running Shoes...$"
-
-LittlerootTown_BrendansHouse_1F_Text_ReceivedShoes:
-	.string "{PLAYER} received a pair of\n"
-	.string "Running Shoes!$"
 
 LittlerootTown_BrendansHouse_1F_Text_ShoesManual:
 	.string "“Press the B Button and dash\n"

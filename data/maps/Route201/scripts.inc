@@ -10,7 +10,7 @@ Route201_MapScripts::
 
 	@ State descriptions for VAR_ROUTE201_STATE
 	@ 1: Entered rival running scene
-	@ 2: Obtained first Pokémon
+	@ 2: Met the professor
 	@ 3: Entered lake event
 	@ 4: Finished lake event
 	@ 5: Received Potion sample
@@ -40,7 +40,7 @@ Route201_EventScript_RivalSee4::
 
 Route201_EventScript_RivalSee::
 	lockall
-	setvar VAR_LITTLEROOT_TOWN_STATE, 2
+	setvar VAR_ROUTE201_STATE, 2
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 10
@@ -427,7 +427,7 @@ Route201_EventScript_RowanChoose::
 	end
 
 Route201_EventScript_RivalChoose::
-	msgbox Route201_Text_RivalChoose, MSGBOX_SIGN
+	msgbox Route201_Text_RivalChoose, MSGBOX_NPC
 	end
 
 Route201_EventScript_PickStarter::
@@ -520,6 +520,9 @@ Route201_EventScript_BattleDecline::
 Route201_EventScript_BattleAccept::
 	msgbox Route201_Text_AlwaysWanted, MSGBOX_SIGN
 	switch VAR_STARTER_MON
+	@ // FODO: Prevent wiping out from resetting event
+	@ Remove 201 state call in Route201_EventScript_PostRivalBattle
+	setvar VAR_ROUTE201_STATE, 1
 	case 0, Route201_EventScript_RivalBattleTurtwig
 	case 1, Route201_EventScript_RivalBattleChimchar
 	case 2, Route201_EventScript_RivalBattlePiplup
@@ -543,6 +546,7 @@ Route201_EventScript_RivalBattlePiplup::
 Route201_EventScript_PostRivalBattle::
 	msgbox Route201_Text_GoHome, MSGBOX_SIGN
 	setvar VAR_ROUTE201_STATE, 2
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	clearflag FLAG_HIDE_ROUTE_201_MAN
 	delay 48

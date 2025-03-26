@@ -7,8 +7,8 @@ LittlerootTown_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
-	@ 1: Left with Rival to see lake
-	@ 2: Entered lake event
+	@ 1: Entered rival running scene
+	@ 2: Returned with Pokémon
 	@ 3: Left Twinleaf with Running Shoes
 	@ 4: Received Pokédex
 	@ 5: Leave Twinleaf with Pokédex
@@ -25,12 +25,12 @@ LittlerootTown_MapScripts::
 	@ 9: Received Parcel
 
 	@ State descriptions for VAR_ALTERNATE_TEXT
-	@ 1: Talked to Mom saying bye in intro event
-	@ 2: Talked to Rival's Mom after Rival leaves Twinleaf
-	@ 3: Talked to Helper Route 202 without telling Mom
+	@ 1: Mom saying bye in intro event
+	@ 2: Rival's Mom speaking after Rival leaves Twinleaf
+	@ 3: Helper Route 202 requesting you notify family
 
 LittlerootTown_OnTransition:
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_EventScript_LeaveRunning
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_LeaveRunning
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 8, LittlerootTown_EventScript_LeaveParcel
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	end
