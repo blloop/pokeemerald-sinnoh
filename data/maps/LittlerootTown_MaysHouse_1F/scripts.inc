@@ -56,7 +56,7 @@ LittlerootTown_MaysHouse_1F_RocketedOff:
 	.string "I wonder who he takes after?$"
 
 LittlerootTown_MaysHouse_1F_TakesAfter:
-	.string "{RIVAL}'s mom: {RIVAL}\n"
+	.string "{RIVAL}'s mom: My {RIVAL}\n"
 	.string "should be out on Route 201 by now.\p"
 	.string "He just can't sit still, that boy.\n"
 	.string "I wonder who he takes after?$"

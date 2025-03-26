@@ -9,10 +9,10 @@ Route201_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_ROUTE201_STATE
-	@ 1: Prior to obtaining Pokémon
-	@ 2: Entered rival running scene
-	@ 3: Obtained first Pokémon
-	@ 4: Entered lake event
+	@ 1: Entered rival running scene
+	@ 2: Obtained first Pokémon
+	@ 3: Entered lake event
+	@ 4: Finished lake event
 	@ 5: Received Potion sample
 
 Route201_OnTransition:
@@ -39,9 +39,8 @@ Route201_EventScript_RivalSee4::
 	goto Route201_EventScript_RivalSee
 
 Route201_EventScript_RivalSee::
-	lock
+	lockall
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
-	setvar VAR_ROUTE201_STATE, 1
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 10
@@ -347,12 +346,7 @@ Route201_EventScript_HundredPass::
 	msgbox Route201_Text_SomeClass, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	@ setflag FLAG_HIDE_ROUTE_201_RIVAL
-	@ loadword 0 Route201_EventScript_Rival
-	@ setfollower LOCALID_RIVAL 0x100
-
-	@ clearflag FLAG_HIDE_ROUTE_201_MAN
-	release
+	releaseall
 	end
 
 Route201_EventScript_LeftBriefcaseDawn::
@@ -369,7 +363,6 @@ Route201_EventScript_SomethingWrongDawn::
 	waitmovement 0
 	msgbox Route201_Text_HardReplaceDawn, MSGBOX_SIGN
 	return
-
 	
 Route201_EventScript_SomethingWrongLucas::
 	msgbox Route201_Text_SomethingWrongLucas, MSGBOX_DEFAULT
@@ -409,6 +402,163 @@ Route201_Movement_HelperEnter:
 	walk_right
 	step_end
 
+Route201_EventScript_PickLeaveRight::
+	lockall
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route201_Text_WhatsUp, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
+	waitmovement 0
+	releaseall
+	end
+
+Route201_EventScript_PickLeaveDown::
+	lockall
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route201_Text_WhatsUp, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
+	waitmovement 0
+	releaseall
+	end
+
+Route201_EventScript_RowanChoose::
+	msgbox Route201_Text_RowanChoose, MSGBOX_NPC
+	end
+
+Route201_EventScript_RivalChoose::
+	msgbox Route201_Text_RivalChoose, MSGBOX_SIGN
+	end
+
+Route201_EventScript_PickStarter::
+	lock
+	special ChooseStarter
+	delay 30
+	removeobject LOCALID_BRIEFCASE
+	applymovement LOCALID_RIVAL, Common_Movement_FaceLeft
+	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	switch VAR_STARTER_MON
+	case 0, Route201_EventScript_RivalPickTurtwig
+	case 1, Route201_EventScript_RivalPickChimchar
+	case 2, Route201_EventScript_RivalPickPiplup
+
+Route201_EventScript_StarterPicked::
+	msgbox Route201_Text_ChosenGood, MSGBOX_SIGN
+	applymovement LOCALID_RIVAL, Common_Movement_WalkUp
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	applymovement LOCALID_PROF, Common_Movement_WalkRight
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
+	applymovement LOCALID_PROF, Route201_Movement_ProfessorLeave
+	waitmovement 0
+	removeobject LOCALID_PROF
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route201_EventScript_HelperWaitDawn
+	call_if_eq VAR_RESULT, FEMALE, Route201_EventScript_HelperWaitLucas
+	applymovement LOCALID_HELPER, Common_Movement_WalkRight
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement LOCALID_HELPER, Route201_Movement_ProfessorEnter
+	waitmovement 0
+	removeobject LOCALID_HELPER
+	msgbox Route201_Text_ReallyNice, MSGBOX_SIGN
+	delay 48
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	delay 48
+	applymovement LOCALID_RIVAL, Route201_Movement_RivalScurry
+	waitmovement 0
+	goto Route201_EventScript_RivalBattle
+
+Route201_EventScript_RivalPickTurtwig::
+	msgbox Route201_Text_RivalPickTurtwig, MSGBOX_DEFAULT
+	goto Route201_EventScript_StarterPicked
+	end
+
+Route201_EventScript_RivalPickChimchar::
+	msgbox Route201_Text_RivalPickChimchar, MSGBOX_DEFAULT
+	goto Route201_EventScript_StarterPicked
+	end
+
+Route201_EventScript_RivalPickPiplup::
+	msgbox Route201_Text_RivalPickPiplup, MSGBOX_DEFAULT
+	goto Route201_EventScript_StarterPicked
+	end
+
+Route201_EventScript_HelperWaitDawn::
+	msgbox Route201_Text_HelperWaitDawn, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_HELPER, Common_Movement_WalkRight
+	waitmovement 0
+	msgbox Route201_Text_HelperPassDawn, MSGBOX_SIGN
+	return
+
+Route201_EventScript_HelperWaitLucas::
+	msgbox Route201_Text_HelperWaitLucas, MSGBOX_SIGN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_HELPER, Common_Movement_WalkRight
+	waitmovement 0
+	msgbox Route201_Text_HelperPassLucas, MSGBOX_SIGN
+	return
+
+Route201_EventScript_RivalBattle::
+	msgbox Route201_Text_OneThing, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route201_EventScript_BattleDecline
+	goto Route201_EventScript_BattleAccept
+	
+Route201_EventScript_BattleDecline::
+	msgbox Route201_Text_ThatAttitude, MSGBOX_DEFAULT
+	goto Route201_EventScript_RivalBattle
+
+Route201_EventScript_BattleAccept::
+	msgbox Route201_Text_AlwaysWanted, MSGBOX_SIGN
+	switch VAR_STARTER_MON
+	case 0, Route201_EventScript_RivalBattleTurtwig
+	case 1, Route201_EventScript_RivalBattleChimchar
+	case 2, Route201_EventScript_RivalBattlePiplup
+	end
+
+Route201_EventScript_RivalBattleTurtwig::
+	trainerbattle_no_intro TRAINER_RIVAL_ROUTE_201_TURTWIG, Route201_Text_RivalDefeated
+	goto Route201_EventScript_PostRivalBattle
+	end
+
+Route201_EventScript_RivalBattleChimchar::
+	trainerbattle_no_intro TRAINER_RIVAL_ROUTE_201_CHIMCHAR, Route201_Text_RivalDefeated
+	goto Route201_EventScript_PostRivalBattle
+	end
+
+Route201_EventScript_RivalBattlePiplup::
+	trainerbattle_no_intro TRAINER_RIVAL_ROUTE_201_PIPLUP, Route201_Text_RivalDefeated
+	goto Route201_EventScript_PostRivalBattle
+	end
+
+Route201_EventScript_PostRivalBattle::
+	msgbox Route201_Text_GoHome, MSGBOX_SIGN
+	setvar VAR_ROUTE201_STATE, 2
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
+	clearflag FLAG_HIDE_ROUTE_201_MAN
+	delay 48
+	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
+	fadedefaultbgm
+	fadescreen FADE_TO_BLACK
+	end
+
+Route201_Movement_RivalScurry:
+	walk_in_place_fast_down
+	walk_in_place_fast_down
+	walk_in_place_fast_down
+	walk_fast_left
+	walk_fast_down
+	step_end
+
 Route201_EventScript_Rival::
 	facefollower
 	goto_if_eq VAR_FOLLOWER_TEXT, 0, Route201_EventScript_RivalTalk1
@@ -417,6 +567,10 @@ Route201_EventScript_Rival::
 	goto_if_eq VAR_FOLLOWER_TEXT, 3, Route201_EventScript_RivalTalk4
 	goto_if_eq VAR_FOLLOWER_TEXT, 4, Route201_EventScript_RivalTalk5
 	goto_if_eq VAR_FOLLOWER_TEXT, 5, Route201_EventScript_RivalTalk6
+
+@ loadword 0 Route201_EventScript_Rival
+@ setflag FLAG_HIDE_ROUTE_201_RIVAL
+@ setfollower LOCALID_RIVAL 0x100
 
 Route201_EventScript_RivalTalk1::
 	setvar VAR_FOLLOWER_TEXT, 1
@@ -494,7 +648,6 @@ Route201_EventScript_ProfessorB::
 	goto Route201_EventScript_Professor1
 
 Route201_EventScript_Professor1::
-	setvar VAR_ROUTE201_STATE, 4
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -687,7 +840,7 @@ Route201_EventScript_MartSample1::
 	end
 
 Route201_EventScript_MartSample2::
-	msgbox Route201_EventScript_MartSample2, MSGBOX_NPC
+	msgbox Route201_Text_MartSample2, MSGBOX_NPC
 	end
 
 Route201_EventScript_BagIsFull::
@@ -839,11 +992,11 @@ Route201_Text_LeftBriefcaseDawn:
 	.string "You left your briefcase at the lake!$"
 
 Route201_Text_LeftBriefcaseLucas:
-	.string "Lucas: Professor Rowan.\p"
-	.string "You left your briefcase at the lake!$"
+	.string "Lucas: Professor Rowan!\p"
+	.string "You left your briefcase behind at\n"
+	.string "the lake.$"
 
 Route201_Text_SomethingWrongDawn:
-	.string "Oh?\n"
 	.string "Is something wrong here?\p"
 	.string "Rowan: Ah! There it is!\n"
 	.string "Dawn, nice work.\p"
@@ -859,7 +1012,7 @@ Route201_Text_SomethingWrongLucas:
 	.string "these two with their own Pokémon.$"
 
 Route201_Text_HardReplaceDawn:
-	.string "Dawn: Pardon?!\p"
+	.string "Dawn: Pardon?!p"
 	.string "Those Pokémon are hard to replace.\n"
 	.string "Are you sure about giving them away?\p"
 	.string "Rowan: Hm!\p"
@@ -873,8 +1026,8 @@ Route201_Text_HardReplaceDawn:
 
 Route201_Text_HardReplaceLucas:
 	.string "Lucas: Pardon?!\p"
-	.string "Those Pokémon are hard to replace.\n"
-	.string "Are you sure about giving them away?\p"
+	.string "Those Pokémon are crucial.\n"
+	.string "You're giving them away?\p"
 	.string "Rowan: Hm!\p"
 	.string "We exist side by side with Pokémon.\p"
 	.string "There comes a time when people should\n"
@@ -899,6 +1052,94 @@ Route201_Text_SomeClass:
 	.string "You can choose first.\p"
 	.string "Hey, I'm practically a grown-up.\n"
 	.string "I have to show some class here.$"
+
+Route201_Text_WhatsUp:
+	.string "{RIVAL}: What's up with you?\n"
+	.string "Open the briefcase and pick a Pokémon!$"
+
+Route201_Text_RowanChoose:
+	.string "Rowan: Go on! Open the briefcase and\n"
+	.string "choose a Pokémon!$"
+
+Route201_Text_RivalChoose:
+	.string "Hey, {PLAYER}.\n"
+	.string "You can choose first. Go ahead.\p"
+	.string "You know, like, I'm gonna be a man\n"
+	.string "about it. Yeah, I'm slick.$"
+
+Route201_Text_RivalPickTurtwig:
+	.string "{RIVAL}: Then, I choose you!\n"
+	.string "I'm picking this CHIMCHAR!$"
+
+Route201_Text_RivalPickChimchar:
+	.string "{RIVAL}: Then, I choose you!\n"
+	.string "I'm picking this PIPLUP!$"
+
+Route201_Text_RivalPickPiplup:
+	.string "{RIVAL}: Then, I choose you!\n"
+	.string "I'm picking this TURTWIG!$"
+
+Route201_Text_ChosenGood:
+	.string "Rowan: Very well! Both of you have\n"
+	.string "chosen a good Pokémon, it seems.\p"
+	.string "Now, listen well!\p"
+	.string "The Pokémon you have been entrusted\n"
+	.string "with are unfamiliar with the world.\p"
+	.string "In that regard, they're much\n"
+	.string "like you.\p"
+	.string "As fellow newcomers to the world,\n"
+	.string "I hope you'll do well together.\p"
+	.string "If you have any trouble, come see me\n"
+	.string "at my lab in Sandgem Town.\p"
+	.string "And now, we'll be on our way.$"
+
+Route201_Text_HelperWaitDawn:
+	.string "Dawn: Professor!\n"
+	.string "Wait for me, please!$"
+
+Route201_Text_HelperWaitLucas:
+	.string "Lucas: Professor!\n"
+	.string "Wait for me!$"
+
+Route201_Text_HelperPassDawn:
+	.string "I'm sorry...\n"
+	.string "Please let me pass.$"
+
+Route201_Text_HelperPassLucas:
+	.string "Uh, sorry folks.$"
+
+Route201_Text_ReallyNice:
+	.string "{RIVAL}: How do you like that?\n"
+	.string "Prof. Rowan's really nice.\p"
+	.string "On TV, he seems so stern and scary.$"
+
+Route201_Text_OneThing:
+	.string "Heheh, {PLAYER}!\n"
+	.string "We've both got Pokémon now.\p"
+	.string "There's only one thing to do, right\n"
+	.string "Are you up for this?$"
+
+Route201_Text_ThatAttitude:
+	.string "{RIVAL}: What's with that attitude?\n"
+	.string "Don't be that way!$"
+
+Route201_Text_AlwaysWanted:
+	.string "{RIVAL}: I've always wanted to\n"
+	.string "say this...\p"
+	.string "The time has finally come!\p"
+	.string "{PLAYER}!\n"
+	.string "I challenge you to a battle!$"
+
+Route201_Text_RivalDefeated:
+	.string "What are you saying?!\n"
+	.string "We ended up losing?!$"
+
+Route201_Text_GoHome:
+	.string "{RIVAL}: Whew!\n"
+	.string "Let's go home.\p"
+	.string "I'm beat after that battle.\n"
+	.string "My Pokémon needs rest, too.\p"
+	.string "See ya, {PLAYER}!$"
 
 Route201_Text_RivalTalk1:
 	.string "{RIVAL}: Hey, if we run into a\n"
