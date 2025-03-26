@@ -927,6 +927,7 @@ static void CB2_GiveStarter(void)
     ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
     ResetTasks();
     SetMainCallback2(CB2_EndFirstBattle);
+    // FODO: Fix graphic flash after removing battle
     // PlayBattleBGM();
     // SetMainCallback2(CB2_StartFirstBattle);
     // BattleTransition_Start(B_TRANSITION_BLUR);
