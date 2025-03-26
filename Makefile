@@ -365,6 +365,13 @@ $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
+MINING_DEPS := $(shell find graphics/mining_minigame/items/ -type f -name '*.4bpp') \
+               $(shell find graphics/mining_minigame/stones/ -type f -name '*.4bpp') 
+#               $(C_SUBDIR)/data/mining_minigame.h
+
+$(DATA_SRC_SUBDIR)/mining_minigame.h: $(MINING_DEPS)
+	python3 $(TOOLS_DIR)/mining_minigame/analyze_sprites.py
+
 # Linker script
 ifeq ($(MODERN),0)
 LD_SCRIPT := ld_script.ld
