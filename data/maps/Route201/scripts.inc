@@ -14,6 +14,9 @@ Route201_MapScripts::
 	@ 3: Entered lake event
 	@ 4: Finished lake event
 	@ 5: Received Potion sample
+	
+	@ State descriptions for VAR_FOLLOWER_TEXT
+	@ 1-6: Visit lake with Rival
 
 Route201_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -39,8 +42,7 @@ Route201_EventScript_RivalSee4::
 	goto Route201_EventScript_RivalSee
 
 Route201_EventScript_RivalSee::
-	lockall
-	setvar VAR_ROUTE201_STATE, 2
+	lock
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 10
@@ -51,6 +53,8 @@ Route201_EventScript_RivalSee::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	goto_if_eq VAR_ROUTE201_STATE, 2, Route201_EventScript_RivalLake
+	setvar VAR_ROUTE201_STATE, 1
 	msgbox Route201_Text_TooSlow, MSGBOX_SIGN
 	call_if_eq VAR_0x8004, 1, Route201_EventScript_RivalShift1
 	call_if_eq VAR_0x8004, 2, Route201_EventScript_RivalShift2
@@ -346,7 +350,7 @@ Route201_EventScript_HundredPass::
 	msgbox Route201_Text_SomeClass, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	releaseall
+	release
 	end
 
 Route201_EventScript_LeftBriefcaseDawn::
@@ -403,23 +407,23 @@ Route201_Movement_HelperEnter:
 	step_end
 
 Route201_EventScript_PickLeaveRight::
-	lockall
+	lock
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route201_Text_WhatsUp, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
 	waitmovement 0
-	releaseall
+	release
 	end
 
 Route201_EventScript_PickLeaveDown::
-	lockall
+	lock
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route201_Text_WhatsUp, MSGBOX_SIGN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
-	releaseall
+	release
 	end
 
 Route201_EventScript_RowanChoose::
@@ -427,6 +431,10 @@ Route201_EventScript_RowanChoose::
 	end
 
 Route201_EventScript_RivalChoose::
+	goto_if_eq VAR_ROUTE201_STATE, 1, Route201_EventScript_RivalChooseMsg
+	end
+
+Route201_EventScript_RivalChooseMsg::
 	msgbox Route201_Text_RivalChoose, MSGBOX_NPC
 	end
 
@@ -477,6 +485,16 @@ Route201_EventScript_StarterPicked::
 	waitmovement 0
 	goto Route201_EventScript_RivalBattle
 
+Route201_Movement_ProfessorLeave:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
 Route201_EventScript_RivalPickTurtwig::
 	msgbox Route201_Text_RivalPickTurtwig, MSGBOX_DEFAULT
 	goto Route201_EventScript_StarterPicked
@@ -521,8 +539,8 @@ Route201_EventScript_BattleAccept::
 	msgbox Route201_Text_AlwaysWanted, MSGBOX_SIGN
 	switch VAR_STARTER_MON
 	@ // FODO: Prevent wiping out from resetting event
-	@ Remove 201 state call in Route201_EventScript_PostRivalBattle
-	setvar VAR_ROUTE201_STATE, 1
+	@ // Remove 201 state call here and in Route201_EventScript_PostRivalBattle
+	setvar VAR_ROUTE201_STATE, 0
 	case 0, Route201_EventScript_RivalBattleTurtwig
 	case 1, Route201_EventScript_RivalBattleChimchar
 	case 2, Route201_EventScript_RivalBattlePiplup
@@ -553,6 +571,7 @@ Route201_EventScript_PostRivalBattle::
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
 	fadedefaultbgm
 	fadescreen FADE_TO_BLACK
+	release
 	end
 
 Route201_Movement_RivalScurry:
@@ -563,6 +582,19 @@ Route201_Movement_RivalScurry:
 	walk_fast_down
 	step_end
 
+Route201_EventScript_RivalLake::
+	setvar VAR_ROUTE201_STATE, 3
+	msgbox Route201_Text_SickOfWaiting, MSGBOX_SIGN
+	call_if_eq VAR_0x8004, 1, Route201_EventScript_RivalShift1
+	call_if_eq VAR_0x8004, 2, Route201_EventScript_RivalShift2
+	call_if_eq VAR_0x8004, 3, Route201_EventScript_RivalShift3
+	call_if_eq VAR_0x8004, 4, Route201_EventScript_RivalShift4
+	msgbox Route201_Text_NothingToFear, MSGBOX_SIGN
+	loadword 0 Route201_EventScript_Rival
+	setfollower LOCALID_RIVAL 0x100
+	release
+	end
+
 Route201_EventScript_Rival::
 	facefollower
 	goto_if_eq VAR_FOLLOWER_TEXT, 0, Route201_EventScript_RivalTalk1
@@ -570,11 +602,8 @@ Route201_EventScript_Rival::
 	goto_if_eq VAR_FOLLOWER_TEXT, 2, Route201_EventScript_RivalTalk3
 	goto_if_eq VAR_FOLLOWER_TEXT, 3, Route201_EventScript_RivalTalk4
 	goto_if_eq VAR_FOLLOWER_TEXT, 4, Route201_EventScript_RivalTalk5
-	goto_if_eq VAR_FOLLOWER_TEXT, 5, Route201_EventScript_RivalTalk6
+	goto Route201_EventScript_RivalTalk6
 
-@ loadword 0 Route201_EventScript_Rival
-@ setflag FLAG_HIDE_ROUTE_201_RIVAL
-@ setfollower LOCALID_RIVAL 0x100
 
 Route201_EventScript_RivalTalk1::
 	setvar VAR_FOLLOWER_TEXT, 1
@@ -602,6 +631,7 @@ Route201_EventScript_RivalTalk5::
 	end
 
 Route201_EventScript_RivalTalk6::
+	setvar VAR_FOLLOWER_TEXT, 6
 	msgbox Route201_Text_RivalTalk6, MSGBOX_SIGN
 	end
 
@@ -641,178 +671,6 @@ Route201_EventScript_FollowGrassSpecial::
 	release
 	end
 
-Route201_EventScript_ProfessorA::
-	lock
-	setvar VAR_0x8004, 0
-	goto Route201_EventScript_Professor1
-	
-Route201_EventScript_ProfessorB::
-	lock
-	setvar VAR_0x8004, 1
-	goto Route201_EventScript_Professor1
-
-Route201_EventScript_Professor1::
-	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceLeft
-	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_WalkInPlaceRight
-	waitmovement 0
-	playse SE_PIN
-	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark
-	waitmovement 0
-	delay 48
-	delay 48
-	msgbox Route201_Text_RivalProf, MSGBOX_SIGN
-	delay 48
-	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
-	delay 48
-	call_if_eq VAR_0x8004, 0, Route201_EventScript_ProfessorMove1
-	call_if_eq VAR_0x8004, 1, Route201_EventScript_ProfessorMove2
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route201_EventScript_ProfessorSay4
-	call_if_eq VAR_RESULT, FEMALE, Route201_EventScript_ProfessorSay5
-	switch VAR_STARTER_MON
-	case 0, Route201_EventScript_ProfessorSay1
-	case 1, Route201_EventScript_ProfessorSay2
-	case 2, Route201_EventScript_ProfessorSay3
-	end
-
-Route201_EventScript_Professor2::
-	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceRight
-	waitmovement 0
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route201_EventScript_ProfessorSay6
-	call_if_eq VAR_RESULT, FEMALE, Route201_EventScript_ProfessorSay7
-	call_if_eq VAR_0x8004, 0, Route201_EventScript_HelperMove1
-	call_if_eq VAR_0x8004, 1, Route201_EventScript_HelperMove2
-	applymovement LOCALID_PROF, Route201_Movement_ProfessorLeave
-	waitmovement 0
-	removeobject LOCALID_PROF
-	call_if_eq VAR_RESULT, MALE, Route_EventScript_HelperSay1
-	call_if_eq VAR_RESULT, FEMALE, Route_EventScript_HelperSay2
-	applymovement LOCALID_HELPER, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
-	call_if_eq VAR_RESULT, MALE, Route_EventScript_HelperSay3
-	call_if_eq VAR_RESULT, FEMALE, Route_EventScript_HelperSay4
-	applymovement LOCALID_HELPER, Route201_Movement_HelperLeave
-	waitmovement 0
-	removeobject LOCALID_HELPER
-	msgbox Route201_Text_RivalLeave, MSGBOX_SIGN
-	delay 48
-	setvar VAR_LITTLEROOT_INTRO_STATE, 6
-	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 1, 5
-	fadedefaultbgm
-	fadescreen FADE_TO_BLACK
-	destroyfollower
-	release
-	end
-
-Route201_EventScript_ProfessorSay1::
-	msgbox Route201_Text_Professor1, MSGBOX_SIGN
-	goto Route201_EventScript_Professor2
-	end
-
-Route201_EventScript_ProfessorSay2::
-	msgbox Route201_Text_Professor2, MSGBOX_SIGN
-	goto Route201_EventScript_Professor2
-	end
-Route201_EventScript_ProfessorSay3::
-	msgbox Route201_Text_Professor3, MSGBOX_SIGN
-	goto Route201_EventScript_Professor2
-	end
-
-Route201_EventScript_ProfessorSay4::
-	msgbox Route201_Text_Professor4, MSGBOX_SIGN
-	return
-
-Route201_EventScript_ProfessorSay5::
-	msgbox Route201_Text_Professor5, MSGBOX_SIGN
-	return
-
-Route201_EventScript_ProfessorSay6::
-	msgbox Route201_Text_Professor6, MSGBOX_SIGN
-	return
-
-Route201_EventScript_ProfessorSay7::
-	msgbox Route201_Text_Professor7, MSGBOX_SIGN
-	return
-
-Route201_EventScript_ProfessorMove1::
-	applymovement LOCALID_PROF, Route201_Movement_Professor1
-	waitmovement 0
-	return
-	
-Route201_EventScript_ProfessorMove2::
-	applymovement LOCALID_PROF, Route201_Movement_Professor2
-	waitmovement 0
-	return
-
-Route_EventScript_HelperSay1::
-	msgbox Route201_Text_Helper1, MSGBOX_SIGN
-	return
-
-Route_EventScript_HelperSay2::
-	msgbox Route201_Text_Helper2, MSGBOX_SIGN
-	return
-
-Route_EventScript_HelperSay3::
-	msgbox Route201_Text_Helper3, MSGBOX_SIGN
-	return
-
-Route_EventScript_HelperSay4::
-	msgbox Route201_Text_Helper4, MSGBOX_SIGN
-	return
-
-Route201_EventScript_HelperMove1::
-	applymovement LOCALID_HELPER, Route201_Movement_Helper1
-	return
-
-Route201_EventScript_HelperMove2::
-	applymovement LOCALID_HELPER, Route201_Movement_Helper2
-	return
-
-Route201_Movement_Professor1:
-	walk_left
-	walk_left
-	step_end
-
-Route201_Movement_Professor2:
-	walk_left
-	walk_down
-	walk_left
-	step_end
-
-Route201_Movement_ProfessorLeave:
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
-Route201_Movement_Helper1:
-	delay_16
-	delay_16
-	walk_in_place_right
-	step_end
-
-Route201_Movement_Helper2:
-	delay_16
-	walk_up
-	walk_in_place_down
-	walk_in_place_right
-	step_end
-
-Route201_Movement_HelperLeave:
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	step_end
-
 Route201_EventScript_TipSign::
 	msgbox Route201_Text_TipSign, MSGBOX_SIGN
 	end
@@ -835,12 +693,12 @@ Route201_EventScript_MartSample::
 	end
 
 Route201_EventScript_MartSample1::
-	lockall
+	lock
 	msgbox Route201_Text_MartSample1, MSGBOX_NPC
 	giveitem ITEM_POTION
 	goto_if_eq VAR_RESULT, FALSE, Route201_EventScript_BagIsFull
 	setvar VAR_ROUTE201_STATE, 5
-	releaseall
+	release
 	end
 
 Route201_EventScript_MartSample2::
@@ -849,7 +707,7 @@ Route201_EventScript_MartSample2::
 
 Route201_EventScript_BagIsFull::
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	releaseall
+	release
 	end
 
 Route201_EventScript_SchoolKidTalk::
@@ -1016,7 +874,7 @@ Route201_Text_SomethingWrongLucas:
 	.string "these two with their own Pokémon.$"
 
 Route201_Text_HardReplaceDawn:
-	.string "Dawn: Pardon?!p"
+	.string "Dawn: Pardon?!\p"
 	.string "Those Pokémon are hard to replace.\n"
 	.string "Are you sure about giving them away?\p"
 	.string "Rowan: Hm!\p"
@@ -1145,13 +1003,33 @@ Route201_Text_GoHome:
 	.string "My Pokémon needs rest, too.\p"
 	.string "See ya, {PLAYER}!$"
 
+Route201_Text_SickOfWaiting:
+	.string "{RIVAL}: Too slow!\n"
+	.string "{PLAYER}, I'm sick of waiting!\p"
+	.string "I'm going to see Prof. Rowan so I\n"
+	.string "can thank him properly.\p"
+	.string "So, I had this great idea.\n"
+	.string "Listen up, OK?\p"
+	.string "You know that lake where we always\n"
+	.string "play at?\p"
+	.string "You know how they say a legendary\n"
+	.string "Pokémon lives there?\p"
+	.string "You guessed it!\n"
+	.string "Let's catch that Pokémon.\p"
+	.string "That'll make Prof. Rowan happy.\n"
+	.string "I'm sure of that!$"
+
+Route201_Text_NothingToFear:
+	.string "{RIVAL}: Me and you together,\n"
+	.string "we've got nothing to fear!$"
+
 Route201_Text_RivalTalk1:
-	.string "{RIVAL}: Hey, if we run into a\n"
-	.string "Pokémon, I'm gonna catch it somehow.\p"
-	.string "Because I'm gonne be a Pokémon\n"
-	.string "Trainer.\p"
-	.string "You know what a Trainer does, right?\n"
-	.string "Makes Pokémon battle and all that?$"
+	.string "{RIVAL}: That Pokémon battle...\p"
+	.string "Wasn't that wickedly fun or what?\p"
+	.string "I mean, I'd pick the moves, and my\n"
+	.string "Pokémon would use them!\p"
+	.string "Yeah, I'm going to battle tons and get\n"
+	.string "real close with Pokémon.$"
 
 Route201_Text_RivalTalk2:
 	.string "{RIVAL}: Pokémon all have\n"
@@ -1161,121 +1039,46 @@ Route201_Text_RivalTalk2:
 	.string "That's so awesomely cool.$"
 	
 Route201_Text_RivalTalk3:
-	.string "{RIVAL}: I want Pokémon of my\n"
-	.string "own, and not too soon, either.\p"
-	.string "I'd be able to go everywhere with my\n"
-	.string "Pokémon that way.$"
+	.string "{RIVAL}: Do you believe it?\n"
+	.string "I can hardly believe it.\p"
+	.string "You and me, we're Pokémon Trainers all\n"
+	.string "of a sudden.\p"
+	.string "Man, we've got tons to learn about\n"
+	.string "being a Trainer.\p"
+	.string "But seeing this Poké Ball with this\n"
+	.string "CHIMCHAR inside...\p"
+	.string "It makes me feel like I can do anything!\n"
+	.string "Nothing's impossible!$"
 	
 Route201_Text_RivalTalk4:
 	.string "{RIVAL}: That lake has a mirage\n"
 	.string "Pokémon living in it.\p"
-	.string "Everyone says nothing lives there,\n"
-	.string "but I know I'm right.$"
+	.string "Everyone says it's just a legend, but\n"
+	.string "I know I'm right.$"
 	
 Route201_Text_RivalTalk5:
-	.string "{RIVAL}: I'm gonna become\n"
-	.string "a Pokémon Trainer for sure.\p"
-	.string "Not just any trainer either.\n"
-	.string "I'm going to be the greatest ever.\l"
-	.string "That's my dream.$"
+	.string "{RIVAL}: Hey, do you know about\n"
+	.string "the Champion?\p"
+	.string "There's this out-of-this-world tough\n"
+	.string "Trainer who gets called that.\p"
+	.string "Well, I'm gonna get so tough, the Champ\n"
+	.string "has to battle me. You watch!\p"
+	.string "With this little guy here, I'm sure I can\n"
+	.string "get that tough.$"
 	
 Route201_Text_RivalTalk6:
 	.string "{RIVAL}: Hey, that's enough\n"
 	.string "talking already.\p"
-	.string "I'm itching to get going to the lake.\n"
+	.string "I'm itching to get going to the  lake.\n"
 	.string "Come on, come on!$"
 
 Route201_Text_FollowLeave:
-	.string "{RIVAL}: Hey!\n"
-	.string "Where are you wandering off to?!\p"
-	.string "That mystery Pokémon on TV!\n"
-	.string "It's calling out to me!\p"
-	.string "Forget about going back home!$"
+	.string "{RIVAL}: Heheh, {PLAYER}.\n"
+	.string "The lake's not that way!$"
 
 Route201_Text_FollowGrass:
-	.string "Remember what your mother said?\p"
-	.string "Mom: “{PLAYER}!\n"
-	.string "Don't go into the tall grass!\p"
-	.string "“Remember, wild Pokémon may attack\n"
-	.string "you if you're walking in the tall grass.\p"
-	.string "“It would be OK if you had your\n"
-	.string "own Pokémon, but...“$"
-
-Route201_Text_RivalProf:
-	.string "{RIVAL}: Hey, it's those people!\n"
-	.string "Is that old guy staring at us?$"
-
-Route201_Text_Professor1:
-	.string "Hmm...\n"
-	.string "TURTWIG and CHIMCHAR...\p"
-	.string "...\p"
-	.string "Hmm...\p"
-	.string "I see...\n"
-	.string "That's how it is...$"
-	
-Route201_Text_Professor2:
-	.string "Hmm...\n"
-	.string "CHIMCHAR and PIPLUP...\p"
-	.string "...\p"
-	.string "Hmm...\p"
-	.string "I see...\n"
-	.string "That's how it is...$"
-	
-Route201_Text_Professor3:
-	.string "Hmm...\n"
-	.string "PIPLUP and TURTWIG...\p"
-	.string "...\p"
-	.string "Hmm...\p"
-	.string "I see...\n"
-	.string "That's how it is...$"
-
-Route201_Text_Professor4:
-	.string "Professor: Hmm...\p"
-	.string "I heard from Dawn that\n"
-	.string "you used our Pokémon?\l"
-	.string "Let me see them, please.$"
-
-Route201_Text_Professor5:
-	.string "Professor: Hmm...\p"
-	.string "I heard from Lucas that\n"
-	.string "you used our Pokémon?\l"
-	.string "Let me see them, please.$"
-
-Route201_Text_Professor6:
-	.string "Dawn!\n"
-	.string "I'm going back to my lab!$"
-
-Route201_Text_Professor7:
-	.string "Lucas!\n"
-	.string "I'm going back to my lab!$"
-
-Route201_Text_Helper1:
-	.string "Dawn: Um...Yes!\n"
-	.string "Professor, please wait for me!$"
-
-Route201_Text_Helper2:
-	.string "Lucas: Uh... Yeah, Of course!\n"
-	.string "Professor, wait for me!$"
-
-Route201_Text_Helper3:
-	.string "I think you should visit our lab\n"
-	.string "later.\p"
-	.string "OK, see you!$"
-	
-Route201_Text_Helper4:
-	.string "You should visit us at our lab later,\n"
-	.string "I think.\p"
-	.string "We'll be seeing you!$"
-
-Route201_Text_RivalLeave:
-	.string "{RIVAL}: What was all that\n"
-	.string "craziness about?\p"
-	.string "I mean, if he was angry, he could've\n"
-	.string "just yelled at us, or whatever...\p"
-	.string "And didn't he want their Pokémon\n"
-	.string "back...?\p"
-	.string "{PLAYER}...\n"
-	.string "We should go home, too...$"
+	.string "{RIVAL}: Hey, {PLAYER}!\n"
+	.string "I said, the lake's not that way!$"
 
 Route201_Text_TipSign:
 	.string "Trainer Tips!\p"
