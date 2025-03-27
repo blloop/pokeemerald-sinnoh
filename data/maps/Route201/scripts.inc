@@ -443,6 +443,7 @@ Route201_EventScript_PickStarter::
 	special ChooseStarter
 	delay 30
 	removeobject LOCALID_BRIEFCASE
+	setflag FLAG_SYS_POKEMON_GET
 	applymovement LOCALID_RIVAL, Common_Movement_FaceLeft
 	applymovement LOCALID_PROF, Common_Movement_WalkInPlaceDown
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
