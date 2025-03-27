@@ -43,3 +43,5 @@ prefabs.json
 
 # poryscript
 tools/poryscript/poryscript*
+/pokeemerald-*.png
+/pokeemerald_modern-*.png
