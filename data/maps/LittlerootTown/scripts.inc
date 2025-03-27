@@ -47,7 +47,7 @@ LittlerootTown_EventScript_LeaveParcel::
 
 LittlerootTown_EventScript_RivalMeet::
 	lock
-	setvar VAR_LITTLEROOT_INTRO_STATE, 3
+	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	opendoor 3, 12
 	waitdooranim
 	addobject LOCALID_RIVAL
