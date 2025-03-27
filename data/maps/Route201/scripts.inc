@@ -83,6 +83,7 @@ Route201_EventScript_RivalSee::
 	applymovement LOCALID_RIVAL, Route201_Movement_RunGrass
 	waitmovement 0
 	msgbox Route201_Text_HoldIt, MSGBOX_SIGN
+	playse SE_PIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0

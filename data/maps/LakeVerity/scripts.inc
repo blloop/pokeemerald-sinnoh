@@ -80,6 +80,7 @@ LakeVerity_EventScript_IntroScene::
 	applymovement LOCALID_RIVAL, LakeVerity_Movement_Scurry
 	waitmovement 0
 	msgbox LakeVerity_Text_HearThat, MSGBOX_SIGN
+	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
