@@ -97,7 +97,7 @@
 #define EFFECT_CONVERSION_2 93
 #define EFFECT_LOCK_ON 94
 #define EFFECT_SKETCH 95
-#define EFFECT_UNUSED_60 96  // thaw
+#define EFFECT_BLIZZARD 96 // EFFECT_UNUSED_60 - thaw
 #define EFFECT_SLEEP_TALK 97
 #define EFFECT_DESTINY_BOND 98
 #define EFFECT_FLAIL 99
@@ -142,7 +142,7 @@
 #define EFFECT_DEFENSE_UP_HIT 138
 #define EFFECT_ATTACK_UP_HIT 139
 #define EFFECT_ALL_STATS_UP_HIT 140
-#define EFFECT_UNUSED_8D 141  // incomplete fake out in gen 2
+#define EFFECT_GLARE 141  // EFFECT_UNUSED_8D incomplete fake out in gen 2
 #define EFFECT_BELLY_DRUM 142
 #define EFFECT_PSYCH_UP 143
 #define EFFECT_MIRROR_COAT 144

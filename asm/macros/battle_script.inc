@@ -1253,6 +1253,12 @@
 	.byte \position
 	.endm
 
+	.macro stockpilestatwearoff battler:req, ptr
+	.byte 0xf9
+	.byte \battler
+	.4byte \ptr
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1360,6 +1366,15 @@
 
 	.macro playtrainerdefeatbgm battler:req
 	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+
+	@ FODO: Add steadfast logic
+	.macro stattextbuffer battler:req
+	various \battler, VARIOUS_STAT_TEXT_BUFFER
+	.endm
+
+	.macro switchinabilities battler:req
+	various \battler, VARIOUS_SWITCHIN_ABILITIES
 	.endm
 
 @ helpful macros

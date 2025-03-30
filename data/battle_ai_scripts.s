@@ -177,6 +177,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SONICBOOM, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_RAIN_DANCE, AI_CBM_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CBM_SunnyDay
+	if_effect EFFECT_GLARE, AI_CBM_Glare
 	if_effect EFFECT_BELLY_DRUM, AI_CBM_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CBM_Haze
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
@@ -242,6 +243,13 @@ AI_CBM_Nightmare:
 AI_CBM_DreamEater:
 	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	end
+
+AI_CBM_Glare:
+	get_ability AI_TARGET
+	if_equal ABILITY_LIMBER, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
 AI_CBM_BellyDrum:
@@ -733,6 +741,7 @@ AI_CheckViability:
 	if_effect EFFECT_MOONLIGHT, AI_CV_HealWeather
 	if_effect EFFECT_RAIN_DANCE, AI_CV_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CV_SunnyDay
+	if_effect EFFECT_GLARE, AI_CV_Glare
 	if_effect EFFECT_BELLY_DRUM, AI_CV_BellyDrum
 	if_effect EFFECT_PSYCH_UP, AI_CV_PsychUp
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
@@ -1564,6 +1573,7 @@ AI_CV_Substitute4:
 	if_equal EFFECT_TOXIC, AI_CV_Substitute5
 	if_equal EFFECT_POISON, AI_CV_Substitute5
 	if_equal EFFECT_PARALYZE, AI_CV_Substitute5
+	if_equal EFFECT_GLARE, AI_CV_Substitute5
 	if_equal EFFECT_WILL_O_WISP, AI_CV_Substitute5
 	if_equal EFFECT_CONFUSE, AI_CV_Substitute6
 	if_equal EFFECT_LEECH_SEED, AI_CV_Substitute7
@@ -1737,6 +1747,7 @@ AI_CV_Encore_EncouragedMovesToEncore:
 	.byte EFFECT_SAFEGUARD
 	.byte EFFECT_RAIN_DANCE
 	.byte EFFECT_SUNNY_DAY
+	.byte EFFECT_GLARE
 	.byte EFFECT_BELLY_DRUM
 	.byte EFFECT_PSYCH_UP
 	.byte EFFECT_FUTURE_SIGHT
@@ -2073,6 +2084,12 @@ AI_CV_SunnyDay_ScoreDown1:
 	score -1
 AI_CV_SunnyDay_End:
 	end
+
+AI_CV_Glare:
+	if_target_faster AI_CV_Paralyze2
+	if_hp_more_than AI_USER, 70, AI_CV_Paralyze_End
+	score -1
+	goto AI_CV_Paralyze_End
 
 AI_CV_BellyDrum:
 	if_hp_less_than AI_USER, 90, AI_CV_BellyDrum_ScoreDown2
@@ -2688,6 +2705,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
 	.byte EFFECT_MINIMIZE
 	.byte EFFECT_CURSE
 	.byte EFFECT_SWAGGER
+	.byte EFFECT_GLARE
 	.byte EFFECT_CAMOUFLAGE
 	.byte EFFECT_YAWN
 	.byte EFFECT_DEFENSE_CURL
@@ -3184,6 +3202,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
 	.byte EFFECT_FURY_CUTTER
 	.byte EFFECT_ATTRACT
 	.byte EFFECT_SAFEGUARD
+	.byte EFFECT_GLARE
 	.byte EFFECT_PSYCH_UP
 	.byte EFFECT_MIRROR_COAT
 	.byte EFFECT_WILL_O_WISP
