@@ -107,7 +107,7 @@
     {
       "type": "trigger",
       "x": 3,
-      "y": 11,
+      "y": 12,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "3",

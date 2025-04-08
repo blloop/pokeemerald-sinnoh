@@ -167,7 +167,7 @@
       "width": 64,
       "height": 24,
       "primary_tileset": "gTileset_Outdoor",
-      "secondary_tileset": "gTileset_Rustboro",
+      "secondary_tileset": "gTileset_Twinleaf",
       "border_filepath": "data/layouts/Route201/border.bin",
       "blockdata_filepath": "data/layouts/Route201/map.bin"
     },
