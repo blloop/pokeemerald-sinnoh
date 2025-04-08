@@ -104,10 +104,10 @@
     {
       "id": "LAYOUT_OLDALE_TOWN",
       "name": "OldaleTown_Layout",
-      "width": 32,
-      "height": 26,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_Outdoor",
+      "secondary_tileset": "gTileset_Twinleaf",
       "border_filepath": "data/layouts/OldaleTown/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown/map.bin"
     },
@@ -176,7 +176,7 @@
       "name": "Route202_Layout",
       "width": 30,
       "height": 36,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_Outdoor",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route202/border.bin",
       "blockdata_filepath": "data/layouts/Route202/map.bin"
