@@ -95,9 +95,9 @@
       "id": "LAYOUT_LITTLEROOT_TOWN",
       "name": "LittlerootTown_Layout",
       "width": 20,
-      "height": 30,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "height": 32,
+      "primary_tileset": "gTileset_Outdoor",
+      "secondary_tileset": "gTileset_Twinleaf",
       "border_filepath": "data/layouts/LittlerootTown/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown/map.bin"
     },
@@ -164,9 +164,9 @@
     {
       "id": "LAYOUT_ROUTE201",
       "name": "Route201_Layout",
-      "width": 60,
-      "height": 18,
-      "primary_tileset": "gTileset_General",
+      "width": 64,
+      "height": 24,
+      "primary_tileset": "gTileset_Outdoor",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/Route201/border.bin",
       "blockdata_filepath": "data/layouts/Route201/map.bin"
@@ -4426,7 +4426,7 @@
       "name": "LakefrontVerity_Layout",
       "width": 20,
       "height": 16,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_Outdoor",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/LakefrontVerity/border.bin",
       "blockdata_filepath": "data/layouts/LakefrontVerity/map.bin"
