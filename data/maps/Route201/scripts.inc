@@ -166,6 +166,7 @@ Route201_EventScript_RivalGrass4::
 
 Route201_Movement_RivalGrass1:
 	walk_up
+	walk_up
 	walk_right
 	walk_right
 	walk_right
@@ -177,6 +178,7 @@ Route201_Movement_RivalGrass1:
 
 Route201_Movement_RivalGrass2:
 	walk_up
+	walk_up
 	walk_right
 	walk_right
 	walk_right
@@ -187,6 +189,7 @@ Route201_Movement_RivalGrass2:
 
 Route201_Movement_RivalGrass3:
 	walk_up
+	walk_up
 	walk_right
 	walk_right
 	walk_up
@@ -196,6 +199,7 @@ Route201_Movement_RivalGrass3:
 
 Route201_Movement_RivalGrass4:
 	walk_up
+	walk_up
 	walk_right
 	walk_up
 	walk_right
@@ -203,6 +207,7 @@ Route201_Movement_RivalGrass4:
 	step_end
 
 Route201_Movement_PlayerGrass1:
+	walk_up
 	walk_up
 	walk_up
 	walk_right
@@ -214,6 +219,7 @@ Route201_Movement_PlayerGrass1:
 Route201_Movement_PlayerGrass2:
 	walk_up
 	walk_up
+	walk_up
 	walk_right
 	walk_right
 	walk_right
@@ -222,11 +228,13 @@ Route201_Movement_PlayerGrass2:
 Route201_Movement_PlayerGrass3:
 	walk_up
 	walk_up
+	walk_up
 	walk_right
 	walk_right
 	step_end
 
 Route201_Movement_PlayerGrass4:
+	walk_up
 	walk_up
 	walk_up
 	walk_right
