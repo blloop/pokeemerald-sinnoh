@@ -662,7 +662,6 @@ Route201_EventScript_FollowLeave::
 
 Route201_EventScript_FollowGrass::
 	lock
-	goto_if_eq VAR_FACING, DIR_NORTH, Route201_EventScript_FollowGrassSpecial
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
@@ -676,7 +675,9 @@ Route201_EventScript_FollowGrass::
 	release
 	end
 
-Route201_EventScript_FollowGrassSpecial::
+Route201_EventScript_FollowGrass2::
+	lock
+	goto_if_eq VAR_FACING, DIR_EAST, Route201_EventScript_FollowGrass
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0

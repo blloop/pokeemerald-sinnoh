@@ -245,12 +245,12 @@
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
       "var_value": "3",
-      "script": "Route201_EventScript_FollowGrass"
+      "script": "Route201_EventScript_FollowGrass2"
     },
     {
       "type": "trigger",
       "x": 17,
-      "y": 16,
+      "y": 15,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
       "var_value": "1",
@@ -259,7 +259,7 @@
     {
       "type": "trigger",
       "x": 18,
-      "y": 16,
+      "y": 15,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
       "var_value": "1",
@@ -268,7 +268,7 @@
     {
       "type": "trigger",
       "x": 19,
-      "y": 15,
+      "y": 14,
       "elevation": 0,
       "var": "VAR_ROUTE201_STATE",
       "var_value": "1",
